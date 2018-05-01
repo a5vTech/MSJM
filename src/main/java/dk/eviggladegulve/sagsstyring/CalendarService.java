@@ -37,20 +37,15 @@ public class CalendarService {
         return date.plusDays(1).minusDays(date.getDayOfWeek().getValue());
     }
 
-    public void createViewData() {
+ /*   public void createViewData() {
 
         for (int i = 0; i < employeeList.size(); i++) {
             LocalDate startDate = firstDay();
 
-            System.out.println("START DATE......." + startDate.toString());
+            //System.out.println("START DATE......." + startDate.toString());
             for (int j = 0; j < 14; j++) {
 
                 access.createConnection();
-//                ArrayList<Sag> sager = access.executeStamementCases(String.format("SELECT employee.employee_id, first_name,sags_nr,titel"+
-//                        "FROM employee" +
-//                        "JOIN employee_sager ON (employee.employee_id = employee_sager.employee_id)" +
-//                        "JOIN sager ON (sager.sags_nr = employee_sager.sager_id)" +
-//                        "WHERE employee.employee_id=%d AND ('%s' BETWEEN start_dato AND slut_dato);",employeeList.get(i).getId(),startDate.toString()));
                 ArrayList<Case> sager = access.executeStamementCases("SELECT *" +
                         " FROM svend" +
                         " JOIN svend_sager ON (svend.svend_id = svend_sager.svend_id)" +
@@ -67,6 +62,8 @@ public class CalendarService {
 
         }
 
-    }
+    } */
+
+
 
 }

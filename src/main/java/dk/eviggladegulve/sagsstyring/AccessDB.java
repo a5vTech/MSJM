@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +86,7 @@ public class AccessDB {
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
-    }
+        }
         return id;
     }
 
@@ -119,7 +120,7 @@ public class AccessDB {
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        activeCaseList.add(new Case(rs.getInt("sags_id"),rs.getString("arbejdssted"),rs.getInt("telefonnummer"),rs.getString("vejnavn"),rs.getInt("vejnummer"),rs.getString("start_dato"),rs.getString("slut_dato"),rs.getInt("postnummer"),rs.getString("by_navn"),rs.getString("email"),rs.getString("saerlige_aftaler"),rs.getString("kontaktperson_navn"),rs.getInt("kontaktperson_telefonnummer"),rs.getString("kontaktperson_email"),rs.getString("arbejdsbeskrivelse"),rs.getString("ekstra_arbejde")));
+                        activeCaseList.add(new Case(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde")));
 
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -135,21 +136,37 @@ public class AccessDB {
         return activeCaseList;
     }
 
-    public ArrayList<Case> executeStamementCases(String sql) {
-        ArrayList<Case> sager = new ArrayList<>();
+    public void executeStamementCases(LocalDate dateFromView, ArrayList<Employee> employeeList) {
+        createConnection();
+        LocalDate date = dateFromView;
+       // ArrayList<Case> sager = new ArrayList<>();
         Statement s = null;
         try {
             s = con.createStatement();
-            ResultSet rs = s.executeQuery(sql);
-            if (rs != null) {
-                while (rs.next()) {
-                    try {
-                        Case sag =  new Case(rs.getInt("sags_id"),rs.getString("start_dato"),rs.getString("slut_dato"),rs.getString("arbejdssted"));
-                        sager.add(sag);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
+            for (int i = 0; i < employeeList.size(); i++) {
+                LocalDate startDate = date;
+
+                //System.out.println("START DATE......." + startDate.toString());
+                for (int j = 0; j < 14; j++) {
+                    ArrayList<Case> currentSager = new ArrayList<>();
+                    ResultSet rs = s.executeQuery(String.format("SELECT * FROM svend JOIN svend_sager ON (svend.svend_id = svend_sager.svend_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE svend.svend_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", employeeList.get(i).getSvend_id(), startDate.toString()));
+                    if (rs != null) {
+                        while (rs.next()) {
+                            try {
+                                Case sag = new Case(rs.getInt("sags_id"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getString("arbejdssted"));
+                                currentSager.add(sag);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
+
+                    startDate = startDate.plusDays(1);
+                    employeeList.get(i).getSager().add(currentSager);
                 }
+
+
+
 
             }
             s.close();
@@ -157,51 +174,30 @@ public class AccessDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return sager;
+      //  return sager;
 
     }
-   /* public ArrayList<Case> executeStamementCalendar(String sql) {
-        Statement s = null;
-        ArrayList<Case> sager = new ArrayList<>();
-        try {
-            s = con.createStatement();
-            ResultSet rs = s.executeQuery(sql);
-            if (rs != null) {
-                while (rs.next()) {
-                    try {
 
-                        sager.add(new Case(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
-                        //System.out.println("Data from name: " + rs.getString("email") + " " + rs.getString("password")); //Det her er fra da jeg testede mod min database
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-            s.close();
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return sager;
-    }*/
     public ArrayList<Employee> executeStamementEmployeeList(String sql) {
         Statement s = null;
         ArrayList<Employee> empList = new ArrayList<>();
         try {
             s = con.createStatement();
+
             ResultSet rs = s.executeQuery(sql);
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        empList.add(new Employee(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"),rs.getInt("telefonnummer")));
+                        empList.add(new Employee(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer")));
                         //sager.add(new Sag(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }
 
+
             }
+
             s.close();
             con.close();
         } catch (SQLException e) {
@@ -209,7 +205,6 @@ public class AccessDB {
         }
         return empList;
     }
-
 
 
 }
