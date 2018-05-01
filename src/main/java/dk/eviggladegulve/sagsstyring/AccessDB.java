@@ -134,4 +134,82 @@ public class AccessDB {
         }
         return activeCaseList;
     }
+
+    public ArrayList<Case> executeStamementCases(String sql) {
+        ArrayList<Case> sager = new ArrayList<>();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        Case sag =  new Case(rs.getInt("sags_id"),rs.getString("start_dato"),rs.getString("slut_dato"),rs.getString("arbejdssted"));
+                        sager.add(sag);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sager;
+
+    }
+   /* public ArrayList<Case> executeStamementCalendar(String sql) {
+        Statement s = null;
+        ArrayList<Case> sager = new ArrayList<>();
+        try {
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+
+                        sager.add(new Case(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
+                        //System.out.println("Data from name: " + rs.getString("email") + " " + rs.getString("password")); //Det her er fra da jeg testede mod min database
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sager;
+    }*/
+    public ArrayList<Employee> executeStamementEmployeeList(String sql) {
+        Statement s = null;
+        ArrayList<Employee> empList = new ArrayList<>();
+        try {
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        empList.add(new Employee(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"),rs.getInt("telefonnummer")));
+                        //sager.add(new Sag(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return empList;
+    }
+
+
+
 }

@@ -44,6 +44,13 @@ public class Case {
         this.ekstra_arbejde = ekstra_arbejde;
     }
 
+    public Case(int sags_id, String arbejdssted, String start_dato, String slut_dato) {
+        this.sags_id = sags_id;
+        this.arbejdssted = arbejdssted;
+        this.start_dato = start_dato;
+        this.slut_dato = slut_dato;
+    }
+
     //Getters and setters
     public int getSags_id() {
         return sags_id;
