@@ -1,5 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<body>
+<div class="container-fluid">
+    <form method="post" th:action="@{/opret_sag}">
+
+        <h1>Sag:</h1>
+        <h4>Oplysninger</h4>
+
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Arbejdssted:</label>
+                <br/>
+                <input type="text" th:field="${case.arbejdssted}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Telefonnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.telefonnummer}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Vejnavn:</label>
+                <br/>
+                <input type="text" th:field="${case.vejnavn}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Vejnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.vejnummer}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>By:</label>
+                <br/>
+                <input type="text" th:field="${case.by}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Postnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.postnummer}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Start dato:</label>
+                <br/>
+                <input type="text" th:field="${case.start_dato}"/>
+            </div>
+            <div class="col-md-4">
+                <label>Slut dato:</label>
+                <br/>
+                <input type="text" th:field="${case.slut_dato}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>E-mail:</label>
+                <br/>
+                <input type="text" th:field="${case.email}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Særlige aftaler:</label>
+                <br/>
+                <input type="text" th:field="${case.saerlige_aftaler}"/>
+            </div>
+        </div>
+
+        <h4>Kontaktperson</h4>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Kontaktperson navn:</label>
+                <br/>
+                <input type="text" th:field="${case.kontaktperson_navn}"/>
+            </div>
+            <div class="col-md-2">
+                <label>Telefonnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.kontaktperson_telefonnummer}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>E-mail:</label>
+                <br/>
+                <input type="text" th:field="${case.kontaktperson_email}"/>
+            </div>
+        </div>
+
+        <h4>Ekstra</h4>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Arbejdsbeskrivelse:</label>
+                <br/>
+                <input type="text" th:field="${case.arbejdsbeskrivelse}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Ekstra arbejde:</label>
+                <br/>
+                <input type="text" th:field="${case.ekstra_arbejde}"/>
+            </div>
+        </div>
+
+
+        <h4>Hvem arbejder på denne sag:</h4>
+        <button type="submit" name="save" value="savebtn">Send</button>
+    </form>
+</div>
+
+</body>
 <head>
     <meta charset="UTF-8"/>
     <title>opret_sag</title>
@@ -18,118 +138,4 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-<form method="post" th:action="@{/opret_sag}">
-
-    <h1>Sag:</h1>
-    <h4>Oplysninger</h4>
-    <div class="row">
-        <div class="col-md-2">
-            <label>Arbejdssted:</label>
-            <br/>
-            <input type="text" th:field="${case.arbejdssted}"/>
-        </div>
-
-        <div class="col-md-4">
-            <label>Telefonnummer:</label>
-            <br/>
-            <input type="text" th:field="${case.telefonnummer}"/>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <label>Vejnavn:</label>
-            <br/>
-            <input type="text" th:field="${case.vejnavn}"/>
-        </div>
-
-        <div class="col-md-4">
-            <label>Vejnummer:</label>
-            <br/>
-            <input type="text" th:field="${case.vejnummer}"/>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <label>By:</label>
-            <br/>
-            <input type="text" th:field="${case.by}"/>
-        </div>
-
-        <div class="col-md-4">
-            <label>Postnummer:</label>
-            <br/>
-            <input type="text" th:field="${case.postnummer}"/>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <label>Start dato:</label>
-            <br/>
-            <input type="text" th:field="${case.start_dato}"/>
-        </div>
-        <div class="col-md-4">
-            <label>Slut dato:</label>
-            <br/>
-            <input type="text" th:field="${case.slut_dato}"/>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <label>E-mail:</label>
-            <br/>
-            <input type="text" th:field="${case.email}"/>
-        </div>
-
-        <div class="col-md-4">
-            <label>Særlige aftaler:</label>
-            <br/>
-            <input type="text" th:field="${case.saerlige_aftaler}"/>
-        </div>
-    </div>
-
-    <h4>Kontaktperson</h4>
-    <div class="row">
-        <div class="col-md-2">
-            <label>Kontaktperson navn:</label>
-            <br/>
-            <input type="text" th:field="${case.kontaktperson_navn}"/>
-        </div>
-        <div class="col-md-2">
-            <label>Telefonnummer:</label>
-            <br/>
-            <input type="text" th:field="${case.kontaktperson_telefonnummer}"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            <label>E-mail:</label>
-            <br/>
-            <input type="text" th:field="${case.kontaktperson_email}"/>
-        </div>
-    </div>
-
-    <h4>Ekstra</h4>
-    <div class="row">
-        <div class="col-md-2">
-            <label>Arbejdsbeskrivelse:</label>
-            <br/>
-            <input type="text" th:field="${case.arbejdsbeskrivelse}"/>
-        </div>
-
-        <div class="col-md-4">
-            <label>Ekstra arbejde:</label>
-            <br/>
-            <input type="text" th:field="${case.ekstra_arbejde}"/>
-        </div>
-    </div>
-
-    <h4>Hvem arbejder på denne sag:</h4>
-    <button type="submit" name="save" value="savebtn">Send</button>
-</form>
-</body>
 </html>
