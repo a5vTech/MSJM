@@ -1,0 +1,75 @@
+button{
+    margin: 10px;
+    text-align: center;
+    width: 300px;
+}
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label{
+    width: 200px
+}
+
+#opret_sag{
+    margin-top: 20px;
+    width: 150px;
+}
+.navbar-button{
+    width: 100px;
+    margin-right: 15px;
+}
+.navigation{
+    background-color: #4e555b;
+}
+
+h2{
+    text-align: center;
+}
+
+#opret_svend{
+    margin-top: 20px;
+    width: 150px;
+}
+
+.loginBtn{
+    margin-top: 20px;
+    width: 200px;
+    text-align: center;
+    margin-left: 0px !important;
+}
+
+.loginInput{
+    width: 200px;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    width: 60%;
+    margin: 0 auto;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 5px 8px 5px 8px;
+}
+
+tr:nth-child(odd) {
+    background-color: #dddddd;
+}
+td:nth-child(even) {
+    text-align: center;
+}
+
+.registerBtn{
+    width: 150px
+}
+
+.more-txt{
+    height: 80px;
+    width: 100%;
+}

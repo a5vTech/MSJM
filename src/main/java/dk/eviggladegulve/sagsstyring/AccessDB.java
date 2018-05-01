@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccessDB {
     static AccessDB instance = new AccessDB();
@@ -107,4 +109,29 @@ public class AccessDB {
     }
 
 
+    public ArrayList<Case> getAllActiveCases() {
+        createConnection();
+        ArrayList<Case> activeCaseList = new ArrayList<>();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM egg.sag JOIN adresse ON (sag.adresse = adresse.adresse_id)");
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        activeCaseList.add(new Case(rs.getInt("sags_id"),rs.getString("arbejdssted"),rs.getInt("telefonnummer"),rs.getString("vejnavn"),rs.getInt("vejnummer"),rs.getString("start_dato"),rs.getString("slut_dato"),rs.getInt("postnummer"),rs.getString("by_navn"),rs.getString("email"),rs.getString("saerlige_aftaler"),rs.getString("kontaktperson_navn"),rs.getInt("kontaktperson_telefonnummer"),rs.getString("kontaktperson_email"),rs.getString("arbejdsbeskrivelse"),rs.getString("ekstra_arbejde")));
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activeCaseList;
+    }
 }
