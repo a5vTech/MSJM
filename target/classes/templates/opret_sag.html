@@ -1,5 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<body>
+<div class="container-fluid">
+    <form method="post" th:action="@{/opret_sag}">
+
+        <h1>Sag:</h1>
+        <h4>Oplysninger</h4>
+
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Arbejdssted:</label>
+                <br/>
+                <input type="text" th:field="${case.arbejdssted}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Telefonnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.telefonnummer}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Vejnavn:</label>
+                <br/>
+                <input type="text" th:field="${case.vejnavn}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Vejnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.vejnummer}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>By:</label>
+                <br/>
+                <input type="text" th:field="${case.by}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Postnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.postnummer}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>Start dato:</label>
+                <br/>
+                <input type="text" th:field="${case.start_dato}"/>
+            </div>
+            <div class="col-md-4">
+                <label>Slut dato:</label>
+                <br/>
+                <input type="text" th:field="${case.slut_dato}"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <label>E-mail:</label>
+                <br/>
+                <input type="text" th:field="${case.email}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Særlige aftaler:</label>
+                <br/>
+                <input type="text" th:field="${case.saerlige_aftaler}"/>
+            </div>
+        </div>
+
+        <h4>Kontaktperson</h4>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Kontaktperson navn:</label>
+                <br/>
+                <input type="text" th:field="${case.kontaktperson_navn}"/>
+            </div>
+            <div class="col-md-2">
+                <label>Telefonnummer:</label>
+                <br/>
+                <input type="text" th:field="${case.kontaktperson_telefonnummer}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <label>E-mail:</label>
+                <br/>
+                <input type="text" th:field="${case.kontaktperson_email}"/>
+            </div>
+        </div>
+
+        <h4>Ekstra</h4>
+        <div class="row">
+            <div class="col-md-2">
+                <label>Arbejdsbeskrivelse:</label>
+                <br/>
+                <input type="text" th:field="${case.arbejdsbeskrivelse}"/>
+            </div>
+
+            <div class="col-md-4">
+                <label>Ekstra arbejde:</label>
+                <br/>
+                <input type="text" th:field="${case.ekstra_arbejde}"/>
+            </div>
+        </div>
+
+
+        <h4>Hvem arbejder på denne sag:</h4>
+        <button type="submit" name="save" value="savebtn">Send</button>
+    </form>
+</div>
+
+</body>
 <head>
     <meta charset="UTF-8"/>
     <title>opret_sag</title>
@@ -17,144 +137,5 @@
             crossorigin="anonymous"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
-<body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="container-fluid">
-
-
-
-
-    <form method="post" th:action="@{/opret_sag}">
-
-
-        <div class="container logo">
-            <div class="row">
-                <div class="col-md-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
-                <div class="col-md-2"></div>
-                <div class="col-md-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
-
-            </div>
-
-</div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-md-2">
-                    <label>Arbejdssted:</label>
-                </div>
-                <div class="col-md-10">
-
-                    <input type="text" th:field="${case.arbejdssted}"/>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-2">
-                    <label>Adresse:</label>
-                </div>
-                <div class="col-md-10">
-                    <input type="text" th:field="${case.vejnavn}"/>
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="col-md-2">
-                    <label>By:</label>
-                </div>
-                <div class="col-md-10">
-                    <input type="text" th:field="${case.by}"/>
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="col-md-2">
-                    <label>E-mail:</label>
-                </div>
-                <div class="col-md-10">
-                    <input type="text" th:field="${case.email}"/>
-                </div>
-            </div>
-
-            <div class="row logoColour">
-                <div class="col-md-2">
-                    <label>Telefonnummer:</label>
-                </div>
-                <div class="col-md-10">
-                    <input class="" type="text" th:field="${case.telefonnummer}"/>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2">
-                    <label>Opstartsdato:</label>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" th:field="${case.start_dato}"/>
-                </div>
-
-                <div class="col-md-2">
-                    <label>Slutdato:</label>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" th:field="${case.slut_dato}"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Ekstraarbejde er udført. Aftalt med:<span><input type="text"/></span></label>
-
-                </div>
-                <div class="col-md-12">
-                <textarea  wrap="hard" class="form-control textarea" rows="5"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <label>Der er aftalt fast mødetid kl.</label>
-                    <input type="text"/>
-                </div>
-
-                <div class="col-md-6">
-                    <label>Arbejdet skal udføres på overtid fra kl.</label>
-                    <input type="text"/>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Arbejdsbeskrivelse:</label>
-                    <br/>
-                    <input type="text" th:field="${case.arbejdsbeskrivelse}"/>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Særlige aftaler:</label>
-                    <br/>
-                    <input type="text" th:field="${case.saerlige_aftaler}"/>
-                </div>
-            </div>
-        </div>
-
-        <button type="submit" name="save" value="savebtn">Send</button>
-    </form>
-</div>
-
-</body>
-
 </html>

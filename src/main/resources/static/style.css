@@ -1,5 +1,5 @@
 div {
-    /*border-style: solid;*/
+    border-style: solid;
     border-width: 0.02px;
     text-align: center;
     vertical-align: middle;
@@ -39,52 +39,4 @@ div {
 
 button {
     bottom: 9px;
-}
-
-.right-align {
-    text-align: right;
-    margin-right: 140px;
-    margin-top: 60px;
-}
-
-.left-align {
-    text-align: left;
-}
-
-.container {
-    border: 1px solid rgba(0, 0, 0, 0.98);
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.logo {
-    border: none;
-    margin-top: 15px;
-    margin-bottom: 15px;
-
-}
-.row{
-    padding: 5px;
-}
-
-input {
-    width: 100%;
-}
-
-.logoColour {
-    background-color: #DDEBF6;
-
-}
-
-.textarea {
-    max-width: 100%;
-    min-width: 100%;
-
-}
-
-@media print {
-    .logoColour {
-        background-color: #DDEBF6 !important;
-
-    }
 }
