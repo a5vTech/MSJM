@@ -17,91 +17,63 @@
             crossorigin="anonymous"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container-fluid">
-
-
-
-
     <form method="post" th:action="@{/opret_sag}">
 
-
-        <div class="container logo">
-            <div class="row">
-                <div class="col-md-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
-                <div class="col-md-2"></div>
-                <div class="col-md-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
-
-            </div>
-
-</div>
+        <h2 class="right-align">Arbejdsseddel:</h2>
 
         <div class="container">
-            <div class="row logoColour">
-                <div class="col-md-2">
+            <div class="row pull-left">
+                <div class="col-md-12">
                     <label>Arbejdssted:</label>
-                </div>
-                <div class="col-md-10">
-
-                    <input type="text" th:field="${case.arbejdssted}"/>
+                    <input class="form-control" type="text" th:field="${case.arbejdssted}"/>
                 </div>
             </div>
 
 
-            <div class="row">
-                <div class="col-md-2">
+            <div class="row pull-left">
+                <div class="col-md-12">
                     <label>Adresse:</label>
-                </div>
-                <div class="col-md-10">
                     <input type="text" th:field="${case.vejnavn}"/>
+                    <br/>
                 </div>
             </div>
 
-            <div class="row ">
-                <div class="col-md-2">
+            <div class="row pull-left">
+                <div class="col-md-12">
                     <label>By:</label>
-                </div>
-                <div class="col-md-10">
                     <input type="text" th:field="${case.by}"/>
                 </div>
             </div>
 
-            <div class="row ">
-                <div class="col-md-2">
+            <div class="row pull-left">
+                <div class="col-md-12">
                     <label>E-mail:</label>
-                </div>
-                <div class="col-md-10">
                     <input type="text" th:field="${case.email}"/>
+
                 </div>
             </div>
 
-            <div class="row logoColour">
-                <div class="col-md-2">
+            <div class="row pull-left">
+                <div class="col-md-12">
                     <label>Telefonnummer:</label>
-                </div>
-                <div class="col-md-10">
-                    <input class="" type="text" th:field="${case.telefonnummer}"/>
+                    <input type="text" th:field="${case.telefonnummer}"/>
                 </div>
             </div>
-
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-6">
                     <label>Opstartsdato:</label>
-                </div>
-                <div class="col-md-4">
                     <input type="text" th:field="${case.start_dato}"/>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-6">
                     <label>Slutdato:</label>
-                </div>
-                <div class="col-md-4">
                     <input type="text" th:field="${case.slut_dato}"/>
                 </div>
             </div>
@@ -110,11 +82,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <label>Ekstraarbejde er udført. Aftalt med:<span><input type="text"/></span></label>
+                    <label class="checkbox-inline"><input type="checkbox">Ekstraarbejde er udført.
+                        <label>Aftalt med:</label>
+                        <input type="checkbox"/>
 
-                </div>
-                <div class="col-md-12">
-                <textarea  wrap="hard" class="form-control textarea" rows="5"></textarea>
+                        <br/>
+                        <input type="text"/>
                 </div>
             </div>
         </div>
@@ -151,7 +124,7 @@
             </div>
         </div>
 
-        <button type="submit" name="save" value="savebtn">Send</button>
+        <button type="submit" name="save" value="redigerbtn">Gem oplysninger</button>
     </form>
 </div>
 
