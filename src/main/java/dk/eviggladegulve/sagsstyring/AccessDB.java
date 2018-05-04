@@ -36,7 +36,7 @@ public class AccessDB {
         }
     }
 
-    public void insertCase(Case currentCase) {
+    public void insertCase(Sag currentCase) {
         createConnection();
         Statement s = null;
         try {
@@ -49,6 +49,8 @@ public class AccessDB {
         }
 
     }
+
+
 
     public void insertAddress(String vejnavn, int vejnummer, int postnummer, String by) {
         createConnection();
@@ -66,6 +68,7 @@ public class AccessDB {
     }
 
     public int getLastAddress() {
+        createConnection();
         Statement s = null;
         int id = 0;
         try {
@@ -90,12 +93,39 @@ public class AccessDB {
         return id;
     }
 
-    public void insertEmployee(Employee currentEmployee) {
+    public boolean checkLogin(String username, String password) {
         createConnection();
         Statement s = null;
         try {
             s = con.createStatement();
-            s.executeUpdate(String.format("INSERT INTO svend(fornavn, efternavn, email, telefonnummer) VALUES('%s','%s','%s',%s);", currentEmployee.getFornavn(), currentEmployee.getEfternavn(), currentEmployee.getEmail(), currentEmployee.getTelefonnummer()));
+            ResultSet rs = s.executeQuery(String.format("SELECT kodeord FROM svend WHERE svend_id = %s", username));
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        if (password.equals(rs.getString("kodeord"))) {
+                            return true;
+                        } else
+                            return false;
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
+
+    public void insertEmployee(Medarbejder currentEmployee) {
+        createConnection();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            s.executeUpdate(String.format("INSERT INTO svend(fornavn, efternavn, email, telefonnummer, kodeord) VALUES('%s','%s','%s',%s,'%s');", currentEmployee.getFornavn(), currentEmployee.getEfternavn(), currentEmployee.getEmail(), currentEmployee.getTelefonnummer(), currentEmployee.getKodeord()));
             s.close();
             con.close();
         } catch (SQLException e) {
@@ -110,9 +140,9 @@ public class AccessDB {
     }
 
 
-    public ArrayList<Case> getAllActiveCases() {
+    public ArrayList<Sag> getAllActiveCases() {
         createConnection();
-        ArrayList<Case> activeCaseList = new ArrayList<>();
+        ArrayList<Sag> activeCaseList = new ArrayList<>();
         Statement s = null;
         try {
             s = con.createStatement();
@@ -120,7 +150,7 @@ public class AccessDB {
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        activeCaseList.add(new Case(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde")));
+                        activeCaseList.add(new Sag(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde")));
 
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -136,10 +166,10 @@ public class AccessDB {
         return activeCaseList;
     }
 
-    public void executeStamementCases(LocalDate dateFromView, ArrayList<Employee> employeeList) {
+    public void executeStamementCases(LocalDate dateFromView, ArrayList<Medarbejder> employeeList) {
         createConnection();
         LocalDate date = dateFromView;
-       // ArrayList<Case> sager = new ArrayList<>();
+       // ArrayList<Sag> sager = new ArrayList<>();
         Statement s = null;
         try {
             s = con.createStatement();
@@ -148,12 +178,12 @@ public class AccessDB {
 
                 //System.out.println("START DATE......." + startDate.toString());
                 for (int j = 0; j < 14; j++) {
-                    ArrayList<Case> currentSager = new ArrayList<>();
+                    ArrayList<Sag> currentSager = new ArrayList<>();
                     ResultSet rs = s.executeQuery(String.format("SELECT * FROM svend JOIN svend_sager ON (svend.svend_id = svend_sager.svend_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE svend.svend_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", employeeList.get(i).getSvend_id(), startDate.toString()));
                     if (rs != null) {
                         while (rs.next()) {
                             try {
-                                Case sag = new Case(rs.getInt("sags_id"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getString("arbejdssted"));
+                                Sag sag = new Sag(rs.getInt("sags_id"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getString("arbejdssted"));
                                 currentSager.add(sag);
                             } catch (SQLException e) {
                                 e.printStackTrace();
@@ -178,9 +208,9 @@ public class AccessDB {
 
     }
 
-    public ArrayList<Employee> executeStamementEmployeeList(String sql) {
+    public ArrayList<Medarbejder> executeStamementEmployeeList(String sql) {
         Statement s = null;
-        ArrayList<Employee> empList = new ArrayList<>();
+        ArrayList<Medarbejder> empList = new ArrayList<>();
         try {
             s = con.createStatement();
 
@@ -188,7 +218,7 @@ public class AccessDB {
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        empList.add(new Employee(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer")));
+                        empList.add(new Medarbejder(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer"), rs.getString("kodeord")));
                         //sager.add(new Sag(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -207,4 +237,44 @@ public class AccessDB {
     }
 
 
+
+    public void end_case(String id){
+        createConnection();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            s.executeUpdate(String.format("UPDATE sag SET status = 0 WHERE sags_id = %s", id));
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void timer(String svend_id, String sags_id, String timer){
+        createConnection();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            s.executeUpdate(String.format("INSERT INTO registrerede_timer(svend_id, sags_id, timer) VALUES(%s, %s, %s)", svend_id, sags_id, timer));
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void add_extra_work(String ekstra_arbejde, String id){
+        createConnection();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            s.executeUpdate(String.format("UPDATE sag SET ekstra_arbejde='%s' WHERE sags_id=%s;", ekstra_arbejde, id));
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
