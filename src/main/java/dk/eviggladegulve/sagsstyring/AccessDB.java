@@ -208,17 +208,18 @@ public class AccessDB {
 
     }
 
-    public ArrayList<Medarbejder> executeStamementEmployeeList(String sql) {
+    public ArrayList<Medarbejder> executeStamementEmployeeList() {
+        createConnection();
         Statement s = null;
         ArrayList<Medarbejder> empList = new ArrayList<>();
         try {
             s = con.createStatement();
 
-            ResultSet rs = s.executeQuery(sql);
+            ResultSet rs = s.executeQuery("SELECT * FROM svend");
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        empList.add(new Medarbejder(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer"), rs.getString("kodeord")));
+                        empList.add(new Medarbejder(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer"), rs.getString("kodeord"),rs.getString("stilling")));
                         //sager.add(new Sag(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
                     } catch (SQLException e) {
                         e.printStackTrace();

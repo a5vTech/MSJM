@@ -9,6 +9,7 @@ public class Medarbejder {
     private String email;
     private int telefonnummer;
     private String kodeord;
+    private String stilling;
     private ArrayList<ArrayList<Sag>> sager = new ArrayList<>();
 
     // Constructors
@@ -32,6 +33,16 @@ public class Medarbejder {
         this.email = email;
         this.telefonnummer = telefonnummer;
         this.kodeord = kodeord;
+    }
+
+    public Medarbejder(int svend_id, String fornavn, String efternavn, String email, int telefonnummer, String kodeord, String stilling) {
+        this.svend_id = svend_id;
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.email = email;
+        this.telefonnummer = telefonnummer;
+        this.kodeord = kodeord;
+        this.stilling = stilling;
     }
 
     // Getters and setters
@@ -89,5 +100,13 @@ public class Medarbejder {
 
     public void setKodeord(String kodeord) {
         this.kodeord = kodeord;
+    }
+
+    public String getStilling() {
+        return stilling;
+    }
+
+    public void setStilling(String stilling) {
+        this.stilling = stilling;
     }
 }

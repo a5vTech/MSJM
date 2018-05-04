@@ -16,15 +16,19 @@
 </head>
 
 <body>
-    <div class="container-fluid" id="outerContainer">
-        <div class="container" id="innerContainer">
-            <button class="btn">Opret sag</button>
-            <button class="btn">Rediger sag</button>
-            <button class="btn">Afslut sag</button>
-            <button class="btn">Opret medarbejder</button>
-            <button class="btn">Rediger medarbejder</button>
-            <button class="btn">Kalender</button>
-        </div>
+<div class="container-fluid" id="outerContainer">
+    <nav th:replace="fragments/navbar :: navbar"></nav> <!-- Skal forklares -->
+    <div class="container" id="menuContainer">
+        <form method="post" th:action="@{/menu}">
+            <button type="submit" name="opret_sag" class="btn center-block">Opret sag</button><br><br>
+            <button type="submit" name="rediger_sag" class="btn center-block">Rediger sag</button><br><br>
+            <button type="submit" name="afslut_sag" class="btn center-block">Afslut sag</button><br><br>
+            <button type="submit" name="opret_medarbejder" class="btn center-block">Opret medarbejder</button><br><br>
+            <button type="submit" name="rediger_medarbejder" class="btn center-block">Rediger medarbejder</button><br><br>
+            <button type="submit" name="kalender" class="btn center-block">Kalender</button>
+        </form>
     </div>
+</div>
 </body>
+
 </html>

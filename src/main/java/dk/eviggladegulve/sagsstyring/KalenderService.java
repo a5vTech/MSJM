@@ -9,8 +9,7 @@ public class KalenderService {
     ArrayList<Medarbejder> medarbejderListe;
 
     public KalenderService() {
-        access.createConnection();
-        medarbejderListe = access.executeStamementEmployeeList("SELECT * FROM svend");
+        medarbejderListe = access.executeStamementEmployeeList();
     }
 
     public void dateMangement() {
@@ -34,32 +33,7 @@ public class KalenderService {
         return date.plusDays(1).minusDays(date.getDayOfWeek().getValue());
     }
 
- /*   public void createViewData() {
 
-        for (int i = 0; i < medarbejderListe.size(); i++) {
-            LocalDate startDate = firstDay();
-
-            //System.out.println("START DATE......." + startDate.toString());
-            for (int j = 0; j < 14; j++) {
-
-                access.createConnection();
-                ArrayList<Sag> sager = access.executeStamementCases("SELECT *" +
-                        " FROM svend" +
-                        " JOIN svend_sager ON (svend.svend_id = svend_sager.svend_id)" +
-                        " JOIN sag ON (sag.sags_id = svend_sager.sags_id)" +
-                        String.format(" WHERE svend.svend_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", medarbejderListe.get(i).getSvend_id(), startDate.toString()));
-                medarbejderListe.get(i).getSager().add(sager);
-                startDate = startDate.plusDays(1);
-                System.out.println(startDate.toString());
-
-            }
-//            }
-//            access.createConnection();
-
-
-        }
-
-    } */
 
 
 

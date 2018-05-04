@@ -1,0 +1,42 @@
+div {
+    /*border-style: solid;*/
+    border-width: 0.02px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/*ABOVE IS FOR TESTING PURPOSES*/
+
+.hidden {
+    display: none;
+}
+
+.noMargin {
+    margin: 0;
+}
+
+.noPadding {
+    padding: 0;
+}
+
+.rightAbsolute {
+    position: absolute;
+    right: 0;
+}
+
+.leftAbsolute {
+    position: absolute;
+    left: 0;
+}
+
+.fontBold {
+    font-weight: bold;
+}
+
+.height50px {
+    height: 50px;
+}
+
+button {
+    bottom: 9px;
+}
