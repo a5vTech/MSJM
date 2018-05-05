@@ -20,6 +20,8 @@ public class Sag {
     private String kontaktperson_email;
     private String arbejdsbeskrivelse;
     private String ekstra_arbejde;
+    private String fast_moedetid;
+    private String udfoeres_overtid;
 
 //Constructors
 
@@ -190,6 +192,21 @@ public class Sag {
         this.adresse_id = adresse_id;
     }
 
+    public String getFast_moedetid() {
+        return fast_moedetid;
+    }
+
+    public void setFast_moedetid(String fast_moedetid) {
+        this.fast_moedetid = fast_moedetid;
+    }
+
+    public String getUdfoeres_overtid() {
+        return udfoeres_overtid;
+    }
+
+    public void setUdfoeres_overtid(String udfoeres_overtid) {
+        this.udfoeres_overtid = udfoeres_overtid;
+    }
 
     public static Sag findCaseById(int id){
         AccessDB access = AccessDB.getInstance();
@@ -201,4 +218,5 @@ public class Sag {
         }
         return new Sag();
     }
+
 }

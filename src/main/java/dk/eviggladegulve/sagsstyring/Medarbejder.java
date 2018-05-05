@@ -3,7 +3,7 @@ package dk.eviggladegulve.sagsstyring;
 import java.util.ArrayList;
 
 public class Medarbejder {
-    private int svend_id;
+    private int medarbejder_id;
     private String fornavn;
     private String efternavn;
     private String email;
@@ -26,8 +26,8 @@ public class Medarbejder {
         this.kodeord = kodeord;
     }
 
-    public Medarbejder(int svend_id, String fornavn, String efternavn, String email, int telefonnummer, String kodeord) {
-        this.svend_id = svend_id;
+    public Medarbejder(int medarbejder_id, String fornavn, String efternavn, String email, int telefonnummer, String kodeord) {
+        this.medarbejder_id = medarbejder_id;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
         this.email = email;
@@ -35,8 +35,8 @@ public class Medarbejder {
         this.kodeord = kodeord;
     }
 
-    public Medarbejder(int svend_id, String fornavn, String efternavn, String email, int telefonnummer, String kodeord, String stilling) {
-        this.svend_id = svend_id;
+    public Medarbejder(int medarbejder_id, String fornavn, String efternavn, String email, int telefonnummer, String kodeord, String stilling) {
+        this.medarbejder_id = medarbejder_id;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
         this.email = email;
@@ -86,12 +86,12 @@ public class Medarbejder {
         this.sager = sager;
     }
 
-    public int getSvend_id() {
-        return svend_id;
+    public int getMedarbejder_id() {
+        return medarbejder_id;
     }
 
-    public void setSvend_id(int svend_id) {
-        this.svend_id = svend_id;
+    public void setMedarbejder_id(int medarbejder_id) {
+        this.medarbejder_id = medarbejder_id;
     }
 
     public String getKodeord() {

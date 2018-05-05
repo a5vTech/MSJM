@@ -5,12 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.image.AreaAveragingScaleFilter;
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Controller
+@SessionAttributes("Bruger")
+
 public class LoginController {
     final AccessDB access = AccessDB.getInstance();
 
@@ -20,11 +18,9 @@ public class LoginController {
     }
 
     @PostMapping("/log_ind")
-    public String loginPost(@RequestParam("username") String username, @RequestParam("password") String password) {
-        if(access.checkLogin(username,password)){
-            return "redirect:/kalender";
-        }else
-            return "redirect:/log_ind";
-    }
+    public String loginPost(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+        model.addAttribute("Bruger", username);
 
+        return access.checkLogin(username,password);
+    }
 }

@@ -5,12 +5,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import dk.eviggladegulve.sagsstyring.*;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 @Controller
+@SessionAttributes("Bruger")
 public class MenuController {
 
     @GetMapping("/menu")
-    public String menu(Model model) {
+    public String menu() {
         return "menu";
+    }
+
+    @PostMapping("/menu")
+    public String menuPost() {
+        return "redirect:/menu";
     }
 
 

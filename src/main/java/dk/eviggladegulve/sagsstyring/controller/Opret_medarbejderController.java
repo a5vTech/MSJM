@@ -13,13 +13,14 @@ public class Opret_medarbejderController {
     final AccessDB access = AccessDB.getInstance();
 
     @GetMapping("/opret_medarbejder")
-    public String createEmployee(Model model) {
-        model.addAttribute("employee",new Medarbejder());
+    public String opretMedarbejder(Model model) {
+        model.addAttribute("medarbejder",new Medarbejder());
         return "opret_medarbejder";
     }
 
     @PostMapping(value= "/opret_medarbejder", params = "save")
-    public String createEmployeePost(@ModelAttribute Medarbejder nuvaerendeMedarbejder) {
+    public String opretMedarbejderPost(@ModelAttribute Medarbejder nuvaerendeMedarbejder) {
+        System.out.println(nuvaerendeMedarbejder.getStilling());
         access.insertEmployee(nuvaerendeMedarbejder);
         return "opret_medarbejder";
     }

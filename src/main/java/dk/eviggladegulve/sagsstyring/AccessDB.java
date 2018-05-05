@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AccessDB {
     static AccessDB instance = new AccessDB();
@@ -93,19 +92,25 @@ public class AccessDB {
         return id;
     }
 
-    public boolean checkLogin(String username, String password) {
+    public String checkLogin(String username, String password) {
         createConnection();
         Statement s = null;
         try {
             s = con.createStatement();
-            ResultSet rs = s.executeQuery(String.format("SELECT kodeord FROM svend WHERE svend_id = %s", username));
+            // crypto from https://passwordsgenerator.net/
+            ResultSet rs = s.executeQuery(String.format("SELECT CAST(AES_DECRYPT(kodeord,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') AS CHAR) AS kodeord, stilling FROM svend WHERE svend_id = %s", username));
             if (rs != null) {
                 while (rs.next()) {
                     try {
                         if (password.equals(rs.getString("kodeord"))) {
-                            return true;
+                            if ("Leder".equals(rs.getString("stilling")))
+                                return "redirect:/menu";
+                            else if ("Konduktør".equals(rs.getString("stilling")))
+                                return "redirect:/kalender";
+                            else if ("Svend".equals(rs.getString("stilling")))
+                                return "igangværende_sager";
                         } else
-                            return false;
+                            return "redirect:/log_ind";
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -114,7 +119,7 @@ public class AccessDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return "redirect:/log_ind";
     }
 
 
@@ -125,7 +130,7 @@ public class AccessDB {
         Statement s = null;
         try {
             s = con.createStatement();
-            s.executeUpdate(String.format("INSERT INTO svend(fornavn, efternavn, email, telefonnummer, kodeord) VALUES('%s','%s','%s',%s,'%s');", currentEmployee.getFornavn(), currentEmployee.getEfternavn(), currentEmployee.getEmail(), currentEmployee.getTelefonnummer(), currentEmployee.getKodeord()));
+            s.executeUpdate(String.format("INSERT INTO svend(fornavn, efternavn, email, telefonnummer, kodeord, stilling) VALUES('%s','%s','%s',%s,AES_ENCRYPT('%s','y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe'),'%s');", currentEmployee.getFornavn(), currentEmployee.getEfternavn(), currentEmployee.getEmail(), currentEmployee.getTelefonnummer(), currentEmployee.getKodeord(), currentEmployee.getStilling()));
             s.close();
             con.close();
         } catch (SQLException e) {
@@ -179,7 +184,7 @@ public class AccessDB {
                 //System.out.println("START DATE......." + startDate.toString());
                 for (int j = 0; j < 14; j++) {
                     ArrayList<Sag> currentSager = new ArrayList<>();
-                    ResultSet rs = s.executeQuery(String.format("SELECT * FROM svend JOIN svend_sager ON (svend.svend_id = svend_sager.svend_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE svend.svend_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", employeeList.get(i).getSvend_id(), startDate.toString()));
+                    ResultSet rs = s.executeQuery(String.format("SELECT * FROM svend JOIN svend_sager ON (svend.svend_id = svend_sager.svend_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE svend.svend_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", employeeList.get(i).getMedarbejder_id(), startDate.toString()));
                     if (rs != null) {
                         while (rs.next()) {
                             try {
