@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kalender</title>
+
+    <!-- Bootstrap CSS + JavaScript -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{calStyle.css}"/>
+</head>
+
+<body>
+<div class="container-fluid" id="outerContainer">
+    <div class="container-fluid noPadding" id="headerContainer">
+        <h1>Kalender</h1>
+        <table class="table-bordered col-md-12">
+            <tr class="row noMargin">
+                <td class="col-md-4 offset-md-4">01 januar 2018 - 14 januar 2018</td>
+            </tr>
+            <tr class="row noMargin height50px">
+                <td class="col-md-1"></td>
+                <td class="col" th:text="'Uge ' + ${week1}">Uge1</td>
+                <td class="col" th:text="'Uge ' + ${week2}">Uge2</td>
+            </tr>
+            <tr class="row noMargin fontBold">
+                <td class="col-md-1">Navn</td>
+                <td class="col">man</td>
+                <td class="col">tir</td>
+                <td class="col">ons</td>
+                <td class="col">tor</td>
+                <td class="col">fre</td>
+                <td class="col">lør</td>
+                <td class="col">søn</td>
+                <td class="col">man</td>
+                <td class="col">tir</td>
+                <td class="col">ons</td>
+                <td class="col">tor</td>
+                <td class="col">fre</td>
+                <td class="col">lør</td>
+                <td class="col">søn</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="container-fluid" id="contentCont">
+    <table class="table-bordered col-md-12">
+        <tr class="row noMargin" th:each="Employee: ${empList}">
+            <td class="col-md-1" th:text="${Employee.fornavn} + ' ' + ${Employee.efternavn} + '' + ${Employee.svend_id}"></td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(0)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(1)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(2)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(3)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(4)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(5)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(6)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(7)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(8)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(9)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(10)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(11)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(12)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+            <td class="col">
+                <p th:each="Sag: ${Employee.getSager().get(13)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
+            </td>
+
+
+        </tr>
+    </table>
+</div>
+</body>
+
+</html>

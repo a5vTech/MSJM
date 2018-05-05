@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>opret_sag</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container-fluid">
+
+
+
+
+    <form method="post" th:action="@{/opret_sag}">
+
+
+        <div class="container logo">
+            <div class="row">
+                <div class="col-md-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
+
+            </div>
+
+</div>
+
+        <div class="container">
+            <div class="row logoColour">
+                <div class="col-md-2">
+                    <label>Arbejdssted:</label>
+                </div>
+                <div class="col-md-10">
+
+                    <input type="text" th:field="${case.arbejdssted}"/>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Adresse:</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" th:field="${case.vejnavn}"/>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-md-2">
+                    <label>By:</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" th:field="${case.by}"/>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-md-2">
+                    <label>E-mail:</label>
+                </div>
+                <div class="col-md-10">
+                    <input type="text" th:field="${case.email}"/>
+                </div>
+            </div>
+
+            <div class="row logoColour">
+                <div class="col-md-2">
+                    <label>Telefonnummer:</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="" type="text" th:field="${case.telefonnummer}"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Opstartsdato:</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" th:field="${case.start_dato}"/>
+                </div>
+
+                <div class="col-md-2">
+                    <label>Slutdato:</label>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" th:field="${case.slut_dato}"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Ekstraarbejde er udført. Aftalt med:<span><input type="text"/></span></label>
+
+                </div>
+                <div class="col-md-12">
+                <textarea  wrap="hard" class="form-control textarea" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Der er aftalt fast mødetid kl.</label>
+                    <input type="text"/>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Arbejdet skal udføres på overtid fra kl.</label>
+                    <input type="text"/>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Arbejdsbeskrivelse:</label>
+                    <br/>
+                    <input type="text" th:field="${case.arbejdsbeskrivelse}"/>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Særlige aftaler:</label>
+                    <br/>
+                    <input type="text" th:field="${case.saerlige_aftaler}"/>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" name="save" value="savebtn">Send</button>
+    </form>
+</div>
+
+</body>
+
+</html>
