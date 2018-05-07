@@ -41,11 +41,18 @@ public class AccessDB {
         try {
             s = con.createStatement();
             s.executeUpdate(String.format("INSERT INTO sag(arbejdssted, telefonnummer, adresse, start_dato, slut_dato, email, saerlige_aftaler, kontaktperson_navn, kontaktperson_telefonnummer, kontaktperson_email, arbejdsbeskrivelse, ekstra_arbejde) VALUES('%s',%d,%d,'%s','%s','%s','%s','%s',%d,'%s','%s','%s');", currentCase.getArbejdssted(), currentCase.getTelefonnummer(), getLastAddress(), currentCase.getStart_dato(), currentCase.getSlut_dato(), currentCase.getEmail(), currentCase.getSaerlige_aftaler(), currentCase.getKontaktperson_navn(), currentCase.getKontaktperson_telefonnummer(), currentCase.getKontaktperson_email(), currentCase.getArbejdsbeskrivelse(), currentCase.getEkstra_arbejde()));
+
+
+
+
+
+
             s.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -77,6 +84,33 @@ public class AccessDB {
                 while (rs.next()) {
                     try {
                         id = rs.getInt("adresse_id");
+                        return id;
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+
+    public int getLastCaseId() {
+        createConnection();
+        Statement s = null;
+        int id = 0;
+        try {
+            s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT sags_id FROM sag ORDER BY sags_id DESC LIMIT 1;");
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        id = rs.getInt("sags_id");
                         return id;
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -277,6 +311,19 @@ public class AccessDB {
         try {
             s = con.createStatement();
             s.executeUpdate(String.format("UPDATE sag SET ekstra_arbejde='%s' WHERE sags_id=%s;", ekstra_arbejde, id));
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void assignToCase(int sags_id, String medarbejder_id) {
+        createConnection();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            s.executeUpdate(String.format("INSERT INTO svend_sager(medarbejder_id, sags_id) VALUES(%s, %s)", medarbejder_id, sags_id));
             s.close();
             con.close();
         } catch (SQLException e) {

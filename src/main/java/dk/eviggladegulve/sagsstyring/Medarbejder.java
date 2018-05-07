@@ -109,4 +109,5 @@ public class Medarbejder {
     public void setStilling(String stilling) {
         this.stilling = stilling;
     }
+
 }

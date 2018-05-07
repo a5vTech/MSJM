@@ -16,14 +16,14 @@ public class Opret_sagController {
     @GetMapping("/opret_sag")
     public String createCase(Model model) {
         model.addAttribute("case", new Sag());
+        model.addAttribute("sags_id", access.getLastCaseId()+1);
         return "opret_sag";
     }
 
     @PostMapping(value = "/opret_sag", params = "save")
     public String createCasePost(@ModelAttribute Sag nuvaerendeSag) {
-        System.out.println();
         access.insertAddress(nuvaerendeSag.getVejnavn(), nuvaerendeSag.getVejnummer(), nuvaerendeSag.getPostnummer(), nuvaerendeSag.getBy());
         access.insertCase(nuvaerendeSag);
-        return "redirect:/opret_sag";
+        return "redirect:/tilknyt_medarbejder/";
     }
 }

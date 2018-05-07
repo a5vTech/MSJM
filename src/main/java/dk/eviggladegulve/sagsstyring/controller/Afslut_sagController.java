@@ -21,7 +21,7 @@ public class Afslut_sagController {
 
     }
 
-    @PostMapping(value = "/afslut_sag", params = "end_Sag")
+    @PostMapping(value = "/afslut_sag", params = "end_case")
     public String afslut_sagPost(Sag nuvaerendeSag, @RequestParam String end_case_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde, @RequestParam("arbejdstimer") String timer, @RequestParam("svend_id") String svend_id) {
         access.end_case(end_case_id);
         access.add_extra_work(ekstra_arbejde, end_case_id);

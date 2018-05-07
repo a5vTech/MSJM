@@ -41,6 +41,14 @@ button {
     bottom: 9px;
 }
 
+label {
+    padding-top: 2px;
+}
+
+.float-left {
+    float: left;
+}
+
 .right-align {
     text-align: right;
     margin-right: 140px;
@@ -70,6 +78,18 @@ button {
 
 .row {
     padding: 5px;
+}
+
+label {
+    display: inline-block;
+    margin-top: 3px;
+    max-width: 100%;
+    font-weight: 700;
+    float: left;
+}
+
+.padding-left {
+    padding-left: 25px;
 }
 
 input {

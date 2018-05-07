@@ -17,7 +17,7 @@
             <div class="row noBorder">
                 <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
                 <div class="col-sm-2"></div>
-                <div class="col-sm-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
+                <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${sags_id}"></h3></div>
 
             </div>
 
@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <label>Slutdato:</label>
+                    <label class="padding-left">Slutdato:</label>
                 </div>
                 <div class="col-sm-4">
                     <input type="text" th:field="${case.slut_dato}"/>
@@ -102,7 +102,7 @@
 
         <div class="container">
             <div class="row logoColour">
-                <div class="col-sm-8 center-align">
+                <div class="col-sm-5 center-align">
                     <label>Ekstraarbejde er udført. Aftalt med:</label>
                 </div>
                 <div class="col-sm-4">
@@ -136,7 +136,7 @@
 
         <div class="container">
             <div class="row logoColour">
-                <div class="col-sm-12 ">
+                <div class="col-sm-12 pull-left">
                     <label>Arbejdsbeskrivelse:</label>
                 </div>
             </div>

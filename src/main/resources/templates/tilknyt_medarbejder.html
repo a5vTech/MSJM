@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Tilknyt medarbejder</title>
+        <th:block th:include="fragments/head :: headInclude"/>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Tilknyt medarbejder</h1>
+            <h1 th:text="${sags_id}"></h1>
+            <table>
+                <form method="post" th:action="@{/tilknyt_medarbejder}">
+                    <tr th:each="Medarbejder: ${medarbejderListe}">
+                        <td>
+                            <input type="checkbox" th:value="${Medarbejder.getMedarbejder_id()}" name="medarbejder_id">
+                        </td>
+                        <td th:text="'ID: ' + ${Medarbejder.getMedarbejder_id()}"></td>
+                        <td th:text="${Medarbejder.getFornavn()} + ' ' + ${Medarbejder.getEfternavn()}"></td>
+                    </tr>
+                    <tr>
+
+
+                        <div class="form-group">
+                            <select multiple class="form-control" id="exampleFormControlSelect2" name="medarbejder_id">
+                                <option th:each="Medarbejder : ${medarbejderListe}" th:value="${Medarbejder.getMedarbejder_id()}" th:text="${Medarbejder.getMedarbejder_id()}+${Medarbejder.getFornavn()}"></option>
+                            </select>
+                        </div>
+
+
+
+
+
+                        <button type="submit">Tilknyt</button>
+                    </tr>
+                </form>
+            </table>
+        </div>
+    </body>
+</html>
