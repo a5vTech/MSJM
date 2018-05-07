@@ -3,11 +3,9 @@ package dk.eviggladegulve.sagsstyring.controller;
 import dk.eviggladegulve.sagsstyring.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -17,13 +15,13 @@ public class Afslut_sagController {
     @GetMapping("/afslut_sag/{id}")
     public String afslut_sag(@PathVariable("id") int id, Model model) {
         ArrayList<Sag> sager = access.getAllActiveCases();
-        model.addAttribute("case", Sag.findCaseById(id));
+        model.addAttribute("Sag", Sag.findCaseById(id));
 
         return "afslut_sag";
 
     }
 
-    @PostMapping(value = "/afslut_sag", params = "end_case")
+    @PostMapping(value = "/afslut_sag", params = "end_Sag")
     public String afslut_sagPost(Sag nuvaerendeSag, @RequestParam String end_case_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde, @RequestParam("arbejdstimer") String timer, @RequestParam("svend_id") String svend_id) {
         access.end_case(end_case_id);
         access.add_extra_work(ekstra_arbejde, end_case_id);

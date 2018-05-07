@@ -21,7 +21,7 @@
                 <td th:text="${Case.getArbejdssted()}"></td>
                 <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
                 <td>
-                    <form method="post" th:action="@{/aktive_sager}">
+                    <form method="post" th:action="@{/sager_til_afslutning}">
                         <input type="hidden"  th:value="${Case.getSags_id()}" th:name="id">
                         <a th:href="@{'/afslut_sag/'+ ${Case.getSags_id()}}"><button  type="button" name="afslut_sagBtn" class="btn btn-light registerBtn">Afslut sag</button></a>
 

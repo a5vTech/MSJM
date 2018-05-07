@@ -98,7 +98,7 @@ public class AccessDB {
         try {
             s = con.createStatement();
             // crypto from https://passwordsgenerator.net/
-            ResultSet rs = s.executeQuery(String.format("SELECT CAST(AES_DECRYPT(kodeord,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') AS CHAR) AS kodeord, stilling FROM svend WHERE svend_id = %s", username));
+            ResultSet rs = s.executeQuery(String.format("SELECT CAST(AES_DECRYPT(kodeord,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') AS CHAR) AS kodeord, stilling FROM medarbejder WHERE medarbejder_id = %s", username));
             if (rs != null) {
                 while (rs.next()) {
                     try {
@@ -130,7 +130,7 @@ public class AccessDB {
         Statement s = null;
         try {
             s = con.createStatement();
-            s.executeUpdate(String.format("INSERT INTO svend(fornavn, efternavn, email, telefonnummer, kodeord, stilling) VALUES('%s','%s','%s',%s,AES_ENCRYPT('%s','y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe'),'%s');", currentEmployee.getFornavn(), currentEmployee.getEfternavn(), currentEmployee.getEmail(), currentEmployee.getTelefonnummer(), currentEmployee.getKodeord(), currentEmployee.getStilling()));
+            s.executeUpdate(String.format("INSERT INTO medarbejder(fornavn, efternavn, email, telefonnummer, kodeord, stilling) VALUES('%s','%s','%s',%s,AES_ENCRYPT('%s','y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe'),'%s');", currentEmployee.getFornavn(), currentEmployee.getEfternavn(), currentEmployee.getEmail(), currentEmployee.getTelefonnummer(), currentEmployee.getKodeord(), currentEmployee.getStilling()));
             s.close();
             con.close();
         } catch (SQLException e) {
@@ -174,7 +174,7 @@ public class AccessDB {
     public void executeStamementCases(LocalDate dateFromView, ArrayList<Medarbejder> employeeList) {
         createConnection();
         LocalDate date = dateFromView;
-       // ArrayList<Sag> sager = new ArrayList<>();
+        // ArrayList<Sag> sager = new ArrayList<>();
         Statement s = null;
         try {
             s = con.createStatement();
@@ -184,7 +184,7 @@ public class AccessDB {
                 //System.out.println("START DATE......." + startDate.toString());
                 for (int j = 0; j < 14; j++) {
                     ArrayList<Sag> currentSager = new ArrayList<>();
-                    ResultSet rs = s.executeQuery(String.format("SELECT * FROM svend JOIN svend_sager ON (svend.svend_id = svend_sager.svend_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE svend.svend_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", employeeList.get(i).getMedarbejder_id(), startDate.toString()));
+                    ResultSet rs = s.executeQuery(String.format("SELECT * FROM medarbejder JOIN svend_sager ON (medarbejder.medarbejder_id = svend_sager.medarbejder_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE medarbejder.medarbejder_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", employeeList.get(i).getMedarbejder_id(), startDate.toString()));
                     if (rs != null) {
                         while (rs.next()) {
                             try {
@@ -209,7 +209,7 @@ public class AccessDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-      //  return sager;
+        //  return sager;
 
     }
 
@@ -220,11 +220,11 @@ public class AccessDB {
         try {
             s = con.createStatement();
 
-            ResultSet rs = s.executeQuery("SELECT * FROM svend");
+            ResultSet rs = s.executeQuery("SELECT * FROM medarbejder");
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        empList.add(new Medarbejder(rs.getInt("svend_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer"), rs.getString("kodeord"),rs.getString("stilling")));
+                        empList.add(new Medarbejder(rs.getInt("medarbejder_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer"), rs.getString("kodeord"),rs.getString("stilling")));
                         //sager.add(new Sag(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -262,7 +262,7 @@ public class AccessDB {
         Statement s = null;
         try {
             s = con.createStatement();
-            s.executeUpdate(String.format("INSERT INTO registrerede_timer(svend_id, sags_id, timer) VALUES(%s, %s, %s)", svend_id, sags_id, timer));
+            s.executeUpdate(String.format("INSERT INTO registrerede_timer(medarbejder_id, sags_id, timer) VALUES(%s, %s, %s)", svend_id, sags_id, timer));
             s.close();
             con.close();
         } catch (SQLException e) {

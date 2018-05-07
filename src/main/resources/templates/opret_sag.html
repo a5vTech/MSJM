@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>opret_sag</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
 <nav th:replace="fragments/navbar :: navbar"></nav>
@@ -13,7 +14,7 @@
 
 
         <div class="container logo">
-            <div class="row">
+            <div class="row noBorder">
                 <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
                 <div class="col-sm-2"></div>
                 <div class="col-sm-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
@@ -43,12 +44,22 @@
                 </div>
             </div>
 
+
             <div class="row ">
                 <div class="col-sm-2">
                     <label>By:</label>
                 </div>
                 <div class="col-sm-10">
                     <input type="text" th:field="${case.by}"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <label>Kunde:</label>
+                </div>
+                <div class="col-sm-10">
+                    <input type="text"/>
                 </div>
             </div>
 
@@ -63,13 +74,12 @@
 
             <div class="row logoColour">
                 <div class="col-sm-2">
-                    <label>Telefonnummer:</label>
+                    <label>Telefon:</label>
                 </div>
                 <div class="col-sm-10">
                     <input class="" type="text" th:field="${case.telefonnummer}"/>
                 </div>
             </div>
-
         </div>
 
         <div class="container">
@@ -92,7 +102,7 @@
 
         <div class="container">
             <div class="row logoColour">
-                <div class="col-sm-8 center-align logoColour">
+                <div class="col-sm-8 center-align">
                     <label>Ekstraarbejde er udført. Aftalt med:</label>
                 </div>
                 <div class="col-sm-4">
@@ -125,22 +135,42 @@
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
+            <div class="row logoColour">
+                <div class="col-sm-12 ">
                     <label>Arbejdsbeskrivelse:</label>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5" th:field="${case.arbejdsbeskrivelse}"></textarea>
+                    <textarea wrap="hard" class="form-control textarea" rows="5"
+                              th:field="${case.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <div class="row">
+            <div class="row logoColour">
                 <div class="col-sm-12">
                     <label>Særlige aftaler:</label>
-                    <br/>
-                    <input type="text" th:field="${case.saerlige_aftaler}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <textarea wrap="hard" class="form-control textarea" rows="5"
+                              th:field="${case.saerlige_aftaler}"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="container noBorder">
+            <div class="row noBorder">
+                <div class="col-sm-12">
+                    <strong>Det er håndværk - det ligger fast!</strong>
+                </div>
+            </div>
+            <div class="row noBorder">
+                <div class="col-sm-12">
+                    <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
                 </div>
             </div>
         </div>

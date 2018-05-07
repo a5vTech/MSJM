@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Kalender</title>
 
     <!-- Bootstrap CSS + JavaScript -->
@@ -50,7 +50,7 @@
 <div class="container-fluid" id="contentCont">
     <table class="table-bordered col-md-12">
         <tr class="row noMargin" th:each="Employee: ${empList}">
-            <td class="col-md-1" th:text="${Employee.fornavn} + ' ' + ${Employee.efternavn} + '' + ${Employee.svend_id}"></td>
+            <td class="col-md-1" th:text="${Employee.fornavn} + ' ' + ${Employee.efternavn} + '' + ${Employee.medarbejder_id}"></td>
             <td class="col">
                 <p th:each="Sag: ${Employee.getSager().get(0)}" th:text="'Sag nr'+${Sag.getSags_id()}">hej</p>
             </td>

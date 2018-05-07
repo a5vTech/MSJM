@@ -12,7 +12,7 @@ public class Rediger_medarbejerController {
     final AccessDB access = AccessDB.getInstance();
 
 
-    @GetMapping("/rediger_medarbejdere")
+    @GetMapping("/medarbejdere_til_redigering")
     public String redigerMedarbejder(Model model) throws NullPointerException{
         ArrayList<Medarbejder> medarbejderListe = access.executeStamementEmployeeList();
         model.addAttribute("medarbejderListe", medarbejderListe);

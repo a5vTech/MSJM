@@ -18,18 +18,7 @@
 </head>
 <body>
 
-<!-- <nav class="navbar" id="navbar" th:fragment="navbar">
-    <form method="post" th:action="@{/menu}">
-        <button type="submit" name="menu" class="btn">Menu</button>
-        <button type="submit" name="opret_sag" class="btn">Opret sag</button>
-        <button type="submit" name="rediger_sag" class="btn">Rediger sag</button>
-        <button type="submit" name="afslut_sag" class="btn">Afslut sag</button>
-        <button type="submit" name="opret_medarbejder" class="btn">Opret medarbejder</button>
-        <button type="submit" name="rediger_medarbejder" class="btn">Rediger medarbejder</button>
-        <button type="submit" name="kalender" class="btn">Kalender</button>
-    </form>
-</nav> -->
-<form>
+
     <nav class="navbar navbar-default" id="navbar" th:fragment="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -44,13 +33,13 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="" type="submit" name="opret_sag">Opret sag</a>
+                            <a href="/opret_sag" type="submit" name="opret_sag">Opret sag</a>
                         </li>
                         <li>
-                            <a href="">Rediger sag</a>
+                            <a href="/sager_til_redigering">Rediger sag</a>
                         </li>
                         <li>
-                            <a href="">Afslut sag</a>
+                            <a href="/afslut_sag">Afslut sag</a>
                         </li>
                     </ul>
                 </li>
@@ -59,20 +48,20 @@
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="">Opret ansat</a>
+                            <a href="/opret_medarbejder">Opret medarbejder</a>
                         </li>
                         <li>
-                            <a href="">Rediger ansat</a>
+                            <a href="/medarbejdere_til_redigering">Rediger ansat</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="">Kalender</a>
+                    <a href="/kalender">Kalender</a>
                 </li>
             </ul>
         </div>
     </nav>
-</form>
+
 
 </body>
 </html>
