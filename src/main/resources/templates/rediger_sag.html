@@ -2,115 +2,169 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>opret_sag</title>
+    <title>Rediger sag</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container-fluid">
-    <form method="post" th:action="@{/opret_sag}">
 
-        <h2 class="right-align">Arbejdsseddel:</h2>
+    <form method="post" th:action="@{/rediger_sag}">
+
+
+        <div class="container logo">
+            <div class="row noBorder">
+                <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
+            </div>
+        </div>
 
         <div class="container">
-            <div class="row pull-left">
-                <div class="col-md-12">
+            <div class="row logoColour">
+                <div class="col-xs-1">
                     <label>Arbejdssted:</label>
-                    <input class="form-control" type="text" th:field="${case.arbejdssted}"/>
+                </div>
+                <div class="col-xs-11">
+
+                    <input type="text" class="paragraph" th:field="${Sag.arbejdssted}"/>
                 </div>
             </div>
 
-
-            <div class="row pull-left">
-                <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-1">
                     <label>Adresse:</label>
-                    <input type="text" th:field="${case.vejnavn}"/>
-                    <br/>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.vejnavn}"/>
                 </div>
             </div>
 
-            <div class="row pull-left">
-                <div class="col-md-12">
+            <div class="row ">
+                <div class="col-xs-1">
                     <label>By:</label>
-                    <input type="text" th:field="${case.by}"/>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.by}"/>
                 </div>
             </div>
 
-            <div class="row pull-left">
-                <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-1">
+                    <label>Kunde:</label>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.kontaktperson_navn}"/>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-xs-1">
                     <label>E-mail:</label>
-                    <input type="text" th:field="${case.email}"/>
-
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.email}"/>
                 </div>
             </div>
 
-            <div class="row pull-left">
-                <div class="col-md-12">
-                    <label>Telefonnummer:</label>
-                    <input type="text" th:field="${case.telefonnummer}"/>
+            <div class="row logoColour">
+                <div class="col-xs-1">
+                    <label>Telefon:</label>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.telefonnummer}"/>
                 </div>
             </div>
         </div>
 
+
+
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row logoColour">
+                <div class="col-sm-1">
                     <label>Opstartsdato:</label>
-                    <input type="text" th:field="${case.start_dato}"/>
+                </div>
+                <div class="col-sm-4">
+                    <input class="paragraph" th:field="${Sag.start_dato}"/>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-sm-1">
                     <label>Slutdato:</label>
-                    <input type="text" th:field="${case.slut_dato}"/>
+                </div>
+                <div class="col-sm-4">
+                    <input class="paragraph" th:field="${Sag.slut_dato}"/>
                 </div>
             </div>
         </div>
 
         <div class="container">
+            <div class="row logoColour">
+                <div class="col-sm-8 center-align">
+                    <label>Ekstraarbejde er udført. Aftalt med:</label>
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" th:value="${Sag.kontaktperson_navn}"/>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-md-12">
-                    <label class="checkbox-inline"><input type="checkbox">Ekstraarbejde er udført.
-                        <label>Aftalt med:</label>
-                        <input type="checkbox"/>
-
-                        <br/>
-                        <input type="text"/>
+                <div class="col-sm-12">
+                    <textarea wrap="hard" th:value="${Sag.ekstra_arbejde}" class="form-control textarea"
+                              rows="5"></textarea>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row logoColour">
+                <div class="col-sm-4">
                     <label>Der er aftalt fast mødetid kl.</label>
-                    <input type="text"/>
+                </div>
+                <div class="col-sm-1">
+                    <input class="paragraph" th:field="${Sag.fast_moedetid}"/>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-sm-4">
                     <label>Arbejdet skal udføres på overtid fra kl.</label>
-                    <input type="text"/>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Arbejdsbeskrivelse:</label>
-                    <br/>
-                    <input type="text" th:field="${case.arbejdsbeskrivelse}"/>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Særlige aftaler:</label>
-                    <br/>
-                    <input type="text" th:field="${case.saerlige_aftaler}"/>
+                <div class="col-sm-1">
+                    <input class="paragraph" th:field="${Sag.udfoeres_overtid}"/>
                 </div>
             </div>
         </div>
 
-        <button type="submit" name="save" value="redigerbtn">Gem oplysninger</button>
+        <div class="container">
+            <div class="row logoColour">
+                <div class="col-sm-12 ">
+                    <label>Arbejdsbeskrivelse:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                      <textarea wrap="hard" class="form-control textarea" rows="5"
+                                th:field="${Sag.arbejdsbeskrivelse}"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row logoColour">
+                <div class="col-sm-12">
+                    <label>Særlige aftaler:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <textarea wrap="hard" class="form-control textarea" rows="5"
+                              th:field="${Sag.saerlige_aftaler}"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <input type="hidden" th:value="${Sag.getSags_id()}" name="sag_Id">
+        <button type="submit" name="save" value="savebtn">Send</button>
+
     </form>
 </div>
 

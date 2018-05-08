@@ -41,6 +41,18 @@ button {
     bottom: 9px;
 }
 
+label {
+    padding-top: 2px;
+}
+
+.float-left {
+    float: left;
+}
+
+textarea {
+    resize: none;
+}
+
 .right-align {
     text-align: right;
     margin-right: 140px;
@@ -68,23 +80,47 @@ button {
 
 }
 
+
 .row {
     padding: 5px;
+}
+
+.ekstraarbejde_input {
+    width: 467px;
+}
+
+.width-96 {
+    width: 96px;
+}
+
+label {
+    display: inline-block;
+    padding-top: 2px;
+    max-width: 100%;
+    font-weight: 700;
+    float: left;
+}
+
+.padding-left {
+    padding-left: 25px;
 }
 
 input {
     width: 100%;
 }
 
+
+
 .logoColour {
     background-color: #DDEBF6;
-
 }
+
 
 .textarea {
     max-width: 100%;
     min-width: 100%;
-
+    max-height: 70px;
+    border-radius: 0%;
 }
 
 @media print {
@@ -92,6 +128,12 @@ input {
         background-color: #DDEBF6 !important;
 
     }
+
+    input {
+        border: 0px;
+        margin-left: 70px;
+    }
+
     /*https://gist.github.com/donnierayjones/6fd9802d992b2d8d6cfd   ---- Print fix for bootstrap*/
     .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
         float: left;

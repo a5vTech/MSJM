@@ -14,8 +14,7 @@ public class Tilknyt_medarbejderController {
 
     @GetMapping("/tilknyt_medarbejder")
     public String assignEmployee(Model model) {
-        ArrayList<Medarbejder> empList = access.executeStamementEmployeeList();
-        model.addAttribute("medarbejderListe", empList);
+        model.addAttribute("medarbejderListe", access.executeStamementEmployeeList());
         model.addAttribute("sags_id", access.getLastCaseId());
         return "tilknyt_medarbejder";
     }
@@ -23,13 +22,9 @@ public class Tilknyt_medarbejderController {
     @PostMapping("/tilknyt_medarbejder")
     public String assignEmployeePost(@RequestParam("medarbejder_id") String medarbejder_id) {
         String[] idListe = medarbejder_id.split(",");
-
         for (int i = 0; i < idListe.length; i++) {
             access.assignToCase(access.getLastCaseId(),idListe[i]);
       }
-
-
-        // TILKNYT STATEMENT
         return "redirect:/menu";
     }
 }

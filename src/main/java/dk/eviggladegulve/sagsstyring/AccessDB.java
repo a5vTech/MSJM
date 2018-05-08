@@ -330,4 +330,20 @@ public class AccessDB {
             e.printStackTrace();
         }
     }
+
+    public void editCase(Sag sag) {
+        createConnection();
+        Statement s = null;
+        try {
+            s = con.createStatement();
+            s.addBatch(String.format("UPDATE sag SET arbejdssted = '%s', telefonnummer = %s, start_dato = '%s', slut_dato = '%s', email = '%s', saerlige_aftaler = '%s', kontaktperson_navn = '%s', kontaktperson_telefonnummer = '%s', kontaktperson_email = '%s', arbejdsbeskrivelse = '%s' WHERE sags_id=%s;",sag.getArbejdssted(),sag.getTelefonnummer(),sag.getStart_dato(),sag.getSlut_dato(),sag.getEmail(),sag.getSaerlige_aftaler(),sag.getKontaktperson_navn(), sag.getKontaktperson_telefonnummer(), sag.getKontaktperson_email(), sag.getArbejdsbeskrivelse(),sag.getEkstra_arbejde(), sag.getSags_id()));
+            s.addBatch(String.format("UPDATE adresse SET vejnavn = '%s', vejnummer = %s, postnummer = %s, by_navn = '%s' WHERE adresse_id = %s;",sag.getVejnavn(), sag.getVejnummer(), sag.getPostnummer(),sag.getBy(),sag.getAdresse_id()));
+            s.executeBatch();
+            s.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

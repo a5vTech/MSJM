@@ -7,30 +7,17 @@
     </head>
     <body>
         <div class="container">
-            <h1>Tilknyt medarbejder</h1>
-            <h1 th:text="${sags_id}"></h1>
+            <h1>Tilknyt medarbejder(e)</h1>
+            <h1 th:text="'Sag nr. ' + ${sags_id}"></h1>
             <table>
                 <form method="post" th:action="@{/tilknyt_medarbejder}">
-                    <tr th:each="Medarbejder: ${medarbejderListe}">
-                        <td>
-                            <input type="checkbox" th:value="${Medarbejder.getMedarbejder_id()}" name="medarbejder_id">
-                        </td>
-                        <td th:text="'ID: ' + ${Medarbejder.getMedarbejder_id()}"></td>
-                        <td th:text="${Medarbejder.getFornavn()} + ' ' + ${Medarbejder.getEfternavn()}"></td>
-                    </tr>
                     <tr>
-
-
                         <div class="form-group">
-                            <select multiple class="form-control" id="exampleFormControlSelect2" name="medarbejder_id">
-                                <option th:each="Medarbejder : ${medarbejderListe}" th:value="${Medarbejder.getMedarbejder_id()}" th:text="${Medarbejder.getMedarbejder_id()}+${Medarbejder.getFornavn()}"></option>
+                            <label>Vælg medarbejdere der skal tilknyttes sagen.<br>Marker flere med ctrl+venstreklik</label>
+                            <select multiple class="form-control" name="medarbejder_id">
+                                <option th:if="${Medarbejder.getStilling() == 'Svend'}" th:each="Medarbejder : ${medarbejderListe}" th:value="${Medarbejder.getMedarbejder_id()}" th:text="${Medarbejder.getFornavn()}+' '+${Medarbejder.getEfternavn()}+' (id: '+${Medarbejder.getMedarbejder_id()}+')'"></option>
                             </select>
                         </div>
-
-
-
-
-
                         <button type="submit">Tilknyt</button>
                     </tr>
                 </form>

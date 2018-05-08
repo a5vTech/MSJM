@@ -17,132 +17,139 @@
             <div class="row noBorder">
                 <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
                 <div class="col-sm-2"></div>
-                <div class="col-sm-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
+                <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${sags_id}"></h3></div>
 
             </div>
 
         </div>
 
         <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-2">
-                    <label>Arbejdssted:</label>
-                </div>
-                <div class="col-sm-10">
 
-                    <input type="text" th:field="${case.arbejdssted}"/>
+            <div class="row logoColour">
+                <div class="col-sm-1">
+                    <label class="">Arbejdssted:</label>
+                </div>
+                <div class="col-sm-11">
+
+                    <input type="text" th:field="${case.arbejdssted}" placeholder="Arbejdssted"/>
                 </div>
             </div>
 
 
             <div class="row">
-                <div class="col-sm-2">
-                    <label>Adresse:</label>
+                <div class="col-sm-1">
+                    <label class="">Adresse:</label>
                 </div>
-                <div class="col-sm-10">
-                    <input type="text" th:field="${case.vejnavn}"/>
+                <div class="col-sm-11">
+                    <input type="text" th:field="${case.vejnavn}" placeholder="Vejnavn, vejnummer"/>
                 </div>
             </div>
 
 
             <div class="row ">
-                <div class="col-sm-2">
-                    <label>By:</label>
+                <div class="col-sm-1">
+                    <label class="">Postnummer:</label>
                 </div>
-                <div class="col-sm-10">
-                    <input type="text" th:field="${case.by}"/>
+                <div class="col-sm-11">
+                    <input type="text" th:field="${case.by}" placeholder="Postnummer og by"/>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-2">
-                    <label>Kunde:</label>
+                <div class="col-sm-1">
+                    <label class="">Kunde:</label>
                 </div>
-                <div class="col-sm-10">
-                    <input type="text"/>
+                <div class="col-sm-11">
+                    <input type="text" placeholder="Kunde"/>
                 </div>
             </div>
 
             <div class="row ">
-                <div class="col-sm-2">
-                    <label>E-mail:</label>
+                <div class="col-sm-1">
+                    <label class="">E-mail:</label>
                 </div>
-                <div class="col-sm-10">
-                    <input type="text" th:field="${case.email}"/>
+                <div class="col-sm-11">
+                    <input type="text" th:field="${case.email}" placeholder="E-mail"/>
                 </div>
             </div>
 
             <div class="row logoColour">
-                <div class="col-sm-2">
-                    <label>Telefon:</label>
+                <div class="col-sm-1">
+                    <label class="">Telefon:</label>
                 </div>
-                <div class="col-sm-10">
-                    <input class="" type="text" th:field="${case.telefonnummer}"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-2">
-                    <label>Opstartsdato:</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" th:field="${case.start_dato}"/>
-                </div>
-
-                <div class="col-sm-2">
-                    <label>Slutdato:</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" th:field="${case.slut_dato}"/>
+                <div class="col-sm-11">
+                    <input type="text" th:field="${case.telefonnummer}" placeholder="Telefon"/>
                 </div>
             </div>
         </div>
 
         <div class="container">
             <div class="row logoColour">
-                <div class="col-sm-8 center-align">
-                    <label>Ekstraarbejde er udført. Aftalt med:</label>
+                <div class="col-sm-1">
+                    <label class="">Opstartsdato:</label>
                 </div>
-                <div class="col-sm-4">
-                    <input type="text"/>
+                <div class="col-sm-2">
+                    <input type="text" th:field="${case.start_dato}" placeholder="yyyy-mm-dd"/>
+                </div>
+                <div class="col-sm-2">
+                </div>
+
+                <div class="col">
+                    <label class="">Slutdato:</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" th:field="${case.slut_dato}" placeholder="yyyy-mm-dd"/>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row logoColour">
+                <div class="col center-align">
+                    <label class="">Ekstraarbejde er udført. Aftalt med:</label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="text" class="ekstraarbejdeinput"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5"></textarea>
+                    <textarea wrap="hard" class="form-control textarea" th:field="${case.ekstra_arbejde}" rows="5" placeholder="Ekstraarbejde"></textarea>
                 </div>
             </div>
         </div>
 
         <div class="container">
             <div class="row logoColour">
-                <div class="col-sm-4">
-                    <label>Der er aftalt fast mødetid kl.</label>
+                <div class="col">
+                    <label class="">Der er aftalt fast mødetid kl.</label>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text"/>
+                    <input type="text" name="mødetid" placeholder="8.00"/>
+                </div>
+                <div class="col-sm-1">
                 </div>
 
-                <div class="col-sm-4">
-                    <label>Arbejdet skal udføres på overtid fra kl.</label>
+                <div class="col">
+                    <label class="">Arbejdet skal udføres på overtid fra kl.</label>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text"/>
+                    <input type="text" name="overarbejdstid" placeholder="03.00"/>
                 </div>
             </div>
         </div>
 
         <div class="container">
             <div class="row logoColour">
-                <div class="col-sm-12 ">
-                    <label>Arbejdsbeskrivelse:</label>
+                <div class="col pull-left">
+                    <label class="">Arbejdsbeskrivelse:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5"
+                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Arbejdsbeskrivelse"
                               th:field="${case.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
@@ -150,13 +157,13 @@
 
         <div class="container">
             <div class="row logoColour">
-                <div class="col-sm-12">
-                    <label>Særlige aftaler:</label>
+                <div class="col">
+                    <label class="">Særlige aftaler:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5"
+                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Særlige aftaler"
                               th:field="${case.saerlige_aftaler}"></textarea>
                 </div>
             </div>
