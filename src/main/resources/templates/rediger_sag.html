@@ -10,43 +10,61 @@
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container-fluid">
 
-    <form method="post" th:action="@{/rediger_sag}">
+
 
 
         <div class="container logo">
             <div class="row noBorder">
                 <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
                 <div class="col-sm-1"></div>
-                <div class="col-sm-4"><h3 class="pull-right">Arbejdsseddel:</h3></div>
+                <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${Sag.getSags_id()}"></h3></div>
             </div>
         </div>
-
+    <form method="post" th:action="@{/rediger_sag}">
         <div class="container">
             <div class="row logoColour">
                 <div class="col-xs-1">
                     <label>Arbejdssted:</label>
                 </div>
                 <div class="col-xs-11">
-
+                    <input type="hidden" th:value="${Sag.getSags_id()}" name="sag_id"/>                   <!--LALALLALALAL DEBUG -->
+                    <input type="hidden" th:value="${Sag.getAdresse_id()}" name="adresse_id"/>                   <!--LALALLALALAL DEBUG -->
                     <input type="text" class="paragraph" th:field="${Sag.arbejdssted}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-1">
-                    <label>Adresse:</label>
+                    <label>Vej:</label>
                 </div>
                 <div class="col-xs-11">
                     <input class="paragraph" th:field="${Sag.vejnavn}"/>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-xs-1">
+                    <label>Vejnummer:</label>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.vejnummer}"/>
+                </div>
+            </div>
 
-            <div class="row ">
+            <div class="row">
                 <div class="col-xs-1">
                     <label>By:</label>
                 </div>
                 <div class="col-xs-11">
                     <input class="paragraph" th:field="${Sag.by}"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1">
+                    <label>Postnr:</label>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.postnummer}"/>
                 </div>
             </div>
 
@@ -61,7 +79,7 @@
 
             <div class="row ">
                 <div class="col-xs-1">
-                    <label>E-mail:</label>
+                    <label>Email:</label>
                 </div>
                 <div class="col-xs-11">
                     <input class="paragraph" th:field="${Sag.email}"/>
@@ -161,9 +179,8 @@
             </div>
         </div>
 
-
-        <input type="hidden" th:value="${Sag.getSags_id()}" name="sag_Id">
-        <button type="submit" name="save" value="savebtn">Send</button>
+       <!-- <input type="hidden" th:field="${Sag.getSags_id()}"/> -->
+        <button type="submit" name="save">Send</button>
 
     </form>
 </div>

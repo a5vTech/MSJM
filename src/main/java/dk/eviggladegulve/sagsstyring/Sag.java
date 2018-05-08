@@ -29,7 +29,7 @@ public class Sag {
     public Sag() {
     }
 
-    public Sag(int sags_id, String arbejdssted, int telefonnummer, String vejnavn, int vejnummer, String start_dato, String slut_dato, int postnummer, String by, String email, String saerlige_aftaler, String kontaktperson_navn, int kontaktperson_telefonnummer, String kontaktperson_email, String arbejdsbeskrivelse, String ekstra_arbejde) {
+    public Sag(int sags_id, String arbejdssted, int telefonnummer, int adresse_id, String vejnavn, int vejnummer, String start_dato, String slut_dato, int postnummer, String by, String email, String saerlige_aftaler, String kontaktperson_navn, int kontaktperson_telefonnummer, String kontaktperson_email, String arbejdsbeskrivelse, String ekstra_arbejde) {
         this.sags_id = sags_id;
         this.arbejdssted = arbejdssted;
         this.telefonnummer = telefonnummer;
@@ -46,6 +46,7 @@ public class Sag {
         this.kontaktperson_email = kontaktperson_email;
         this.arbejdsbeskrivelse = arbejdsbeskrivelse;
         this.ekstra_arbejde = ekstra_arbejde;
+        this.adresse_id = adresse_id;
     }
 
     public Sag(int sags_id, String arbejdssted, String start_dato, String slut_dato) {

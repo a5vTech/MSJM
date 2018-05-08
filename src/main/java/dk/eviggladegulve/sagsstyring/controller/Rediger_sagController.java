@@ -3,10 +3,7 @@ package dk.eviggladegulve.sagsstyring.controller;
 import dk.eviggladegulve.sagsstyring.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -16,17 +13,23 @@ public class Rediger_sagController {
 
     @GetMapping(value = "/rediger_sag/{id}")
     public String redigerSag(@PathVariable("id") int id, Model model) {
-
-        ArrayList<Sag> sager = access.getAllActiveCases();
-        model.addAttribute("Sag", Sag.findCaseById(id));
+        Sag sag = Sag.findCaseById(id);
+        model.addAttribute("Sag", sag);
 
         return "rediger_sag";
     }
 
-    @PostMapping("/rediger_sag")
-    public String redigerSagPost(@ModelAttribute("Sag") Sag sag) {
-        access.editCase(sag);
-        return "redirect:/rediger_sag";
+    @PostMapping(value = "/rediger_sag", params = "save")
+    public String redigerSagPost(@ModelAttribute Sag nuvaerendeSag, @RequestParam("sag_id") int sag_id, @RequestParam("adresse_id") int adresse_id) {
+        nuvaerendeSag.setSags_id(sag_id);
+        nuvaerendeSag.setAdresse_id(adresse_id);
+        System.out.println(nuvaerendeSag.getVejnavn());
+        System.out.println(nuvaerendeSag.getVejnummer());
+        System.out.println(nuvaerendeSag.getBy());
+        System.out.println(nuvaerendeSag.getPostnummer());
+
+        access.editCase(nuvaerendeSag);
+        return "redirect:/rediger_sag/"+nuvaerendeSag.getSags_id();
 
     }
 

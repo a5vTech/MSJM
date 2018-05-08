@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-sm-11">
 
-                    <input type="text" th:field="${case.arbejdssted}" placeholder="Arbejdssted"/>
+                    <input type="text" th:field="${Sag.arbejdssted}" placeholder="Arbejdssted"/>
                 </div>
             </div>
 
@@ -41,7 +41,15 @@
                     <label class="">Adresse:</label>
                 </div>
                 <div class="col-sm-11">
-                    <input type="text" th:field="${case.vejnavn}" placeholder="Vejnavn, vejnummer"/>
+                    <input type="text" th:field="${Sag.vejnavn}" placeholder="Vejnavn"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-1">
+                    <label>Vejnummer:</label>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.vejnummer}" placeholder="Vejnummer"/>
                 </div>
             </div>
 
@@ -51,7 +59,16 @@
                     <label class="">Postnummer:</label>
                 </div>
                 <div class="col-sm-11">
-                    <input type="text" th:field="${case.by}" placeholder="Postnummer og by"/>
+                    <input type="text" th:field="${Sag.by}" placeholder="By"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1">
+                    <label>Postnr:</label>
+                </div>
+                <div class="col-xs-11">
+                    <input class="paragraph" th:field="${Sag.postnummer}" placeholder="Postnummer"/>
                 </div>
             </div>
 
@@ -66,10 +83,10 @@
 
             <div class="row ">
                 <div class="col-sm-1">
-                    <label class="">E-mail:</label>
+                    <label class="">Email:</label>
                 </div>
                 <div class="col-sm-11">
-                    <input type="text" th:field="${case.email}" placeholder="E-mail"/>
+                    <input type="text" th:field="${Sag.email}" placeholder="E-mail"/>
                 </div>
             </div>
 
@@ -78,7 +95,7 @@
                     <label class="">Telefon:</label>
                 </div>
                 <div class="col-sm-11">
-                    <input type="text" th:field="${case.telefonnummer}" placeholder="Telefon"/>
+                    <input type="text" th:field="${Sag.telefonnummer}" placeholder="Telefon"/>
                 </div>
             </div>
         </div>
@@ -89,7 +106,7 @@
                     <label class="">Opstartsdato:</label>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" th:field="${case.start_dato}" placeholder="yyyy-mm-dd"/>
+                    <input type="text" th:field="${Sag.start_dato}" placeholder="yyyy-mm-dd"/>
                 </div>
                 <div class="col-sm-2">
                 </div>
@@ -98,7 +115,7 @@
                     <label class="">Slutdato:</label>
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" th:field="${case.slut_dato}" placeholder="yyyy-mm-dd"/>
+                    <input type="text" th:field="${Sag.slut_dato}" placeholder="yyyy-mm-dd"/>
                 </div>
                 <div class="col-sm-2">
                 </div>
@@ -116,7 +133,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" th:field="${case.ekstra_arbejde}" rows="5" placeholder="Ekstraarbejde"></textarea>
+                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="5" placeholder="Ekstraarbejde"></textarea>
                 </div>
             </div>
         </div>
@@ -150,7 +167,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Arbejdsbeskrivelse"
-                              th:field="${case.arbejdsbeskrivelse}"></textarea>
+                              th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
         </div>
@@ -164,7 +181,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Særlige aftaler"
-                              th:field="${case.saerlige_aftaler}"></textarea>
+                              th:field="${Sag.saerlige_aftaler}"></textarea>
                 </div>
             </div>
         </div>

@@ -1,10 +1,6 @@
 package dk.eviggladegulve.sagsstyring;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -43,10 +39,6 @@ public class AccessDB {
             s.executeUpdate(String.format("INSERT INTO sag(arbejdssted, telefonnummer, adresse, start_dato, slut_dato, email, saerlige_aftaler, kontaktperson_navn, kontaktperson_telefonnummer, kontaktperson_email, arbejdsbeskrivelse, ekstra_arbejde) VALUES('%s',%d,%d,'%s','%s','%s','%s','%s',%d,'%s','%s','%s');", currentCase.getArbejdssted(), currentCase.getTelefonnummer(), getLastAddress(), currentCase.getStart_dato(), currentCase.getSlut_dato(), currentCase.getEmail(), currentCase.getSaerlige_aftaler(), currentCase.getKontaktperson_navn(), currentCase.getKontaktperson_telefonnummer(), currentCase.getKontaktperson_email(), currentCase.getArbejdsbeskrivelse(), currentCase.getEkstra_arbejde()));
 
 
-
-
-
-
             s.close();
             con.close();
         } catch (SQLException e) {
@@ -55,7 +47,6 @@ public class AccessDB {
 
 
     }
-
 
 
     public void insertAddress(String vejnavn, int vejnummer, int postnummer, String by) {
@@ -157,8 +148,6 @@ public class AccessDB {
     }
 
 
-
-
     public void insertEmployee(Medarbejder currentEmployee) {
         createConnection();
         Statement s = null;
@@ -189,7 +178,7 @@ public class AccessDB {
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        activeCaseList.add(new Sag(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde")));
+                        activeCaseList.add(new Sag(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"),rs.getInt("adresse_id"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde")));
 
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -235,8 +224,6 @@ public class AccessDB {
                 }
 
 
-
-
             }
             s.close();
             con.close();
@@ -258,7 +245,7 @@ public class AccessDB {
             if (rs != null) {
                 while (rs.next()) {
                     try {
-                        empList.add(new Medarbejder(rs.getInt("medarbejder_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer"), rs.getString("kodeord"),rs.getString("stilling")));
+                        empList.add(new Medarbejder(rs.getInt("medarbejder_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getInt("telefonnummer"), rs.getString("kodeord"), rs.getString("stilling")));
                         //sager.add(new Sag(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -277,8 +264,7 @@ public class AccessDB {
     }
 
 
-
-    public void end_case(String id){
+    public void end_case(String id) {
         createConnection();
         Statement s = null;
         try {
@@ -291,7 +277,7 @@ public class AccessDB {
         }
     }
 
-    public void timer(String svend_id, String sags_id, String timer){
+    public void timer(String svend_id, String sags_id, String timer) {
         createConnection();
         Statement s = null;
         try {
@@ -305,7 +291,7 @@ public class AccessDB {
     }
 
 
-    public void add_extra_work(String ekstra_arbejde, String id){
+    public void add_extra_work(String ekstra_arbejde, String id) {
         createConnection();
         Statement s = null;
         try {
@@ -336,9 +322,10 @@ public class AccessDB {
         Statement s = null;
         try {
             s = con.createStatement();
-            s.addBatch(String.format("UPDATE sag SET arbejdssted = '%s', telefonnummer = %s, start_dato = '%s', slut_dato = '%s', email = '%s', saerlige_aftaler = '%s', kontaktperson_navn = '%s', kontaktperson_telefonnummer = '%s', kontaktperson_email = '%s', arbejdsbeskrivelse = '%s' WHERE sags_id=%s;",sag.getArbejdssted(),sag.getTelefonnummer(),sag.getStart_dato(),sag.getSlut_dato(),sag.getEmail(),sag.getSaerlige_aftaler(),sag.getKontaktperson_navn(), sag.getKontaktperson_telefonnummer(), sag.getKontaktperson_email(), sag.getArbejdsbeskrivelse(),sag.getEkstra_arbejde(), sag.getSags_id()));
-            s.addBatch(String.format("UPDATE adresse SET vejnavn = '%s', vejnummer = %s, postnummer = %s, by_navn = '%s' WHERE adresse_id = %s;",sag.getVejnavn(), sag.getVejnummer(), sag.getPostnummer(),sag.getBy(),sag.getAdresse_id()));
-            s.executeBatch();
+            System.out.println(sag.getAdresse_id());
+            String sql = String.format("UPDATE sag SET arbejdssted = '%s', telefonnummer = %s, start_dato = '%s', slut_dato = '%s', email = '%s', saerlige_aftaler = '%s', kontaktperson_navn = '%s', kontaktperson_telefonnummer = %s, kontaktperson_email = '%s', arbejdsbeskrivelse = '%s', ekstra_arbejde = '%s' WHERE sags_id=%s",sag.getArbejdssted(),sag.getTelefonnummer(),sag.getStart_dato(),sag.getSlut_dato(),sag.getEmail(),sag.getSaerlige_aftaler(),sag.getKontaktperson_navn(), sag.getKontaktperson_telefonnummer(), sag.getKontaktperson_email(), sag.getArbejdsbeskrivelse(),sag.getEkstra_arbejde(), sag.getSags_id());
+             s.executeUpdate(sql);
+             s.executeUpdate(String.format("UPDATE adresse SET vejnavn = '%s', vejnummer = %s, postnummer = %s, by_navn = '%s' WHERE adresse_id = %s;",sag.getVejnavn(), sag.getVejnummer(), sag.getPostnummer(),sag.getBy(),sag.getAdresse_id()));
             s.close();
             con.close();
         } catch (SQLException e) {

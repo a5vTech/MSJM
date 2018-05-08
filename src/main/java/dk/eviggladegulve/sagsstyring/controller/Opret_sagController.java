@@ -12,7 +12,7 @@ public class Opret_sagController {
 
     @GetMapping("/opret_sag")
     public String createCase(Model model) {
-        model.addAttribute("case", new Sag());
+        model.addAttribute("Sag", new Sag());
         model.addAttribute("sags_id", access.getLastCaseId()+1);
         return "opret_sag";
     }
