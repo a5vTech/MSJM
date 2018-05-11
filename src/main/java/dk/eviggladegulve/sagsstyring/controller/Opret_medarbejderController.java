@@ -15,6 +15,7 @@ public class Opret_medarbejderController {
     @GetMapping("/opret_medarbejder")
     public String opretMedarbejder(Model model) {
         model.addAttribute("medarbejder",new Medarbejder());
+        model.addAttribute("medarbejder_id", access.getLastEmployeeId()+1);
         return "opret_medarbejder";
     }
 

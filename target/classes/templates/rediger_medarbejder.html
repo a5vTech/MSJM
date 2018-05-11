@@ -1,11 +1,102 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Rediger medarbejder</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
 <body>
-<h1>LALALALALA</h1>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container-fluid">
+    <form method="post" th:action="@{/rediger_medarbejder}">
+        <div class="container logo">
+            <div class="row noBorder">
+                <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4 top-45"><h1>Rediger medarbejder</h1></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row logoColour">
+                <div class="col-sm-1">
+                    <label>ID:</label>
+                </div>
+                <div class="col-sm-3">
+                    <label th:text="${Medarbejder.medarbejder_id}"/>
+                    <input type="hidden" th:value="${Medarbejder.getMedarbejder_id()}" name="medarbejder_id"/>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-1">
+                    <label>Fornavn:</label>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" th:field="${Medarbejder.fornavn}" placeholder="Fornavn"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-1">
+                    <label>Efternavn:</label>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" th:field="${Medarbejder.efternavn}" placeholder="Efternavn"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-1">
+                    <label>Stilling:</label>
+                </div>
+
+                <div class="col-sm-3">
+                    <select th:field="${Medarbejder.stilling}" class="marginRight172">
+                        <option value="Leder">Leder</option>
+                        <option value="Konduktør">Konduktør</option>
+                        <option value="Svend">Svend</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-1">
+                    <label>E-mail:</label>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" th:field="${Medarbejder.email}" placeholder="E-mail"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                    <label>Telefon:</label>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" th:field="${Medarbejder.telefonnummer}" placeholder="Telefon"/>
+                </div>
+            </div>
+
+            <div class="row logoColour">
+                <div class="col-md-1">
+                    <label>Kodeord:</label>
+                </div>
+                <div class="col-sm-3">
+                    <input type="text" th:field="${Medarbejder.kodeord}" placeholder="Kodeord"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="container noBorder">
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn defaultBtn pull-right" name="save">Rediger</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

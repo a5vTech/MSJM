@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
+@SessionAttributes({"BrugerID","Stilling"})
 public class Afslut_sagController {
     final AccessDB access = AccessDB.getInstance();
 
@@ -16,25 +17,24 @@ public class Afslut_sagController {
     public String afslut_sag(@PathVariable("id") int id, Model model) {
         ArrayList<Sag> sager = access.getAllActiveCases();
         model.addAttribute("Sag", Sag.findCaseById(id));
-
+        model.addAttribute("sags_id", id);
+        model.addAttribute("registreredeTimer", access.registreredeTimer(id, 10));
         return "afslut_sag";
-
     }
 
-    @PostMapping(value = "/afslut_sag", params = "end_case")
-    public String afslut_sagPost(Sag nuvaerendeSag, @RequestParam String end_case_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde, @RequestParam("arbejdstimer") String timer, @RequestParam("svend_id") String svend_id) {
+    @PostMapping(value = "/afslut_sag", params = "afslut_Sag_Leder")
+    public String afslut_sagPost(Sag nuvaerendeSag, @RequestParam int end_case_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde, @RequestParam("arbejdstimer") String timer, @RequestParam("svend_id") int svend_id) {
         access.end_case(end_case_id);
-        access.add_extra_work(ekstra_arbejde, end_case_id);
-        access.timer(svend_id, end_case_id, timer);
+        //access.add_extra_work(ekstra_arbejde, end_case_id);
+        //access.timer(svend_id, end_case_id, timer);
         return "redirect:/kalender";
     }
 
 
-    @PostMapping(value = "/afslut_sag", params = "registrer_timer")
-    public String registrer_arbejdstimerPost(Sag nuvaerendeSag, @RequestParam("svend_id") String svend_id, @RequestParam("end_case_id") String sags_id, @RequestParam("arbejdstimer") String timer) {
+    @PostMapping(value = "/afslut_sag", params = "registrer_timer_Btn")
+    public String registrer_arbejdstimerPost(Sag nuvaerendeSag, @RequestParam("sags_id") int sags_id, @RequestParam("medarbejder_id") int medarbejder_id, @RequestParam("timer") String timer) {
 
-        access.timer(svend_id, sags_id, timer);
-        System.out.println("DEBUG det virker2");
+        access.timer(medarbejder_id, sags_id, timer);
 
         return "redirect:/afslut_sag/" + sags_id;
     }

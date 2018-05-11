@@ -4,34 +4,99 @@
     <meta charset="UTF-8"/>
     <title>Sager til redigering</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
-<div class="container">
-    <h1>Sager til redigering</h1>
-    <table>
-        <tr>
-            <th>Sag nr:</th>
-            <th>Arbejdssted:</th>
-            <th>Beskrivelse</th>
-            <th></th>
-        </tr>
-        <tr th:each="Case: ${caseList}">
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container-fluid">
 
-                <td th:text="${Case.getSags_id()}"></td>
-                <td th:text="${Case.getArbejdssted()}"></td>
-                <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
-                <td>
-                    <form method="post" th:action="@{/aktive_sager}">
-                        <input type="hidden"  th:value="${Case.getSags_id()}" th:name="id">
-                        <a th:href="@{'/rediger_sag/'+ ${Case.getSags_id()}}"><button  type="button" name="rediger_sagBtn" class="btn btn-light registerBtn">Rediger sag</button></a>
+    <div class="container logo">
+        <div class="row noBorder">
+            <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4 top-45"><h2>Aktive sager</h2></div>
+        </div>
+    </div>
 
+    <div class="container">
+        <div class="row noPadding">
+            <div class="col">
+                <table class="table table-bordered noMargin">
+                    <thead class="logoColour">
+                    <tr>
+                        <th class="text-center" id="th-id">Sag nr</th>
+                        <th class="text-center">Arbejdssted</th>
+                        <th class="text-center">Beskrivelse</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr th:each="Sag: ${caseList}">
+
+                        <td class="td-center" th:text="${Sag.getSags_id()}"></td>
+                        <td class="td-center" th:text="${Sag.getArbejdssted()}"></td>
+                        <td class="td-center" th:text="${Sag.getArbejdsbeskrivelse()}"></td>
+                        <td class="width-250">
+
+
+                            <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
+                            <a th:href="@{'/rediger_sag/'+ ${Sag.getSags_id()}}">
+                                <button type="button" name="rediger_sagBtn" class="btn defaultBtn blackColour">
+                                    Rediger
+                                </button>
+                            </a>
+
+
+                            <!--<form method="post" th:action="@{/sager_til_redigering}">-->
+                            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
+                            <button type="button" name="slet_sagBtn" class="btn defaultBtn blackColour"
+                                    data-toggle="modal" data-target="#deleteModal"
+                                    th:data-sagid="${Sag.getSags_id()}">Slet
+                            </button>
+                            <!--</form>-->
+                        </td>
+
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content modal-sm modal-centered">
+                <div class="modal-header logoColour">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title logoColour">Modal Header</h4>
+                </div>
+
+                <div class="modal-footer">
+                    <form method="post" th:action="@{/sager_til_redigering}">
+                        <input type="hidden" name="sags_id"/>
+                        <button type="button" class="btn defaultBtn blackColour" data-dismiss="modal">Annuller</button>
+                        <button type="submit" class="btn defaultBtn blackColour" name="slet_sagBtn">Slet</button>
                     </form>
-                </td>
+                </div>
+            </div>
 
-        </tr>
+        </div>
+    </div>
 
-
-    </table>
 </div>
 </body>
+<script>
+    $('#deleteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var sagID = button.data('sagid') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Du er ved at slette sag: ' + sagID)
+        modal.find('.modal-footer input').val(sagID)
+    })
+</script>
 </html>

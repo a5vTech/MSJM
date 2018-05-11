@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Sager til afslutning</title>
+    <title>Afsluttede sager</title>
     <th:block th:include="fragments/head :: headInclude"/>
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
@@ -28,15 +28,15 @@
                         <th>Beskrivelse</th>
                         <th></th>
                     </tr>
-                    <tr th:each="Case: ${caseList}">
+                    <tr th:each="Sag: ${sagerListe}">
 
-                        <td th:text="${Case.getSags_id()}"></td>
-                        <td th:text="${Case.getArbejdssted()}"></td>
-                        <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
+                        <td th:text="${Sag.getSags_id()}"></td>
+                        <td th:text="${Sag.getArbejdssted()}"></td>
+                        <td th:text="${Sag.getArbejdsbeskrivelse()}"></td>
                         <td>
                             <form method="post" th:action="@{/sager_til_afslutning}">
-                                <input type="hidden" th:value="${Case.getSags_id()}" th:name="id">
-                                <a th:href="@{'/afslut_sag/'+ ${Case.getSags_id()}}">
+                                <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
+                                <a th:href="@{'/afslut_sag/'+ ${Sag.getSags_id()}}">
                                     <button type="button" name="afslut_sagBtn" class="btn defaultBtn pull-right">Afslut
                                         sag
                                     </button>

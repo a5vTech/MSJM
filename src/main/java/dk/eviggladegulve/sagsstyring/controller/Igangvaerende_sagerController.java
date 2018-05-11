@@ -12,16 +12,16 @@ import java.util.ArrayList;
 public class Igangvaerende_sagerController {
     final AccessDB access = AccessDB.getInstance();
 
-    @GetMapping("/igangværende_sager")
-    public String igangværendeSager(Model model) {
+    @GetMapping("/igangvaerende_sager")
+    public String igangvaerendeSager(Model model) {
         ArrayList<Sag> sager = access.getAllActiveCases();
         model.addAttribute("caseList", sager);
-        return "igangværende_sager";
+        return "igangvaerende_sager";
     }
 
-    @PostMapping("/igangværende_sager")
-    public String igangværendeSagerPost() {
-        return "igangværende_sager";
+    @PostMapping("/igangvaerende_sager")
+    public String igangvaerendeSagerPost() {
+        return "igangvaerende_sager";
     }
 
 

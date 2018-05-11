@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Sager til redigering</title>
+    <title>Rediger medarbejder</title>
     <th:block th:include="fragments/head :: headInclude"/>
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
@@ -14,7 +14,7 @@
         <div class="row noBorder">
             <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
             <div class="col-sm-1"></div>
-            <div class="col-sm-4 top-45"><h2>Aktive sager</h2></div>
+            <div class="col-sm-4 top-45"><h2>Medarbejdere</h2></div>
         </div>
     </div>
 
@@ -24,45 +24,34 @@
                 <table class="table table-bordered noMargin">
                     <thead class="logoColour">
                     <tr>
-                        <th class="text-center" id="th-id">Sag nr</th>
-                        <th class="text-center">Arbejdssted</th>
-                        <th class="text-center">Beskrivelse</th>
+                        <th class="text-center" id="th-id">Medarbejder nr</th>
+                        <th class="text-center">Fornavn</th>
+                        <th class="text-center">Efternavn</th>
                         <th></th>
                     </tr>
                     </thead>
-                    <tr th:each="Sag: ${caseList}">
+                    <tr th:each="Medarbejder: ${medarbejderListe}">
 
-                        <td class="td-center" th:text="${Sag.getSags_id()}"></td>
-                        <td class="td-center" th:text="${Sag.getArbejdssted()}"></td>
-                        <td class="td-center" th:text="${Sag.getArbejdsbeskrivelse()}"></td>
-                        <td class="width-250">
-
-
-                            <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
-                            <a th:href="@{'/rediger_sag/'+ ${Sag.getSags_id()}}">
-                                <button type="button" name="rediger_sagBtn" class="btn defaultBtn blackColour">
-                                    Rediger
-                                </button>
-                            </a>
-
-
-                            <!--<form method="post" th:action="@{/sager_til_redigering}">-->
-                            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
+                        <td class="td-center" th:text="${Medarbejder.getMedarbejder_id()}"></td>
+                        <td class="td-center" th:text="${Medarbejder.getFornavn()}"></td>
+                        <td class="td-center" th:text="${Medarbejder.getEfternavn()}"></td>
+                        <td class="width-250"><a th:href="'/rediger_medarbejder/'+${Medarbejder.getMedarbejder_id()}">
+                            <button type="button" class="btn defaultBtn blackColour">Rediger</button>
+                        </a>
+                            <input type="hidden" th:value="${Medarbejder.getMedarbejder_id()}" name="sags_id">
                             <button type="button" name="slet_sagBtn" class="btn defaultBtn blackColour"
                                     data-toggle="modal" data-target="#deleteModal"
-                                    th:data-sagid="${Sag.getSags_id()}">Slet
+                                    th:data-medarbejderid="${Medarbejder.getMedarbejder_id()}">Slet
                             </button>
-                            <!--</form>-->
+
                         </td>
 
                     </tr>
-
 
                 </table>
             </div>
         </div>
     </div>
-
 
     <div id="deleteModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -73,12 +62,11 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title logoColour">Modal Header</h4>
                 </div>
-
                 <div class="modal-footer">
-                    <form method="post" th:action="@{/sager_til_redigering}">
-                        <input type="hidden" name="sags_id"/>
+                    <form method="post" th:action="@{/medarbejdere_til_redigering}">
+                        <input type="hidden" name="medarbejder_id"/>
                         <button type="button" class="btn defaultBtn blackColour" data-dismiss="modal">Annuller</button>
-                        <button type="submit" class="btn defaultBtn blackColour" name="slet_sagBtn">Slet</button>
+                        <button type="submit" class="btn defaultBtn blackColour" name="slet_MedarbejderBtn">Slet</button>
                     </form>
                 </div>
             </div>
@@ -91,12 +79,12 @@
 <script>
     $('#deleteModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-        var sagID = button.data('sagid') // Extract info from data-* attributes
+        var medarbejderID = button.data('medarbejderid') // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
-        modal.find('.modal-title').text('Du er ved at slette sag: ' + sagID)
-        modal.find('.modal-footer input').val(sagID)
+        modal.find('.modal-title').text('Du er ved at slette medarbejder: ' + medarbejderID)
+        modal.find('.modal-footer input').val(medarbejderID)
     })
 </script>
 </html>

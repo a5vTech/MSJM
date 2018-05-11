@@ -22,6 +22,7 @@ public class Sag {
     private String ekstra_arbejde;
     private String fast_moedetid;
     private String udfoeres_overtid;
+    private String aftalt_med;
 
 //Constructors
 
@@ -29,7 +30,7 @@ public class Sag {
     public Sag() {
     }
 
-    public Sag(int sags_id, String arbejdssted, int telefonnummer, int adresse_id, String vejnavn, int vejnummer, String start_dato, String slut_dato, int postnummer, String by, String email, String saerlige_aftaler, String kontaktperson_navn, int kontaktperson_telefonnummer, String kontaktperson_email, String arbejdsbeskrivelse, String ekstra_arbejde) {
+    public Sag(int sags_id, String arbejdssted, int telefonnummer, int adresse_id, String vejnavn, int vejnummer, String start_dato, String slut_dato, int postnummer, String by, String email, String saerlige_aftaler, String kontaktperson_navn, int kontaktperson_telefonnummer, String kontaktperson_email, String arbejdsbeskrivelse, String ekstra_arbejde, String aftalt_med, String fast_moedetid, String udfoeres_overtid) {
         this.sags_id = sags_id;
         this.arbejdssted = arbejdssted;
         this.telefonnummer = telefonnummer;
@@ -47,6 +48,9 @@ public class Sag {
         this.arbejdsbeskrivelse = arbejdsbeskrivelse;
         this.ekstra_arbejde = ekstra_arbejde;
         this.adresse_id = adresse_id;
+        this.aftalt_med = aftalt_med;
+        this.fast_moedetid = fast_moedetid;
+        this.udfoeres_overtid = udfoeres_overtid;
     }
 
     public Sag(int sags_id, String arbejdssted, String start_dato, String slut_dato) {
@@ -208,6 +212,16 @@ public class Sag {
     public void setUdfoeres_overtid(String udfoeres_overtid) {
         this.udfoeres_overtid = udfoeres_overtid;
     }
+
+    public String getAftalt_med() {
+        return aftalt_med;
+    }
+
+    public void setAftalt_med(String aftalt_med) {
+        this.aftalt_med = aftalt_med;
+    }
+
+
 
     public static Sag findCaseById(int id){
         AccessDB access = AccessDB.getInstance();

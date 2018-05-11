@@ -19,7 +19,7 @@ public class Tilknyt_medarbejderController {
         return "tilknyt_medarbejder";
     }
 
-    @PostMapping("/tilknyt_medarbejder")
+    @PostMapping(value = "/tilknyt_medarbejder", params = "save")
     public String assignEmployeePost(@RequestParam("medarbejder_id") String medarbejder_id) {
         String[] idListe = medarbejder_id.split(",");
         for (int i = 0; i < idListe.length; i++) {

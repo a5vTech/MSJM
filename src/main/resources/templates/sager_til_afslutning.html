@@ -4,34 +4,50 @@
     <meta charset="UTF-8"/>
     <title>Sager til afslutning</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
-<div class="container">
-    <h1>Sager til afslutning</h1>
-    <table>
-        <tr>
-            <th>Sag nr:</th>
-            <th>Arbejdssted:</th>
-            <th>Beskrivelse</th>
-            <th></th>
-        </tr>
-        <tr th:each="Case: ${caseList}">
+<div class="container-fluid">
 
-                <td th:text="${Case.getSags_id()}"></td>
-                <td th:text="${Case.getArbejdssted()}"></td>
-                <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
-                <td>
-                    <form method="post" th:action="@{/sager_til_afslutning}">
-                        <input type="hidden"  th:value="${Case.getSags_id()}" th:name="id">
-                        <a th:href="@{'/afslut_sag/'+ ${Case.getSags_id()}}"><button  type="button" name="afslut_sagBtn" class="btn btn-light registerBtn">Afslut sag</button></a>
-
-                    </form>
-                </td>
-
-        </tr>
+    <div class="container logo">
+        <div class="row noBorder">
+            <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4 top-45"><h2>Sager til afslutning</h2></div>
+        </div>
+    </div>
 
 
-    </table>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table>
+                    <tr>
+                        <th>Sag nr:</th>
+                        <th>Arbejdssted:</th>
+                        <th>Beskrivelse</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="Case: ${caseList}">
+
+                        <td th:text="${Case.getSags_id()}"></td>
+                        <td th:text="${Case.getArbejdssted()}"></td>
+                        <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
+                        <td>
+                            <form method="post" th:action="@{/sager_til_afslutning}">
+                                <input type="hidden" th:value="${Case.getSags_id()}" th:name="id">
+                                <a th:href="@{'/afslut_sag/'+ ${Case.getSags_id()}}">
+                                    <button type="button" name="afslut_sagBtn" class="btn defaultBtn pull-right">Afslut
+                                        sag
+                                    </button>
+                                </a>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

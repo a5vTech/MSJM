@@ -21,17 +21,11 @@ public class Rediger_sagController {
 
     @PostMapping(value = "/rediger_sag", params = "save")
     public String redigerSagPost(@ModelAttribute Sag nuvaerendeSag, @RequestParam("sag_id") int sag_id, @RequestParam("adresse_id") int adresse_id) {
-        nuvaerendeSag.setSags_id(sag_id);
-        nuvaerendeSag.setAdresse_id(adresse_id);
-        System.out.println(nuvaerendeSag.getVejnavn());
-        System.out.println(nuvaerendeSag.getVejnummer());
-        System.out.println(nuvaerendeSag.getBy());
-        System.out.println(nuvaerendeSag.getPostnummer());
-
-        access.editCase(nuvaerendeSag);
-        return "redirect:/rediger_sag/"+nuvaerendeSag.getSags_id();
-
+    nuvaerendeSag.setSags_id(sag_id);
+    nuvaerendeSag.setAdresse_id(adresse_id);
+    access.editCase(nuvaerendeSag);
+    access.editAddress(nuvaerendeSag);
+    return "redirect:/rediger_sag/"+nuvaerendeSag.getSags_id();
     }
-
 
 }

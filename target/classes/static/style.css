@@ -37,12 +37,78 @@ div {
     height: 50px;
 }
 
-button {
+.defaultBtn {
     bottom: 9px;
+    border-radius: 8px;
+    background-color: #DDEBF6;
 }
 
-label {
-    padding-top: 2px;
+button:hover {
+    background-color: #a7a6a4;
+}
+
+h1, h2, h3, h4, h5, h6, select, tr, th, td, button  {
+    font-family: 'MyriadPro-Light';
+}
+
+
+.noBorder {
+    border-color: transparent !important;
+}
+
+.width-90 {
+    width: 90.666667%;
+}
+
+.width-9 {
+    width: 9.333333%;
+}
+
+.width-6 {
+    width: 6.6%;
+}
+
+.width-23 {
+    width: 23%;
+}
+
+.width-23 {
+    padding-right: 0;
+    width: 23.5%;
+}
+
+.width-77 {
+    width: 77%;
+}
+
+.width-251 {
+    width: 251px;
+    padding-right: 0;
+}
+
+.width-17 {
+    width: 17.5%;
+    padding-right: 0;
+}
+
+.width-250 {
+    width: 250px;
+}
+
+.top-45 {
+    top: 45px;
+}
+
+.marginRight172 {
+    margin-right: 172px;
+}
+
+.noMargin {
+    margin: 0 !important;
+}
+
+.noPadding {
+    padding: 0 !important;
 }
 
 .float-left {
@@ -77,50 +143,74 @@ textarea {
     border: none;
     margin-top: 15px;
     margin-bottom: 15px;
-
 }
-
 
 .row {
     padding: 5px;
 }
 
-.ekstraarbejde_input {
-    width: 467px;
-}
-
-.width-96 {
-    width: 96px;
-}
-
 label {
     display: inline-block;
-    padding-top: 2px;
+    padding-top: 3px;
     max-width: 100%;
     font-weight: 700;
     float: left;
+    font-family: 'MyriadPro-Light';
+
 }
 
 .padding-left {
     padding-left: 25px;
 }
 
-input {
-    width: 100%;
+.marginbottom-1 {
+    margin-bottom: -1px;
 }
 
+.marginRight-10 {
+    margin-right: 10px;
+}
 
+input {
+    width: 100%;
+    font-family: 'MyriadPro-Light';
+}
+
+.td-center {
+    padding-top: 12px !important;
+    padding-bottom: 4px !important;
+}
+
+#th-id {
+    width: 168px;
+}
 
 .logoColour {
     background-color: #DDEBF6;
 }
 
+.blackColour {
+    color: #000000;
+}
 
 .textarea {
     max-width: 100%;
     min-width: 100%;
     max-height: 70px;
     border-radius: 0%;
+}
+
+.modal-centered {
+    left: 0;
+    right: 0;
+    position: fixed;
+    top: 174px;
+    margin: auto;
+    display: table;
+}
+
+.fontNormal {
+    font-weight: normal;
 }
 
 @media print {
@@ -132,6 +222,10 @@ input {
     input {
         border: 0px;
         margin-left: 70px;
+    }
+
+    .hideFromPrint {
+        display: none;
     }
 
     /*https://gist.github.com/donnierayjones/6fd9802d992b2d8d6cfd   ---- Print fix for bootstrap*/
@@ -388,5 +482,28 @@ input {
     td.visible-sm {
         display: table-cell !important;
     }
-/*Print fix end!*/
+
+    /*Print fix end!*/
+    .border-left {
+        border-left: 1px solid black;
+    }
+
+    .border-right {
+        border-right: 1px solid black;
+    }
+
+    .border-all {
+        border: 1px solid black;
+    }
+
+    .marginBottom0 {
+        margin-bottom: 0;
+    }
+
+    .onlyBorderBottom {
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        outline: none;
+    }
 }

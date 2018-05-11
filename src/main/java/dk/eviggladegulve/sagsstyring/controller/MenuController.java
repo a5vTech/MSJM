@@ -8,7 +8,7 @@ import dk.eviggladegulve.sagsstyring.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("Bruger")
+@SessionAttributes({"BrugerID","Stilling"})
 public class MenuController {
 
     @GetMapping("/menu")
