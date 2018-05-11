@@ -14,8 +14,8 @@ public class Igangvaerende_sagerController {
 
     @GetMapping("/igangvaerende_sager")
     public String igangvaerendeSager(Model model) {
-        ArrayList<Sag> sager = access.getAllActiveCases();
-        model.addAttribute("caseList", sager);
+        ArrayList<Sag> sager = access.getAllActiveCasesSvend(10);
+        model.addAttribute("Sager", sager);
         return "igangvaerende_sager";
     }
 

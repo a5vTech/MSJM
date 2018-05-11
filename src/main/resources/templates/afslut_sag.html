@@ -204,13 +204,13 @@
                 </div>
             </div>
 
-            <input type="hidden" th:value="${Sag.getSags_id()}" name="end_Sag_id">
+            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
 
             <div th:switch="${session.Stilling}">
                 <button th:case="'Leder'" type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Afslut sag</button>
                 <button th:case="'Konduktør'" type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Afslut sag</button>
                 <div th:case="'Svend'">
-                    <button type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Afslut sag</button>
+                    <button type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Svend">Afslut sag</button>
                     <button type="button" class="btn defaultBtn pull-right marginRight-10" data-toggle="modal" data-target="#registrerTimerModal"
                             th:data-sagid="${Sag.getSags_id()}" th:data-medarbejderid="${session.BrugerID}" th:data-registreredetimer="${registreredeTimer}">Registrer timer
                     </button>

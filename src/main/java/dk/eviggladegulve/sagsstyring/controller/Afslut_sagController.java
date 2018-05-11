@@ -23,11 +23,19 @@ public class Afslut_sagController {
     }
 
     @PostMapping(value = "/afslut_sag", params = "afslut_Sag_Leder")
-    public String afslut_sagPost(Sag nuvaerendeSag, @RequestParam int end_case_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde, @RequestParam("arbejdstimer") String timer, @RequestParam("svend_id") int svend_id) {
-        access.end_case(end_case_id);
-        //access.add_extra_work(ekstra_arbejde, end_case_id);
-        //access.timer(svend_id, end_case_id, timer);
-        return "redirect:/kalender";
+    public String afslut_sagLederPost(Sag nuvaerendeSag, @RequestParam int sags_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde) {
+        System.out.println(sags_id);
+        access.end_case(sags_id);
+        access.add_extra_work(ekstra_arbejde, sags_id);
+        return "redirect:/sager_til_afslutning";
+    }
+
+
+    @PostMapping(value = "/afslut_sag", params = "afslut_Sag_Svend")
+    public String afslut_sagSvendPost(Sag nuvaerendeSag, @RequestParam int sags_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde) {
+        access.end_case(sags_id);
+        access.add_extra_work(ekstra_arbejde, sags_id);
+        return "redirect:/igangvaerende_sager";
     }
 
 

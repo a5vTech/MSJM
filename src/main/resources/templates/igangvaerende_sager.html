@@ -2,32 +2,59 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Afslut sag</title>
+    <title>Sager til redigering</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
-<h1>Igangværende sager:</h1>
-<table>
-    <tr>
-        <th>Sag nr:</th>
-        <th>Arbejdssted:</th>
-        <th>Beskrivelse</th>
-        <th></th>
-    </tr>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container-fluid">
 
-    <tr th:each="Case: ${caseList}">
+    <div class="container logo">
+        <div class="row noBorder">
+            <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4 top-45"><h2>Aktive sager</h2></div>
+        </div>
+    </div>
 
-        <td th:text="${Case.getSags_id()}"></td>
-        <td th:text="${Case.getArbejdssted()}"></td>
-        <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
-        <td>
+    <div class="container">
+        <div class="row noPadding">
+            <div class="col">
+                <table class="table table-bordered noMargin">
+                    <thead class="logoColour">
+                    <tr>
+                        <th class="text-center" id="th-id">Sag nr</th>
+                        <th class="text-center">Arbejdssted</th>
+                        <th class="text-center">Beskrivelse</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr th:each="Sag: ${Sager}">
 
-                <input type="hidden"  th:value="${Case.getSags_id()}" th:name="id">
-                <a th:href="@{'/afslut_sag/'+ ${Case.getSags_id()}}"><button  type="button" name="end_case" class="btn btn-light registerBtn">Vis sag</button></a>
+                        <td class="td-center" th:text="${Sag.getSags_id()}"></td>
+                        <td class="td-center" th:text="${Sag.getArbejdssted()}"></td>
+                        <td class="td-center" th:text="${Sag.getArbejdsbeskrivelse()}"></td>
+                        <td class="width-250">
 
-        </td>
-    </tr>
 
-</table>
+                            <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
+                            <a th:href="@{'/afslut_sag/'+ ${Sag.getSags_id()}}">
+                                <button type="button" name="aktuel_sagBtn" class="btn defaultBtn blackColour">
+                                    Vis sag
+                                </button>
+                            </a>
+                        </td>
+
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>

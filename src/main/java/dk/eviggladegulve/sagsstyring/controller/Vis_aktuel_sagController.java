@@ -13,8 +13,10 @@ public class Vis_aktuel_sagController {
 
     @GetMapping(value = "/aktuel_sag/{id}")
     public String aktuelSag(@PathVariable("id") int id, Model model) {
-        access.createConnection();
-        model.addAttribute("case", Sag.findCaseById(id));
+        model.addAttribute("sags_id", id);
+        model.addAttribute("Sag", Sag.findCaseById(id));
+        model.addAttribute("timer", access.registreredeTimerSag(id));
+        System.out.println(access.registreredeTimerSag(id));
 
 
         return "vis_aktuel_sag";

@@ -3,7 +3,7 @@ package dk.eviggladegulve.sagsstyring;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+@SuppressWarnings("Duplicates")
 public class AccessDB {
     static AccessDB instance = new AccessDB();
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -231,7 +231,7 @@ public class AccessDB {
     public ArrayList<Sag> getAllActiveCases() {
         createConnection();
         ArrayList<Sag> activeCaseList = new ArrayList<>();
-        String selectSQL = "SELECT * FROM egg.sag JOIN adresse ON (sag.adresse = adresse.adresse_id)";
+        String selectSQL = "SELECT * FROM egg.sag JOIN adresse ON (sag.adresse = adresse.adresse_id) WHERE sag.status = 1";
         try {
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
             ResultSet rs = preparedStatement.executeQuery();
@@ -335,7 +335,7 @@ public class AccessDB {
 
     public void timer(int medarbejder_id, int sags_id, String timer) {
         createConnection();
-        String selectSQL = "INSERT INTO registrerede_timer(medarbejder_id, sags_id, timer) VALUES(%s, %s, %s)";
+        String selectSQL = "INSERT INTO registrerede_timer(medarbejder_id, sags_id, timer) VALUES(?, ?, ?)";
         try {
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
             preparedStatement.setInt(1, medarbejder_id);
@@ -412,11 +412,16 @@ public class AccessDB {
 
     public void editAddress(Sag sag) {
         createConnection();
-        Statement s = null;
+        String selectSQL = "UPDATE adresse SET vejnavn = ?, vejnummer = ?, postnummer = ?, by_navn = ? WHERE adresse_id = ?;";
         try {
-            s = con.createStatement();
-            s.executeUpdate(String.format("UPDATE adresse SET vejnavn = '%s', vejnummer = '%s', postnummer = '%s', by_navn = '%s' WHERE adresse_id = %s;", sag.getVejnavn(), sag.getVejnummer(), sag.getPostnummer(), sag.getBy(), sag.getAdresse_id()));
-            s.close();
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setString(1, sag.getVejnavn());
+            preparedStatement.setInt(2, sag.getVejnummer());
+            preparedStatement.setInt(3, sag.getPostnummer());
+            preparedStatement.setString(4, sag.getBy());
+            preparedStatement.setInt(5, sag.getAdresse_id());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -426,11 +431,12 @@ public class AccessDB {
 
     public void deleteCase(int sags_id) {
         createConnection();
-        Statement s = null;
+        String selectSQL = "DELETE FROM sag WHERE sags_id=?";
         try {
-            s = con.createStatement();
-            s.executeUpdate(String.format("DELETE FROM sag WHERE sags_id=%s", sags_id));
-            s.close();
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, sags_id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -440,17 +446,18 @@ public class AccessDB {
     public void calCases(LocalDate dateFromView, ArrayList<Medarbejder> employeeList) {
         createConnection();
         LocalDate date = dateFromView;
+        String selectSQL = "SELECT sags_id FROM medarbejder JOIN svend_sager ON (medarbejder.medarbejder_id = svend_sager.medarbejder_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE medarbejder.medarbejder_id=? AND (? BETWEEN start_dato AND slut_dato)";
         // ArrayList<Sag> sager = new ArrayList<>();
-        Statement s = null;
         try {
-            s = con.createStatement();
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
             for (int i = 0; i < employeeList.size(); i++) {
                 LocalDate startDate = date;
-
                 //System.out.println("START DATE......." + startDate.toString());
                 for (int j = 0; j < 14; j++) {
                     ArrayList<Sag> currentSager = new ArrayList<>();
-                    ResultSet rs = s.executeQuery(String.format("SELECT sags_id FROM medarbejder JOIN svend_sager ON (medarbejder.medarbejder_id = svend_sager.medarbejder_id) JOIN sag ON (sag.sags_id = svend_sager.sags_id) WHERE medarbejder.medarbejder_id=%d AND ('%s' BETWEEN start_dato AND slut_dato)", employeeList.get(i).getMedarbejder_id(), startDate.toString()));
+                    preparedStatement.setInt(1, employeeList.get(i).getMedarbejder_id());
+                    preparedStatement.setString(2, startDate.toString());
+                    ResultSet rs = preparedStatement.executeQuery();
                     if (rs != null) {
                         while (rs.next()) {
                             try {
@@ -470,7 +477,7 @@ public class AccessDB {
 
 
             }
-            s.close();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -481,12 +488,18 @@ public class AccessDB {
 
     public void editEmployee(Medarbejder medarbejder) {
         createConnection();
-        Statement s = null;
+        String selectSQL = "UPDATE medarbejder SET fornavn = ?, efternavn = ?, email = ?, telefonnummer = ?, stilling = ?, kodeord = AES_ENCRYPT(?,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') WHERE medarbejder_id=?";
         try {
-            s = con.createStatement();
-            String sql = String.format("UPDATE medarbejder SET fornavn = '%s', efternavn = '%s', email = '%s', telefonnummer = %s, stilling = '%s', kodeord = AES_ENCRYPT('%s','y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') WHERE medarbejder_id=%s", medarbejder.getFornavn(), medarbejder.getEfternavn(), medarbejder.getEmail(), medarbejder.getTelefonnummer(), medarbejder.getStilling(), medarbejder.getKodeord(), medarbejder.getMedarbejder_id());
-            s.executeUpdate(sql);
-            s.close();
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setString(1, medarbejder.getFornavn());
+            preparedStatement.setString(2, medarbejder.getEfternavn());
+            preparedStatement.setString(3, medarbejder.getEmail());
+            preparedStatement.setInt(4, medarbejder.getTelefonnummer());
+            preparedStatement.setString(5, medarbejder.getStilling());
+            preparedStatement.setString(6, medarbejder.getKodeord());
+            preparedStatement.setInt(7, medarbejder.getMedarbejder_id());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -496,11 +509,12 @@ public class AccessDB {
 
     public void deleteEmployee(int medarbejder_id) {
         createConnection();
-        Statement s = null;
+        String selectSQL = "DELETE FROM medarbejder WHERE medarbejder_id=?";
         try {
-            s = con.createStatement();
-            s.executeUpdate(String.format("DELETE FROM medarbejder WHERE medarbejder_id=%s", medarbejder_id));
-            s.close();
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, medarbejder_id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -511,11 +525,14 @@ public class AccessDB {
 
     public void addHours(int medarbejder_id, int sags_id, int timer) {
         createConnection();
-        Statement s = null;
+        String selectSQL = "INSERT INTO registrerede_timer (medarbejder_id, sags_id, timer) VALUES (?, ?, ?)";
         try {
-            s = con.createStatement();
-            s.executeUpdate(String.format("INSERT INTO registrerede_timer (medarbejder_id, sags_id, timer) VALUES (%s, %s, %s)", medarbejder_id, sags_id, timer));
-            s.close();
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, medarbejder_id);
+            preparedStatement.setInt(2, sags_id);
+            preparedStatement.setInt(3, timer);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -524,18 +541,20 @@ public class AccessDB {
 
     public int registreredeTimer(int sags_id, int medarbejder_id) {
         createConnection();
-        Statement s = null;
+        String selectSQL = "SELECT SUM(timer) AS registreredeTimer FROM registrerede_timer  WHERE sags_id = ? AND medarbejder_id = ?;";
         int timer = 0;
         try {
-            s = con.createStatement();
-            ResultSet rs = s.executeQuery(String.format("SELECT SUM(timer) AS registreredeTimer FROM registrerede_timer  WHERE sags_id = %s AND medarbejder_id = %s;", sags_id, medarbejder_id));
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, sags_id);
+            preparedStatement.setInt(2, medarbejder_id);
+            ResultSet rs = preparedStatement.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
                     timer = rs.getInt("registreredeTimer");
                     return timer;
                 }
             }
-            s.close();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -543,7 +562,75 @@ public class AccessDB {
         return timer;
     }
 
-    public ArrayList getAllEndedCases() {
-        return null;
+    public int registreredeTimerSag(int sags_id) {
+        createConnection();
+        String selectSQL = "SELECT SUM(timer) AS registreredeTimer FROM registrerede_timer  WHERE sags_id = ?;";
+        int timer = 0;
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setInt(1, sags_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    timer = rs.getInt("registreredeTimer");
+                    return timer;
+                }
+            }
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return timer;
+    }
+
+    public ArrayList<Sag> getAllEndedCases() {
+        createConnection();
+        ArrayList<Sag> endedCaseList = new ArrayList<>();
+        String selectSQL = "SELECT * FROM sag JOIN adresse ON (sag.adresse = adresse.adresse_id) WHERE sag.status = 0";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        endedCaseList.add(new Sag(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"), rs.getInt("adresse_id"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde"), rs.getString("aftalt_med"), rs.getString("fast_moedetid"), rs.getString("udfoeres_overtid")));
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return endedCaseList;
+    }
+
+    public ArrayList<Sag> getAllActiveCasesSvend(int medarbejder_id) {
+        createConnection();
+        ArrayList<Sag> activeCaseList = new ArrayList<>();
+        String selectSQL = "SELECT * FROM egg.sag JOIN adresse ON (sag.adresse = adresse.adresse_id) WHERE sag.status = 1";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        activeCaseList.add(new Sag(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"), rs.getInt("adresse_id"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde"), rs.getString("aftalt_med"), rs.getString("fast_moedetid"), rs.getString("udfoeres_overtid")));
+
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return activeCaseList;
     }
 }
