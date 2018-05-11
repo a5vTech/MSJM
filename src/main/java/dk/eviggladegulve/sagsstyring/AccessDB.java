@@ -382,11 +382,26 @@ public class AccessDB {
 
     public void editCase(Sag sag) {
         createConnection();
-        Statement s = null;
+        String selectSQL = "UPDATE sag SET arbejdssted = ?, telefonnummer = ?, start_dato = ?, slut_dato = ?, email = ?, saerlige_aftaler = ?, kontaktperson_navn = ?, kontaktperson_telefonnummer = ?, kontaktperson_email = ?, arbejdsbeskrivelse = ?, ekstra_arbejde = ?, fast_moedetid = ?, udfoeres_overtid= ?, aftalt_med = ? WHERE sags_id=?;";
         try {
-            s = con.createStatement();
-            s.executeUpdate(String.format("UPDATE sag SET arbejdssted = '%s', telefonnummer = %s, start_dato = '%s', slut_dato = '%s', email = '%s', saerlige_aftaler = '%s', kontaktperson_navn = '%s', kontaktperson_telefonnummer = %s, kontaktperson_email = '%s', arbejdsbeskrivelse = '%s', ekstra_arbejde = '%s', fast_moedetid = %s, udfoeres_overtid= %s, aftalt_med = '%s' WHERE sags_id=%s;",sag.getArbejdssted(), sag.getTelefonnummer(), sag.getStart_dato(), sag.getSlut_dato(), sag.getEmail(), sag.getSaerlige_aftaler(), sag.getKontaktperson_navn(), sag.getKontaktperson_telefonnummer(), sag.getKontaktperson_email(), sag.getArbejdsbeskrivelse(), sag.getEkstra_arbejde(), sag.getFast_moedetid(), sag.getUdfoeres_overtid(), sag.getAftalt_med(), sag.getSags_id()));
-            s.close();
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setString(1, sag.getArbejdssted());
+            preparedStatement.setInt(2, sag.getTelefonnummer());
+            preparedStatement.setString(3, sag.getStart_dato());
+            preparedStatement.setString(4, sag.getSlut_dato());
+            preparedStatement.setString(5, sag.getEmail());
+            preparedStatement.setString(6, sag.getSaerlige_aftaler());
+            preparedStatement.setString(7, sag.getKontaktperson_navn());
+            preparedStatement.setInt(8, sag.getKontaktperson_telefonnummer());
+            preparedStatement.setString(9, sag.getKontaktperson_email());
+            preparedStatement.setString(10, sag.getArbejdsbeskrivelse());
+            preparedStatement.setString(11, sag.getEkstra_arbejde());
+            preparedStatement.setString(12, sag.getFast_moedetid());
+            preparedStatement.setString(13, sag.getUdfoeres_overtid());
+            preparedStatement.setString(14, sag.getAftalt_med());
+            preparedStatement.setInt(15, sag.getSags_id());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
