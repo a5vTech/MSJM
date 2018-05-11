@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Afslut sag</title>
+    <th:block th:include="fragments/head :: headInclude"/>
+</head>
+<body>
+<h1>Igangværende sager:</h1>
+<table>
+    <tr>
+        <th>Sag nr:</th>
+        <th>Arbejdssted:</th>
+        <th>Beskrivelse</th>
+        <th></th>
+    </tr>
+
+    <tr th:each="Case: ${caseList}">
+
+        <td th:text="${Case.getSags_id()}"></td>
+        <td th:text="${Case.getArbejdssted()}"></td>
+        <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
+        <td>
+
+                <input type="hidden"  th:value="${Case.getSags_id()}" th:name="id">
+                <a th:href="@{'/afslut_sag/'+ ${Case.getSags_id()}}"><button  type="button" name="end_case" class="btn btn-light registerBtn">Vis sag</button></a>
+
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
