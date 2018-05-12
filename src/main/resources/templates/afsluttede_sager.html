@@ -2,8 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Sager til redigering</title>
+    <title>Afsluttede sager</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
@@ -14,7 +15,7 @@
         <div class="row noBorder">
             <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
             <div class="col-sm-1"></div>
-            <div class="col-sm-4 top-45"><h2>Aktive sager</h2></div>
+            <div class="col-sm-4 top-45"><h2>Afsluttede sager</h2></div>
         </div>
     </div>
 

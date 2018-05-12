@@ -14,11 +14,11 @@ public class Afslut_sagController {
     final AccessDB access = AccessDB.getInstance();
 
     @GetMapping("/afslut_sag/{id}")
-    public String afslut_sag(@PathVariable("id") int id, Model model) {
+    public String afslut_sag(@PathVariable("id") int id, Model model, @ModelAttribute("BrugerID") int brugerid) {
         ArrayList<Sag> sager = access.getAllActiveCases();
         model.addAttribute("Sag", Sag.findCaseById(id));
         model.addAttribute("sags_id", id);
-        model.addAttribute("registreredeTimer", access.registreredeTimer(id, 10));
+        model.addAttribute("registreredeTimer", access.registreredeTimer(id, brugerid));
         return "afslut_sag";
     }
 

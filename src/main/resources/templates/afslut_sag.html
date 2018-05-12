@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
+<!--<nav th:if="${session.Stilling == 'Leder' or 'Konduktør'}" th:replace="fragments/navbar :: navbar"></nav>-->
+<nav th:replace="${session.Stilling == 'Svend'} ? ~{fragments/navbar :: navbarSvend} : ~{fragments/navbar :: navbar}"></nav>
 <div class="container-fluid">
 
     <form method="post" th:action="@{/afslut_sag}">
@@ -134,7 +135,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="5"
-                              placeholder="Ekstraarbejde" readonly></textarea>
+                              placeholder="Ekstraarbejde"></textarea>
                 </div>
             </div>
         </div>

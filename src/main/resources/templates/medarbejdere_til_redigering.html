@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Rediger medarbejder</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
@@ -38,8 +39,8 @@
                         <td class="width-250"><a th:href="'/rediger_medarbejder/'+${Medarbejder.getMedarbejder_id()}">
                             <button type="button" class="btn defaultBtn blackColour">Rediger</button>
                         </a>
-                            <input type="hidden" th:value="${Medarbejder.getMedarbejder_id()}" name="sags_id">
-                            <button type="button" name="slet_sagBtn" class="btn defaultBtn blackColour"
+                            <!--<input type="hidden" th:value="${Medarbejder.getMedarbejder_id()}" name="sags_id">-->
+                            <button type="button" class="btn defaultBtn blackColour"
                                     data-toggle="modal" data-target="#deleteModal"
                                     th:data-medarbejderid="${Medarbejder.getMedarbejder_id()}">Slet
                             </button>

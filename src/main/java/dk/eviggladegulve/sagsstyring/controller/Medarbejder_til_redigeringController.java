@@ -21,10 +21,10 @@ public class Medarbejder_til_redigeringController {
         return "medarbejdere_til_redigering";
     }
 
-    @PostMapping(value = "/medarbejdere_til_redigering", params = "slet_medarbejderBtn")
+    @PostMapping(value = "/medarbejdere_til_redigering")
     public String medarbejder_til_redigeringSletPost(@RequestParam("medarbejder_id") int medarbejder_id) {
         access.deleteEmployee(medarbejder_id);
-        return "redirect:/medarbejder_til_redigering";
+        return "redirect:/medarbejdere_til_redigering";
     }
 
 

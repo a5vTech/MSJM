@@ -612,9 +612,10 @@ public class AccessDB {
     public ArrayList<Sag> getAllActiveCasesSvend(int medarbejder_id) {
         createConnection();
         ArrayList<Sag> activeCaseList = new ArrayList<>();
-        String selectSQL = "SELECT * FROM egg.sag JOIN adresse ON (sag.adresse = adresse.adresse_id) WHERE sag.status = 1";
+        String selectSQL = "SELECT * FROM egg.svend_sager JOIN sag ON (svend_sager.sags_id = sag.sags_id) JOIN adresse ON (sag.adresse = adresse.adresse_id) WHERE medarbejder_id =? AND sag.status = 1";
         try {
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setInt(1,medarbejder_id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
