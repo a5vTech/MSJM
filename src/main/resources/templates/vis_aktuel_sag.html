@@ -128,13 +128,13 @@
                     <label>Ekstraarbejde er udført. Aftalt med</label>
                 </div>
                 <div class="col-sm-4">
-                    <label class="fontNormal" th:field="${Sag.aftalt_med}"></label>
+                    <label class="fontNormal" th:text="${Sag.aftalt_med}"></label>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="5"
+                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="1"
                               placeholder="Ekstraarbejde" readonly></textarea>
                 </div>
             </div>
@@ -169,7 +169,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Arbejdsbeskrivelse" readonly
+                    <textarea wrap="hard" class="form-control textarea" rows="7" placeholder="Arbejdsbeskrivelse" readonly
                               th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
@@ -183,7 +183,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Særlige aftaler" readonly
+                    <textarea wrap="hard" class="form-control textarea" rows="2" placeholder="Særlige aftaler" readonly
                               th:field="${Sag.saerlige_aftaler}"></textarea>
                 </div>
             </div>
@@ -192,11 +192,17 @@
         <!-- MATERIALE LISTE -->
         <!--<div class="container noPadding" th:include="fragments/materialeliste :: materialeliste"/>-->
 
+        <a href="/afsluttede_sager">
+            <button type="button" class="btn defaultBtn blackColour marginRight-10" name="afslut_Sag_Leder">Tilbage</button>
+        </a>
+        <button type="button" class="btn defaultBtn" data-toggle="modal" data-target="#registreredeTimer" th:data-samlettimer="${timer}">Se
+            registrerede timer
+        </button>
+
         <div class="container noBorder">
             <div class="row noBorder">
                 <div class="col-sm-12">
                     <strong>Det er håndværk - det ligger fast!</strong>
-
                 </div>
             </div>
             <div class="row noBorder">
@@ -204,14 +210,6 @@
                     <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
                 </div>
             </div>
-
-            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
-            <a href="/afsluttede_sager">
-                <button type="button" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Tilbage</button>
-            </a>
-            <button type="button" class="btn defaultBtn pull-right marginRight-10" data-toggle="modal" data-target="#registreredeTimer" th:data-samlettimer="${timer}">Se
-                registrerede timer
-            </button>
         </div>
 
     </form>
@@ -227,16 +225,13 @@
                         <h4 class="modal-title logoColour">Registrerede timer</h4>
                     </div>
                     <div class="modal-body">
-                        <label>Samlet arbejdstimer for sagen:</label>
+                        <label>Samlede arbejdstimer for sagen:</label>
                         <div>
                             <input readonly class="TIMER" style="border-left:0;border-right:0;border-top:0;outline:none;"/>
                         </div>
                     </div>
                     <div class="modal-footer">
-
-                        <button type="button" class="btn defaultBtn blackColour" data-dismiss="modal">Annuller</button>
-                        <button type="submit" class="btn defaultBtn blackColour" name="registrer_timer_Btn">Registrer timer</button>
-
+                        <button type="button" class="btn defaultBtn blackColour" data-dismiss="modal">Tilbage</button>
                     </div>
                 </div>
             </form>

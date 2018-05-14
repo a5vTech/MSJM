@@ -38,7 +38,6 @@
                         <td class="td-center" th:text="${Sag.getArbejdsbeskrivelse()}"></td>
                         <td class="width-250">
 
-
                             <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
                             <a th:href="@{'/rediger_sag/'+ ${Sag.getSags_id()}}">
                                 <button type="button" name="rediger_sagBtn" class="btn defaultBtn blackColour">
@@ -53,6 +52,7 @@
                                     data-toggle="modal" data-target="#deleteModal"
                                     th:data-sagid="${Sag.getSags_id()}">Slet
                             </button>
+
                             <!--</form>-->
                         </td>
 

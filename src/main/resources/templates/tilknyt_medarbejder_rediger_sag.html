@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tilknyt medarbejder</title>
+    <th:block th:include="fragments/head :: headInclude"/>
+    <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
+</head>
+<body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
+<div class="container-fluid">
+    <form method="post" th:action="@{/tilknyt_medarbejder_rediger_sag}">
+        <div class="container logo">
+            <div class="row noBorder">
+                <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4"><h2>Tilknyt eller fjern medarbejder(e)</h2></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row logoColour">
+                <div class="col">
+                    <input type="hidden" th:value="${Sag.getSags_id()}" name="sag_id"/>
+                    <h3 th:text="'Sag nr. ' +${Sag.getSags_id()}"></h3>
+                    <h4>Vælg medarbejdere der skal tilknyttes sagen.<br>Marker
+                        flere med ctrl+venstreklik
+                    </h4>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="marginLeft200">Tilknyt medarbejder</label>
+                    <table>
+                        <tr>
+                            <div class="form-group marginbottom-1">
+
+                                <select multiple class="form-control" name="tilknyt_Medarbejder_id" size="10">
+                                    <option th:if="${Medarbejder.getStilling() == 'Svend'}"
+                                            th:each="Medarbejder : ${medarbejderListe}"
+                                            th:value="${Medarbejder.getMedarbejder_id()}"
+                                            th:text="${Medarbejder.getFornavn()}+' '+${Medarbejder.getEfternavn()}+' (id: '+${Medarbejder.getMedarbejder_id()}+')'"></option>
+                                </select>
+                            </div>
+                        </tr>
+                    </table>
+          </div>
+                <div class="col-lg-6 center-block">
+                    <label class="marginLeft200">Fjern medarbejder</label>
+                    <table>
+                        <tr>
+                            <div class="form-group marginbottom-1">
+
+
+                                <select multiple class="form-control" name="fjern_Medarbejder_id" size="10">
+                                    <option th:each="Medarbejder : ${aktiveMedarbejdere}" th:value="${Medarbejder.getMedarbejder_id()}"
+                                            th:text="${Medarbejder.getFornavn()}+' '+${Medarbejder.getEfternavn()}+' (id: '+${Medarbejder.getMedarbejder_id()}+')'">
+                                    </option>
+                                </select>
+                            </div>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container noBorder">
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn defaultBtn" name="save">Tilknyt
+                    </button>
+                    <button class="btn defaultBtn" type="submit" name="addNone">Tilknyt ingen</button>
+                    <button type="submit" class="btn defaultBtn" name="remove">Fjern</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

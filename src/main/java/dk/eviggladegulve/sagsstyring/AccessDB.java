@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class AccessDB {
     static AccessDB instance = new AccessDB();
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DATABASE_URL = "jdbc:mysql://35.195.21.174:3306/egg?useSSL=false";
+    static final String DATABASE_URL = "jdbc:mysql://35.230.137.104:3306/egg?useSSL=false";
     static Connection con;
 
     private AccessDB() {
@@ -239,8 +239,8 @@ public class AccessDB {
                 while (rs.next()) {
                     try {
                         activeCaseList.add(new Sag(rs.getInt("sags_id"), rs.getString("arbejdssted"), rs.getInt("telefonnummer"), rs.getInt("adresse_id"), rs.getString("vejnavn"), rs.getInt("vejnummer"), rs.getString("start_dato"), rs.getString("slut_dato"), rs.getInt("postnummer"), rs.getString("by_navn"), rs.getString("email"), rs.getString("saerlige_aftaler"), rs.getString("kontaktperson_navn"), rs.getInt("kontaktperson_telefonnummer"), rs.getString("kontaktperson_email"), rs.getString("arbejdsbeskrivelse"), rs.getString("ekstra_arbejde"), rs.getString("aftalt_med"), rs.getString("fast_moedetid"), rs.getString("udfoeres_overtid")));
-
-                    } catch (SQLException e) {
+                        //System.out.println("EKSTRA: " + rs.getString("sags_id")+ " " +rs.getString("ekstra_arbejde"));
+                        } catch (SQLException e) {
                         e.printStackTrace();
                     }
                 }
@@ -350,13 +350,14 @@ public class AccessDB {
     }
 
 
-    public void add_extra_work(String ekstra_arbejde, int id) {
+    public void add_extra_work(String ekstra_arbejde, String aftalt_med, int id) {
         createConnection();
-        String selectSQL = "UPDATE sag SET ekstra_arbejde=? WHERE sags_id=?;";
+        String selectSQL = "UPDATE sag SET ekstra_arbejde=?, aftalt_med = ? WHERE sags_id=?;";
         try {
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
             preparedStatement.setString(1, ekstra_arbejde);
-            preparedStatement.setInt(2, id);
+            preparedStatement.setString(2, aftalt_med);
+            preparedStatement.setInt(3, id);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             con.close();
@@ -368,6 +369,85 @@ public class AccessDB {
     public void assignToCase(int sags_id, String medarbejder_id) {
         createConnection();
         String SQL = "INSERT INTO svend_sager(medarbejder_id, sags_id) VALUES(?, ?)";
+        try {
+            PreparedStatement pStatement = con.prepareStatement(SQL);
+            pStatement.setString(1, medarbejder_id);
+            pStatement.setInt(2, sags_id);
+            pStatement.executeUpdate();
+            pStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Medarbejder> showActiveEmployee(int sags_id) {
+        createConnection();
+        String SQL = "SELECT medarbejder.medarbejder_id, medarbejder.fornavn, medarbejder.efternavn, medarbejder.stilling FROM svend_sager JOIN medarbejder ON (medarbejder.medarbejder_id = svend_sager.medarbejder_id) WHERE sags_id=?;";
+        ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setInt(1, sags_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                     medarbejdere.add(new Medarbejder(rs.getInt("medarbejder_id"),rs.getString("fornavn"),rs.getString("efternavn"),rs.getString("stilling")));
+                }
+            }
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medarbejdere;
+    }
+
+    public ArrayList<Medarbejder> showNonActiveEmployees(int sags_id) {
+        createConnection();
+        String SQL = "SELECT DISTINCT medarbejder.medarbejder_id, medarbejder.fornavn, medarbejder.efternavn, medarbejder.stilling FROM svend_sager JOIN medarbejder ON (medarbejder.medarbejder_id = svend_sager.medarbejder_id) WHERE sags_id!=?;";
+        ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setInt(1, sags_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    medarbejdere.add(new Medarbejder(rs.getInt("medarbejder_id"),rs.getString("fornavn"),rs.getString("efternavn"),rs.getString("stilling")));
+                }
+            }
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medarbejdere;
+    }
+
+//    public int showActiveEmployeeID(int sags_id) {
+//        createConnection();
+//        String SQL = "SELECT medarbejder_id FROM svend_sager WHERE sags_id=?;";
+//        int medarbejder_id = 0;
+//        try {
+//            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+//            preparedStatement.setInt(1, sags_id);
+//            ResultSet rs = preparedStatement.executeQuery();
+//            if (rs != null) {
+//                while (rs.next()) {
+//                    medarbejder_id = rs.getInt("medarbejder_id");
+//                    return medarbejder_id;
+//                }
+//            }
+//            preparedStatement.close();
+//            con.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return medarbejder_id;
+//    }
+
+    public void removeFromCase(int sags_id, String medarbejder_id) {
+        createConnection();
+        String SQL = "DELETE FROM svend_sager WHERE medarbejder_id=? AND sags_id=?;";
         try {
             PreparedStatement pStatement = con.prepareStatement(SQL);
             pStatement.setString(1, medarbejder_id);

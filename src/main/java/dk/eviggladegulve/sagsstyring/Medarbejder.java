@@ -18,6 +18,13 @@ public class Medarbejder {
     public Medarbejder() {
     }
 
+    public Medarbejder(int medarbejder_id, String fornavn, String efternavn, String stilling) {
+        this.medarbejder_id = medarbejder_id;
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.stilling = stilling;
+    }
+
     public Medarbejder(String fornavn, String efternavn, String email, int telefonnummer, String kodeord) {
         this.fornavn = fornavn;
         this.efternavn = efternavn;

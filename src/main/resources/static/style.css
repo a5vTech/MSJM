@@ -1,3 +1,23 @@
+@font-face {
+    font-family: "Myriad Pro Light";
+    font-weight: normal;
+    font-style: normal;
+    src: local("Myriad Pro Light"), url(../static/fonts/MyriadPro-Light.eot) format("eot");
+}
+
+@font-face {
+    font-family: "Myriad Pro Light";
+    font-weight: normal;
+    font-style: normal;
+    src: local("MyriadPro-Light"), url(../static/fonts/MyriadPro-Light.eot) format("eot");
+}
+
+#loginTitle {
+    width: 510px;
+    border-bottom-width: 51px;
+    border-radius: 3%;
+}
+
 div {
     /*border-style: solid;*/
     border-width: 0.02px;
@@ -7,8 +27,41 @@ div {
 
 /*ABOVE IS FOR TESTING PURPOSES*/
 
+.fontSize18 {
+    font-size: 18px;
+}
+
+.marginbottom165 {
+    margin-bottom: 165px;
+}
+
+.selectInherit {
+    font: inherit;
+}
+
+.selectHeight50 {
+    -webkit-appearance: menulist-button;
+    height: 10px;
+}
+
 .hidden {
     display: none;
+}
+
+.borderbottom {
+    border-bottom: none;
+}
+
+.modal-content {
+    border-radius: 14px;
+}
+
+.modal-header {
+    border-radius: 14px;
+}
+
+.modal-footer {
+    border-top: 0;
 }
 
 .noMargin {
@@ -17,6 +70,7 @@ div {
 
 .noPadding {
     padding: 0;
+!important;
 }
 
 .rightAbsolute {
@@ -44,13 +98,49 @@ div {
 }
 
 button:hover {
-    background-color: #a7a6a4;
+    background-color: #CAD8E3;
 }
 
-h1, h2, h3, h4, h5, h6, select, tr, th, td, button  {
-    font-family: 'MyriadPro-Light';
+.paddingRight175 {
+    padding-right: 175px;
 }
 
+a.aHover:hover {
+    background-color: #CAD8E3;
+}
+
+h1, h2, h3, h4, h5, h6, select, tr, th, td, button {
+    font-family: "MyriadPro-Light";
+    font-family: "Myriad Pro Light";
+
+}
+
+label {
+    display: inline-block;
+    padding-top: 3px;
+    max-width: 100%;
+    font-weight: 700;
+    float: left;
+
+    font-family: "MyriadPro-Light";
+    font-family: "Myriad Pro Light";
+}
+
+input {
+    width: 100%;
+    font-family: "MyriadPro-Light";
+    font-family: "Myriad Pro Light";
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    outline: none;
+    background: transparent;
+    border-bottom-color: #b1b1b1;
+}
+
+a:link {
+    text-decoration: none;
+}
 
 .noBorder {
     border-color: transparent !important;
@@ -77,6 +167,10 @@ h1, h2, h3, h4, h5, h6, select, tr, th, td, button  {
     width: 23.5%;
 }
 
+.width-40 {
+    width: 40%;
+}
+
 .width-77 {
     width: 77%;
 }
@@ -99,12 +193,20 @@ h1, h2, h3, h4, h5, h6, select, tr, th, td, button  {
     top: 45px;
 }
 
-.marginRight172 {
-    margin-right: 172px;
+.marginRight165 {
+    margin-right: 165px;
+}
+
+.marginLeft200 {
+    margin-left: 200px;
 }
 
 .noMargin {
     margin: 0 !important;
+}
+
+.noMarginTop {
+    margin-top: 0 !important;
 }
 
 .noPadding {
@@ -149,32 +251,33 @@ textarea {
     padding: 5px;
 }
 
-label {
-    display: inline-block;
-    padding-top: 3px;
-    max-width: 100%;
-    font-weight: 700;
-    float: left;
-    font-family: 'MyriadPro-Light';
 
+
+.floatNone {
+    float: none;
 }
 
 .padding-left {
     padding-left: 25px;
 }
 
+.paddingTop20 {
+    padding-top: 20px;
+!important;
+}
+
 .marginbottom-1 {
     margin-bottom: -1px;
+}
+
+.marginTop20 {
+    margin-top: 20px;
 }
 
 .marginRight-10 {
     margin-right: 10px;
 }
 
-input {
-    width: 100%;
-    font-family: 'MyriadPro-Light';
-}
 
 .td-center {
     padding-top: 12px !important;
@@ -196,8 +299,9 @@ input {
 .textarea {
     max-width: 100%;
     min-width: 100%;
-    max-height: 70px;
+    /*max-height: 70px;*/
     border-radius: 0%;
+
 }
 
 .modal-centered {
@@ -217,6 +321,18 @@ input {
     .logoColour {
         background-color: #DDEBF6 !important;
 
+    }
+
+    #return-to-top {
+        display: none !important;
+    }
+
+    button {
+        display: none !important;
+    }
+
+    nav {
+        display: none;
     }
 
     input {

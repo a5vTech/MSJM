@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
+<nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container-fluid">
 
     <div class="container logo">
@@ -20,26 +21,30 @@
 
 
     <div class="container">
-        <div class="row">
+        <div class="row noPadding">
             <div class="col">
-                <table>
+                <table class="table table-bordered noMargin">
+                    <thead class="logoColour">
                     <tr>
-                        <th>Sag nr:</th>
-                        <th>Arbejdssted:</th>
-                        <th>Beskrivelse</th>
+                        <th class="text-center">Sag nr:</th>
+                        <th class="text-center">Arbejdssted:</th>
+                        <th class="text-center">Beskrivelse</th>
                         <th></th>
                     </tr>
+                    </thead>
                     <tr th:each="Case: ${caseList}">
 
                         <td th:text="${Case.getSags_id()}"></td>
                         <td th:text="${Case.getArbejdssted()}"></td>
                         <td th:text="${Case.getArbejdsbeskrivelse()}"></td>
-                        <td>
+                        <td class="width-250">
+
+
                             <form method="post" th:action="@{/sager_til_afslutning}">
                                 <input type="hidden" th:value="${Case.getSags_id()}" th:name="id">
                                 <a th:href="@{'/afslut_sag/'+ ${Case.getSags_id()}}">
-                                    <button type="button" name="afslut_sagBtn" class="btn defaultBtn pull-right">Afslut
-                                        sag
+                                    <button type="button" name="afslut_sagBtn" class="btn defaultBtn blackColour">
+                                        Afslut sag
                                     </button>
                                 </a>
                             </form>

@@ -223,9 +223,15 @@ public class Sag {
 
 
 
-    public static Sag findCaseById(int id){
+    public static Sag findCaseById(int id, int active){
         AccessDB access = AccessDB.getInstance();
-        ArrayList<Sag> sager = access.getAllActiveCases();
+        ArrayList<Sag> sager = null;
+        if(active == 1){
+           sager = access.getAllActiveCases();
+        } else if(active == 0){
+             sager = access.getAllEndedCases();
+        }
+
         for(Sag c: sager){
             if(c.getSags_id() == id){
                 return c;
@@ -235,3 +241,4 @@ public class Sag {
     }
 
 }
+

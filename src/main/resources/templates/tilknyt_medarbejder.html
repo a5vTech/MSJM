@@ -34,9 +34,9 @@
             <div class="col">
                 <table>
                     <tr>
-                        <div class="form-group marginbottom-1">
+                        <div class="form-group marginbottom-1 ">
 
-                                <select multiple class="form-control" name="medarbejder_id">
+                                <select multiple class="form-control selectInherit" name="medarbejder_id" size="10">
                                     <option th:if="${Medarbejder.getStilling() == 'Svend'}"
                                             th:each="Medarbejder : ${medarbejderListe}"
                                             th:value="${Medarbejder.getMedarbejder_id()}"
@@ -53,9 +53,9 @@
     <div class="container noBorder">
         <div class="row">
             <div class="col">
-                <button type="submit" class="btn defaultBtn pull-right" name="save">Tilknyt
+                <button type="submit" class="btn defaultBtn" name="save">Tilknyt
                 </button>
-
+                <button class="btn defaultBtn" type="submit" name="addNone">Tilknyt ingen</button>
             </div>
         </div>
     </div>

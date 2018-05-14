@@ -14,9 +14,9 @@ public class Vis_aktuel_sagController {
     @GetMapping(value = "/aktuel_sag/{id}")
     public String aktuelSag(@PathVariable("id") int id, Model model) {
         model.addAttribute("sags_id", id);
-        model.addAttribute("Sag", Sag.findCaseById(id));
+        model.addAttribute("Sag", Sag.findCaseById(id,0));
         model.addAttribute("timer", access.registreredeTimerSag(id));
-        System.out.println(access.registreredeTimerSag(id));
+
 
 
         return "vis_aktuel_sag";

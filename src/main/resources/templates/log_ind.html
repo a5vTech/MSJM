@@ -1,24 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <meta charset="UTF-8">
-        <title>Log ind</title>
-        <th:block th:include="fragments/head :: headInclude"/>
-        <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
-        <link rel="stylesheet" type="text/css" th:href="@{style.css}">
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <h1>Log ind</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Log ind</title>
+    <th:block th:include="fragments/head :: headInclude"/>
+    <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="container logo">
+        <div class="row noBorder">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"><img th:src="@{/billeder/Logo PNG.png}"/></div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+
+    <form method="post" th:action="@{/log_ind}">
+        <div class="container noBorder logoColour" id="loginTitle">
+            <div class="row noPadding">
+                <div class="col">
+                    <h2>Login</h2>
+                </div>
             </div>
-            <div class="col-md-12">
-                <form method="post" th:action="@{/log_ind}">
-                    <label>Brugernavn</label><br><input type="number" th:name="username"><br><br>
-                    <label>Kodeord</label><br><input type="password" th:name="password"><br><br>
-                    <button type="submit">Log ind</button>
-                </form>
+
+            <div class="row marginTop20 noPadding">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <label class="fontSize18 floatNone">Brugernavn:</label>
+                    <input type="number" class="fontSize18 border-bottom-color" th:name="username">
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+
+            <div class="row">
+                <div class="row marginTop20">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <label class="fontSize18 floatNone">Kodeord:</label>
+                        <input type="password" class="fontSize18 border-bottom-color" th:name="password">
+                    </div>
+                    <div class="col-sm-4"></div>
+                </div>
             </div>
         </div>
-    </body>
+
+        <button type="submit" class="btn defaultBtn blackColour fontSize18">Log ind</button>
+
+    </form>
+</div>
+</body>
 </html>

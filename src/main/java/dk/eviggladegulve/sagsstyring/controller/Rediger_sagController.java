@@ -13,7 +13,7 @@ public class Rediger_sagController {
 
     @GetMapping(value = "/rediger_sag/{id}")
     public String redigerSag(@PathVariable("id") int id, Model model) {
-        Sag sag = Sag.findCaseById(id);
+        Sag sag = Sag.findCaseById(id,1);
         model.addAttribute("Sag", sag);
 
         return "rediger_sag";

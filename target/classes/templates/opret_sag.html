@@ -105,7 +105,7 @@
                     <label>Opstartsdato:</label>
                 </div>
                 <div class="col-sm-2">
-                    <input type="date" th:field="${Sag.start_dato}" placeholder="yyyy-mm-dd"/>
+                    <input type="date" required th:field="${Sag.start_dato}" placeholder="yyyy-mm-dd"/>
                 </div>
                 <div class="col-sm-2">
                 </div>
@@ -114,7 +114,7 @@
                     <label>Slutdato:</label>
                 </div>
                 <div class="col-sm-2">
-                    <input type="date" th:field="${Sag.slut_dato}" placeholder="yyyy-mm-dd"/>
+                    <input type="date"  required th:field="${Sag.slut_dato}" placeholder="yyyy-mm-dd"/>
                 </div>
                 <div class="col-sm-2">
                 </div>
@@ -133,7 +133,7 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="5"
+                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="1"
                               placeholder="Ekstraarbejde"></textarea>
                 </div>
             </div>
@@ -168,7 +168,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Arbejdsbeskrivelse"
+                    <textarea wrap="hard" class="form-control textarea" rows="7" placeholder="Arbejdsbeskrivelse"
                               th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
@@ -182,7 +182,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Særlige aftaler"
+                    <textarea wrap="hard" class="form-control textarea" rows="2" placeholder="Særlige aftaler"
                               th:field="${Sag.saerlige_aftaler}"></textarea>
                 </div>
             </div>
@@ -192,6 +192,10 @@
 <br/>
         <!-- MATERIALE LISTE -->
         <div class="container noPadding" th:include="fragments/materialeliste :: materialeliste"/>
+
+        <button type="submit" class="btn defaultBtn hideFromPrint" name="save"
+                value="savebtn">Opret
+        </button>
 
         <div class="container noBorder">
             <div class="row noBorder">
@@ -205,9 +209,6 @@
                     <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
                 </div>
             </div>
-            <button type="submit" class="btn defaultBtn pull-right hideFromPrint" name="save"
-                    value="savebtn">Opret
-            </button>
         </div>
 
     </form>

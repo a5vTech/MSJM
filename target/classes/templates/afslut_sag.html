@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Afslut sag</title>
     <th:block th:include="fragments/head :: headInclude"/>
+    <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
     <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
 <body>
@@ -128,13 +129,13 @@
                     <label>Ekstraarbejde er udført. Aftalt med</label>
                 </div>
                 <div class="col-sm-4">
-                    <label class="fontNormal" th:field="${Sag.aftalt_med}"></label>
+                    <input class="fontNormal" id="aftaltmed" th:field="${Sag.aftalt_med}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="5"
+                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" id="ekstraarbejde" rows="1"
                               placeholder="Ekstraarbejde"></textarea>
                 </div>
             </div>
@@ -169,7 +170,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Arbejdsbeskrivelse" readonly
+                    <textarea wrap="hard" class="form-control textarea" rows="7" placeholder="Arbejdsbeskrivelse" readonly
                               th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
@@ -183,7 +184,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5" placeholder="Særlige aftaler" readonly
+                    <textarea wrap="hard" class="form-control textarea" rows="2" placeholder="Særlige aftaler" readonly
                               th:field="${Sag.saerlige_aftaler}"></textarea>
                 </div>
             </div>
@@ -193,6 +194,8 @@
         <!--<div class="container noPadding" th:include="fragments/materialeliste :: materialeliste"/>-->
 
         <div class="container noBorder">
+
+
             <div class="row noBorder">
                 <div class="col-sm-12">
                     <strong>Det er håndværk - det ligger fast!</strong>
@@ -204,9 +207,6 @@
                     <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
                 </div>
             </div>
-
-            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
-
             <div th:switch="${session.Stilling}">
                 <button th:case="'Leder'" type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Afslut sag</button>
                 <button th:case="'Konduktør'" type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Afslut sag</button>
@@ -216,8 +216,10 @@
                             th:data-sagid="${Sag.getSags_id()}" th:data-medarbejderid="${session.BrugerID}" th:data-registreredetimer="${registreredeTimer}">Registrer timer
                     </button>
                 </div>
-
             </div>
+            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
+
+
         </div>
 
     </form>
@@ -235,10 +237,12 @@
                     <div class="modal-body">
                         <label>Registrede timer på nuværrende tidspunkt</label>
                         <div>
-                            <input class="REGISTREREDETIMER">
+                            <input readonly="readonly" class="REGISTREREDETIMER">
                         </div>
                         <div>
                             <input type="hidden" class="MEDARBEJDERID" name="medarbejder_id"/>
+                            <input type="hidden" class="EKSTRAARBEJDE" name="ekstra_arbejde"/>
+                            <input type="hidden" class="AFTALTMED" name="aftalt_med"/>
                         </div>
                         <div>
                             <input type="hidden" class="SAGID" name="sags_id"/>
@@ -267,11 +271,15 @@
         var sagID = button.data('sagid')
         var medarbejderID = button.data('medarbejderid')
         var registreredeTimer = button.data('registreredetimer')
+        var ekstraarbejde = $("#ekstraarbejde").val()
+        var aftaltmed = $("#aftaltmed").val()
         var modal = $(this)
         modal.find('.modal-title').text('Registrer timer for sag nr: ' + sagID)
         modal.find('.modal-body .SAGID').val(sagID)
         modal.find('.modal-body .MEDARBEJDERID').val(medarbejderID)
         modal.find('.modal-body .REGISTREREDETIMER').val(registreredeTimer)
+        modal.find('.modal-body .EKSTRAARBEJDE').val(ekstraarbejde)
+        modal.find('.modal-body .AFTALTMED').val(aftaltmed)
 
 
     })

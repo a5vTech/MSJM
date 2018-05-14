@@ -23,8 +23,14 @@ public class Tilknyt_medarbejderController {
     public String assignEmployeePost(@RequestParam("medarbejder_id") String medarbejder_id) {
         String[] idListe = medarbejder_id.split(",");
         for (int i = 0; i < idListe.length; i++) {
-            access.assignToCase(access.getLastCaseId(),idListe[i]);
-      }
+            access.assignToCase(access.getLastCaseId(), idListe[i]);
+        }
         return "redirect:/menu";
     }
+
+    @PostMapping(value = "/tilknyt_medarbejder", params = "addNone")
+    public String assignNoEmployeesPost() {
+        return "redirect:/menu";
+    }
+
 }
