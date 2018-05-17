@@ -8,18 +8,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
+<div th:if="${session.Stilling == 'Svend'}">
 <nav th:replace="fragments/navbar :: navbarSvend"></nav>
-
-
     <div class="container logo">
         <div class="row noBorder">
             <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
             <div class="col-sm-1"></div>
-            <div class="col-sm-4 top-45"><h2>Mine sager</h2></div>
+            <div class="col-sm-4 top-45"><h2 class="marginBottom50">Mine sager</h2></div>
         </div>
     </div>
-
-    <div class="container">
+    <div class="container bg-white">
         <div class="row noPadding">
             <div class="col">
                 <table class="table table-bordered noMargin">
@@ -32,13 +30,10 @@
                     </tr>
                     </thead>
                     <tr th:each="Sag: ${Sager}">
-
                         <td class="td-center" th:text="${Sag.getSags_id()}"></td>
                         <td class="td-center" th:text="${Sag.getArbejdssted()}"></td>
                         <td class="td-center" th:text="${Sag.getArbejdsbeskrivelse()}"></td>
                         <td class="width-250">
-
-
                             <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
                             <a th:href="@{'/afslut_sag/'+ ${Sag.getSags_id()}}">
                                 <button type="button" name="aktuel_sagBtn" class="btn defaultBtn blackColour">
@@ -46,16 +41,13 @@
                                 </button>
                             </a>
                         </td>
-
                     </tr>
-
-
                 </table>
             </div>
         </div>
     </div>
-
 </div>
 
+<div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør'}" th:insert="fragments/ingen_adgang :: noAccess"></div>
 </body>
 </html>

@@ -8,262 +8,279 @@
     <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
 <body>
-<!--<nav th:if="${session.Stilling == 'Leder' or 'Konduktør'}" th:replace="fragments/navbar :: navbar"></nav>-->
-<nav th:replace="${session.Stilling == 'Svend'} ? ~{fragments/navbar :: navbarSvend} : ~{fragments/navbar :: navbar}"></nav>
-<div class="container-fluid">
+<div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør' || session.Stilling == 'Svend'}">
+    <nav th:replace="${session.Stilling == 'Svend'} ? ~{fragments/navbar :: navbarSvend} : ~{fragments/navbar :: navbar}"></nav>
+    <div class="container-fluid">
 
-    <form method="post" th:action="@{/afslut_sag}">
+        <form method="post" th:action="@{/afslut_sag}">
 
 
-        <div class="container logo">
-            <div class="row noBorder">
-                <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${sags_id}"></h3></div>
-            </div>
-        </div>
-
-        <div class="container">
-
-            <div class="row logoColour">
-                <div class="col-sm-1 width-9">
-                    <label>Arbejdssted:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.arbejdssted}"></label>
+            <div class="container logo">
+                <div class="row noBorder">
+                    <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${sags_id}"></h3></div>
                 </div>
             </div>
 
+            <div class="container bg-white">
 
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Adresse:</label>
+                <div class="row logoColour">
+                    <div class="col-sm-1 width-9">
+                        <label>Arbejdssted:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.arbejdssted}"></label>
+                    </div>
                 </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.vejnavn}"></label>
+
+
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Adresse:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.vejnavn}"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Vejnummer:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.vejnummer}"></label>
+                    </div>
+                </div>
+
+
+                <div class="row ">
+                    <div class="col-sm-1 width-9">
+                        <label>By:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.by}"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Postnr:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.postnummer}"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Kunde:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.kontaktperson_navn}"></label>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-sm-1 width-9">
+                        <label>Email:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.email}"></label>
+                    </div>
+                </div>
+
+                <div class="row logoColour">
+                    <div class="col-sm-1 width-9">
+                        <label>Telefon:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <label class="fontNormal" th:text="${Sag.telefonnummer}"></label>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Vejnummer:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.vejnummer}"></label>
+
+            <div class="container">
+                <div class="row logoColour">
+                    <div class="col-sm-1 width-9">
+                        <label>Opstartsdato:</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="fontNormal" th:text="${Sag.start_dato}"></label>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
+
+                    <div class="col-sm-1 width-6">
+                        <label>Slutdato:</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="fontNormal" th:text="${Sag.slut_dato}"></label>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
                 </div>
             </div>
 
-
-            <div class="row ">
-                <div class="col-sm-1 width-9">
-                    <label>By:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.by}"></label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Postnr:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.postnummer}"></label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Kunde:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.kontaktperson_navn}"></label>
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="col-sm-1 width-9">
-                    <label>Email:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.email}"></label>
-                </div>
-            </div>
-
-            <div class="row logoColour">
-                <div class="col-sm-1 width-9">
-                    <label>Telefon:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <label class="fontNormal" th:text="${Sag.telefonnummer}"></label>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-1 width-9">
-                    <label>Opstartsdato:</label>
-                </div>
-                <div class="col-sm-2">
-                    <label class="fontNormal" th:text="${Sag.start_dato}"></label>
-                </div>
-                <div class="col-sm-2">
+            <div class="container bg-white">
+                <div class="row logoColour">
+                    <div class="col-sm-3 width-251">
+                        <label>Ekstraarbejde er udført. Aftalt med</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input readonly class="fontNormal" id="aftaltmed" name="aftalt_med"th:text="${Sag.aftalt_med}"/>
+                    </div>
                 </div>
 
-                <div class="col-sm-1 width-6">
-                    <label>Slutdato:</label>
-                </div>
-                <div class="col-sm-2">
-                    <label class="fontNormal" th:text="${Sag.slut_dato}"></label>
-                </div>
-                <div class="col-sm-2">
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-3 width-251">
-                    <label>Ekstraarbejde er udført. Aftalt med</label>
-                </div>
-                <div class="col-sm-4">
-                    <input class="fontNormal" id="aftaltmed" th:field="${Sag.aftalt_med}"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" id="ekstraarbejde" rows="1"
+                <div class="row">
+                    <div class="col-sm-12">
+                    <textarea readonly wrap="hard" class="form-control textarea" name="ekstra_arbejde" th:text="${Sag.ekstra_arbejde}" id="ekstraarbejde" rows="1"
                               placeholder="Ekstraarbejde"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-4 width-17">
-                    <label>Der er aftalt fast mødetid kl.</label>
-                </div>
-                <div class="col-sm-1">
-                    <label class="fontNormal" th:text="${Sag.fast_moedetid}"></label>
-                </div>
+            <div class="container">
+                <div class="row logoColour">
+                    <div class="col-sm-4 width-17">
+                        <label>Der er aftalt fast mødetid kl.</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <label class="fontNormal" th:text="${Sag.fast_moedetid}"></label>
+                    </div>
 
-                <div class="col-sm-2">
-                </div>
+                    <div class="col-sm-2">
+                    </div>
 
-                <div class="col-sm-4 width-23">
-                    <label>Arbejdet skal udføres på overtid fra kl.</label>
-                </div>
-                <div class="col-sm-1">
-                    <label class="fontNormal" th:text="${Sag.udfoeres_overtid}"></label>
+                    <div class="col-sm-4 width-23">
+                        <label>Arbejdet skal udføres på overtid fra kl.</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <label class="fontNormal" th:text="${Sag.udfoeres_overtid}"></label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-2">
-                    <label>Arbejdsbeskrivelse:</label>
+            <div class="container bg-white">
+                <div class="row logoColour">
+                    <div class="col-sm-2">
+                        <label>Arbejdsbeskrivelse:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" rows="7" placeholder="Arbejdsbeskrivelse" readonly
                               th:field="${Sag.arbejdsbeskrivelse}"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-2">
-                    <label>Særlige aftaler:</label>
+            <div class="container bg-white">
+                <div class="row logoColour">
+                    <div class="col-sm-2">
+                        <label>Særlige aftaler:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" rows="2" placeholder="Særlige aftaler" readonly
                               th:field="${Sag.saerlige_aftaler}"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- MATERIALE LISTE -->
-        <!--<div class="container noPadding" th:include="fragments/materialeliste :: materialeliste"/>-->
-
-        <div class="container noBorder">
+            <!-- MATERIALE LISTE -->
+            <div class="container noPadding bg-white" th:include="fragments/materialeliste :: materialeliste"/>
 
 
-            <div class="row noBorder">
-                <div class="col-sm-12">
-                    <strong>Det er håndværk - det ligger fast!</strong>
-
-                </div>
-            </div>
-            <div class="row noBorder">
-                <div class="col-sm-12">
-                    <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
-                </div>
-            </div>
             <div th:switch="${session.Stilling}">
-                <button th:case="'Leder'" type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Afslut sag</button>
-                <button th:case="'Konduktør'" type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Leder">Afslut sag</button>
+                <div th:case="'Leder'">
+                    <button type="submit" class="btn defaultBtn marginRight-10" name="afslut_Sag_Leder">Afslut sag</button>
+                    <a th:href="@{'/sager_til_afslutning'}">
+                        <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+                            Tilbage
+                        </button>
+                    </a>
+                </div>
+                <div th:case="'Konduktør'">
+                    <button type="submit" class="btn defaultBtn marginRight-10" name="afslut_Sag_Leder">Afslut sag</button>
+                    <a th:href="@{'/sager_til_afslutning'}">
+                        <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+                            Tilbage
+                        </button>
+                    </a>
+                </div>
                 <div th:case="'Svend'">
-                    <button type="submit" class="btn defaultBtn pull-right" name="afslut_Sag_Svend">Afslut sag</button>
-                    <button type="button" class="btn defaultBtn pull-right marginRight-10" data-toggle="modal" data-target="#registrerTimerModal"
+                    <button type="button" class="btn defaultBtn marginRight-10" data-toggle="modal" data-target="#registrerTimerModal"
                             th:data-sagid="${Sag.getSags_id()}" th:data-medarbejderid="${session.BrugerID}" th:data-registreredetimer="${registreredeTimer}">Registrer timer
                     </button>
+                    <button type="submit" class="btn defaultBtn marginRight-10" name="afslut_Sag_Svend">Afslut sag</button>
+                    <a th:href="@{'/igangvaerende_sager'}">
+                        <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+                            Tilbage
+                        </button>
+                    </a>
                 </div>
             </div>
-            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
-
-
-        </div>
-
-    </form>
-    <br/>
-
-    <div id="registrerTimerModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <form method="post" th:action="@{/afslut_sag}">
-                <!-- Modal content-->
-                <div class="modal-content modal-sm modal-centered">
-                    <div class="modal-header logoColour">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title logoColour">Modal Header</h4>
-                    </div>
-                    <div class="modal-body">
-                        <label>Registrede timer på nuværrende tidspunkt</label>
-                        <div>
-                            <input readonly="readonly" class="REGISTREREDETIMER">
-                        </div>
-                        <div>
-                            <input type="hidden" class="MEDARBEJDERID" name="medarbejder_id"/>
-                            <input type="hidden" class="EKSTRAARBEJDE" name="ekstra_arbejde"/>
-                            <input type="hidden" class="AFTALTMED" name="aftalt_med"/>
-                        </div>
-                        <div>
-                            <input type="hidden" class="SAGID" name="sags_id"/>
-                        </div>
-                        <label>Indtast timer</label>
-                        <div>
-                            <input type="text" name="timer"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="button" class="btn defaultBtn blackColour" data-dismiss="modal">Annuller</button>
-                        <button type="submit" class="btn defaultBtn blackColour" name="registrer_timer_Btn">Registrer timer</button>
+            <div class="container noBorder">
+                <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
+                <div class="row noBorder">
+                    <div class="col-sm-12">
+                        <strong>Det er håndværk - det ligger fast!</strong>
 
                     </div>
                 </div>
-            </form>
+                <div class="row noBorder">
+                    <div class="col-sm-12">
+                        <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <br/>
+
+        <div id="registrerTimerModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <form method="post" th:action="@{/afslut_sag}">
+                    <!-- Modal content-->
+                    <div class="modal-content modal-sm modal-centered">
+                        <div class="modal-header logoColour">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title logoColour">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label>Registrede timer på nuværrende tidspunkt</label>
+                            <div>
+                                <input readonly="readonly" class="REGISTREREDETIMER">
+                            </div>
+                            <div>
+                                <input type="hidden" class="MEDARBEJDERID" name="medarbejder_id"/>
+                                <input type="hidden" class="EKSTRAARBEJDE" name="ekstra_arbejde"/>
+                                <input type="hidden" class="AFTALTMED" name="aftalt_med"/>
+                            </div>
+                            <div>
+                                <input type="hidden" class="SAGID" name="sags_id"/>
+                            </div>
+                            <label>Indtast timer</label>
+                            <div>
+                                <input type="text" name="timer"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="submit" class="btn defaultBtn blackColour" name="registrer_timer_Btn">Registrer timer</button>
+                            <button type="button" class="btn defaultBtn blackColour" data-dismiss="modal">Annuller</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 </body>
 <script>
     $('#registrerTimerModal').on('show.bs.modal', function (event) {

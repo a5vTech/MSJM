@@ -18,7 +18,7 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-default" id="navbar" th:fragment="navbar">
+    <nav class="navbar navbar-default bg-white" id="navbar" th:fragment="navbar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/menu">Evigglade Gulve</a>
@@ -58,10 +58,15 @@
                     <a href="/kalender">Kalender</a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav" style="float:right">
+                <li>
+                    <a href="/log_ind">Log ud</a>
+                </li>
+            </ul>
         </div>
     </nav>
 
-    <nav class="navbar navbar-default" id="navbarvend" th:fragment="navbarSvend">
+    <nav class="navbar navbar-default bg-white" id="navbarvend" th:fragment="navbarSvend">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="">Evigglade Gulve</a>
@@ -69,6 +74,11 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a href="/igangvaerende_sager">Mine sager</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav" style="float:right">
+                <li>
+                    <a href="/log_ind">Log ud</a>
                 </li>
             </ul>
         </div>

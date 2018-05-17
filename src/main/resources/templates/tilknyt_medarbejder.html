@@ -15,10 +15,9 @@
         <div class="row noBorder">
             <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
             <div class="col-sm-1"></div>
-            <div class="col-sm-4 top-45"><h2>Tilknyt medarbejder(e)</h2></div>
+            <div class="col-sm-4 top-45"><h2 class="marginBottom50">Tilknyt medarbejder(e)</h2></div>
         </div>
     </div>
-
     <div class="container">
         <div class="row logoColour">
             <div class="col">
@@ -26,17 +25,14 @@
                 <h4>Vælg medarbejdere der skal tilknyttes sagen.<br>Marker
                     flere med ctrl+venstreklik
                 </h4>
-
             </div>
         </div>
-
         <div class="row">
             <div class="col">
                 <table>
                     <tr>
-                        <div class="form-group marginbottom-1 ">
-
-                                <select multiple class="form-control selectInherit" name="medarbejder_id" size="10">
+                        <div class="form-group marginbottom-1">
+                                <select multiple class="form-control" name="medarbejder_id">
                                     <option th:if="${Medarbejder.getStilling() == 'Svend'}"
                                             th:each="Medarbejder : ${medarbejderListe}"
                                             th:value="${Medarbejder.getMedarbejder_id()}"
@@ -48,8 +44,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="container noBorder">
         <div class="row">
             <div class="col">

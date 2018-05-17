@@ -3,26 +3,29 @@ package dk.eviggladegulve.sagsstyring;
 import java.util.ArrayList;
 
 public class Sag {
+    // Fields
     private int sags_id;
     private int adresse_id;
     private String arbejdssted;
-    private int telefonnummer;
+    private String telefonnummer;
     private String vejnavn;
-    private int vejnummer;
+    private String vejnummer;
     private String start_dato;
     private String slut_dato;
-    private int postnummer;
+    private String postnummer;
     private String by;
     private String email;
     private String saerlige_aftaler;
     private String kontaktperson_navn;
-    private int kontaktperson_telefonnummer;
+    private String kontaktperson_telefonnummer;
     private String kontaktperson_email;
     private String arbejdsbeskrivelse;
     private String ekstra_arbejde;
     private String fast_moedetid;
     private String udfoeres_overtid;
     private String aftalt_med;
+    private int by_id;
+    private int status;
 
 //Constructors
 
@@ -30,7 +33,7 @@ public class Sag {
     public Sag() {
     }
 
-    public Sag(int sags_id, String arbejdssted, int telefonnummer, int adresse_id, String vejnavn, int vejnummer, String start_dato, String slut_dato, int postnummer, String by, String email, String saerlige_aftaler, String kontaktperson_navn, int kontaktperson_telefonnummer, String kontaktperson_email, String arbejdsbeskrivelse, String ekstra_arbejde, String aftalt_med, String fast_moedetid, String udfoeres_overtid) {
+    public Sag(int sags_id, String arbejdssted, String telefonnummer, int adresse_id, String vejnavn, String vejnummer, String start_dato, String slut_dato, String postnummer, String by, String email, String saerlige_aftaler, String kontaktperson_navn, String arbejdsbeskrivelse, String ekstra_arbejde, String aftalt_med, String fast_moedetid, String udfoeres_overtid, int by_id) {
         this.sags_id = sags_id;
         this.arbejdssted = arbejdssted;
         this.telefonnummer = telefonnummer;
@@ -43,14 +46,13 @@ public class Sag {
         this.email = email;
         this.saerlige_aftaler = saerlige_aftaler;
         this.kontaktperson_navn = kontaktperson_navn;
-        this.kontaktperson_telefonnummer = kontaktperson_telefonnummer;
-        this.kontaktperson_email = kontaktperson_email;
         this.arbejdsbeskrivelse = arbejdsbeskrivelse;
         this.ekstra_arbejde = ekstra_arbejde;
         this.adresse_id = adresse_id;
         this.aftalt_med = aftalt_med;
         this.fast_moedetid = fast_moedetid;
         this.udfoeres_overtid = udfoeres_overtid;
+        this.by_id = by_id;
     }
 
     public Sag(int sags_id, String arbejdssted, String start_dato, String slut_dato) {
@@ -61,6 +63,7 @@ public class Sag {
     }
 
     //Getters and setters
+
     public int getSags_id() {
         return sags_id;
     }
@@ -77,11 +80,11 @@ public class Sag {
         this.arbejdssted = arbejdssted;
     }
 
-    public int getTelefonnummer() {
+    public String getTelefonnummer() {
         return telefonnummer;
     }
 
-    public void setTelefonnummer(int telefonnummer) {
+    public void setTelefonnummer(String telefonnummer) {
         this.telefonnummer = telefonnummer;
     }
 
@@ -93,11 +96,11 @@ public class Sag {
         this.vejnavn = vejnavn;
     }
 
-    public int getVejnummer() {
+    public String getVejnummer() {
         return vejnummer;
     }
 
-    public void setVejnummer(int vejnummer) {
+    public void setVejnummer(String vejnummer) {
         this.vejnummer = vejnummer;
     }
 
@@ -117,11 +120,11 @@ public class Sag {
         this.slut_dato = slut_dato;
     }
 
-    public int getPostnummer() {
+    public String getPostnummer() {
         return postnummer;
     }
 
-    public void setPostnummer(int postnummer) {
+    public void setPostnummer(String postnummer) {
         this.postnummer = postnummer;
     }
 
@@ -157,11 +160,11 @@ public class Sag {
         this.kontaktperson_navn = kontaktperson_navn;
     }
 
-    public int getKontaktperson_telefonnummer() {
+    public String getKontaktperson_telefonnummer() {
         return kontaktperson_telefonnummer;
     }
 
-    public void setKontaktperson_telefonnummer(int kontaktperson_telefonnummer) {
+    public void setKontaktperson_telefonnummer(String kontaktperson_telefonnummer) {
         this.kontaktperson_telefonnummer = kontaktperson_telefonnummer;
     }
 
@@ -221,24 +224,20 @@ public class Sag {
         this.aftalt_med = aftalt_med;
     }
 
-
-
-    public static Sag findCaseById(int id, int active){
-        AccessDB access = AccessDB.getInstance();
-        ArrayList<Sag> sager = null;
-        if(active == 1){
-           sager = access.getAllActiveCases();
-        } else if(active == 0){
-             sager = access.getAllEndedCases();
-        }
-
-        for(Sag c: sager){
-            if(c.getSags_id() == id){
-                return c;
-            }
-        }
-        return new Sag();
+    public int getBy_id() {
+        return by_id;
     }
 
+    public void setBy_id(int by_id) {
+        this.by_id = by_id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }
 

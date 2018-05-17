@@ -8,12 +8,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
 <body>
+<div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør'}">
 <nav th:replace="fragments/navbar :: navbar"></nav>
 <div class="container-fluid">
-
     <form method="post" th:action="@{/rediger_sag}">
-
-
         <div class="container logo">
             <div class="row noBorder">
                 <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
@@ -21,9 +19,7 @@
                 <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${Sag.getSags_id()}"></h3></div>
             </div>
         </div>
-
-        <div class="container">
-
+        <div class="container bg-white">
             <div class="row logoColour">
                 <div class="col-sm-1 width-9">
                     <label>Arbejdssted:</label>
@@ -34,7 +30,6 @@
                     <input type="text" class="border-bottom-color" th:field="${Sag.arbejdssted}"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-1 width-9">
                     <label>Adresse:</label>
@@ -43,7 +38,6 @@
                     <input class="border-bottom-color" th:field="${Sag.vejnavn}"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-1 width-9">
                     <label>Vejnummer:</label>
@@ -52,7 +46,6 @@
                     <input class="border-bottom-color" th:field="${Sag.vejnummer}"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-1 width-9">
                     <label>By:</label>
@@ -61,7 +54,6 @@
                     <input class="border-bottom-color" th:field="${Sag.by}"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-1 width-9">
                     <label>Postnr:</label>
@@ -70,7 +62,6 @@
                     <input class="border-bottom-color" th:field="${Sag.postnummer}"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-1 width-9">
                     <label>Kunde:</label>
@@ -79,7 +70,6 @@
                     <input class="border-bottom-color" th:field="${Sag.kontaktperson_navn}"/>
                 </div>
             </div>
-
             <div class="row ">
                 <div class="col-sm-1 width-9">
                     <label>Email:</label>
@@ -88,7 +78,6 @@
                     <input class="border-bottom-color" th:field="${Sag.email}"/>
                 </div>
             </div>
-
             <div class="row logoColour">
                 <div class="col-sm-1 width-9">
                     <label>Telefon:</label>
@@ -98,8 +87,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="container">
             <div class="row logoColour">
                 <div class="col-sm-1 width-9">
@@ -110,7 +97,6 @@
                 </div>
                 <div class="col-sm-2">
                 </div>
-
                 <div class="col-sm-1 width-6">
                     <label>Slutdato:</label>
                 </div>
@@ -121,8 +107,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="container">
+        <div class="container bg-white">
             <div class="row logoColour">
                 <div class="col-sm-3 width-251">
                     <label>Ekstraarbejde er udført. Aftalt med</label>
@@ -131,15 +116,13 @@
                     <input type="text" th:field="${Sag.aftalt_med}"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-12">
                     <textarea wrap="hard" th:field="${Sag.ekstra_arbejde}" class="form-control textarea"
-                              rows="5"></textarea>
+                              rows="1"></textarea>
                 </div>
             </div>
         </div>
-
         <div class="container">
             <div class="row logoColour">
                 <div class="col-sm-3 width-17">
@@ -160,8 +143,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="container">
+        <div class="container bg-white">
             <div class="row logoColour">
                 <div class="col-sm-2 ">
                     <label>Arbejdsbeskrivelse:</label>
@@ -169,13 +151,12 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                      <textarea wrap="hard" class="form-control textarea" rows="5"
+                      <textarea wrap="hard" class="form-control textarea" rows="7"
                                 th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
         </div>
-
-        <div class="container">
+        <div class="container bg-white">
             <div class="row logoColour">
                 <div class="col-sm-2">
                     <label>Særlige aftaler:</label>
@@ -183,24 +164,26 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="5"
+                    <textarea wrap="hard" class="form-control textarea" rows="2"
                               th:field="${Sag.saerlige_aftaler}"></textarea>
                 </div>
             </div>
         </div>
-
         <!-- MATERIALE LISTE -->
-        <div class="container noPadding" th:include="fragments/materialeliste :: materialeliste"/>
-
-        <button type="submit" class="btn defaultBtn" name="save">Rediger
-        </button>
+        <div class="container noPadding bg-white" th:include="fragments/materialeliste :: materialeliste"/>
         <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
+        <button type="submit" class="btn defaultBtn marginRight-10" name="save">Rediger
+        </button>
         <a th:href="@{'/tilknyt_medarbejder_rediger_sag/'+ ${Sag.getSags_id()}}">
-            <button type="button" name="tilknyt_medarbejderBtn" class="btn defaultBtn blackColour">
+            <button type="button" name="tilknyt_medarbejderBtn" class="btn defaultBtn blackColour marginRight-10">
                 Tilknyt eller fjern medarbejder
             </button>
         </a>
-
+        <a th:href="@{'/sager_til_redigering'}">
+            <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+                Tilbage
+            </button>
+        </a>
         <div class="container noBorder">
             <div class="row noBorder">
                 <div class="col-sm-12">
@@ -213,10 +196,9 @@
                 </div>
             </div>
         </div>
-        <!-- <input type="hidden" th:field="${Sag.getSags_id()}"/> -->
     </form>
 </div>
-
+</div>
+<div th:if="${session.Stilling != 'Leder' && session.Stilling != 'Konduktør'}" th:insert="fragments/ingen_adgang :: noAccess"></div>
 </body>
-
 </html>

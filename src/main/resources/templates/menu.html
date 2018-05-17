@@ -7,30 +7,46 @@
     <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
     <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
-
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="container-fluid" id="outerContainer">
-    <div class="container logo">
-        <div class="row noBorder">
-            <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4"><h1>Menu</h1></div>
+
+<div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør'}">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container-fluid" id="outerContainer">
+        <div class="container logo">
+            <div class="row noBorder">
+                <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4"><h1 class="marginBottom50">Menu</h1></div>
+            </div>
+        </div>
+        <div class="container noBorder" id="menuContainer">
+            <form method="post" th:action="@{/menu}">
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/opret_sag" role="button">Opret
+                    sag</a><br><br>
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/sager_til_redigering" role="button">Rediger
+                    sag</a><br><br>
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/sager_til_afslutning" role="button">Afslut
+                    sag</a><br><br>
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/opret_medarbejder" role="button">Opret
+                    medarbejder</a><br><br>
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/medarbejdere_til_redigering"
+                   role="button">Rediger
+                    medarbejder</a><br><br>
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/aktive_sager"
+                   role="button">Aktive sager</a><br><br>
+
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/afsluttede_sager" role="button">Afsluttede
+                    sager</a><br><br>
+                <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/kalender" role="button">
+                    Kalender
+                </a>
+
+
+            </form>
         </div>
     </div>
-    <div class="container noBorder" id="menuContainer">
-        <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/opret_sag" role="button">Opret sag</a><br><br>
-        <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/sager_til_redigering" role="button">Rediger
-            sag</a><br><br>
-        <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/sager_til_afslutning" role="button">Afslut sag</a><br><br>
-        <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/opret_medarbejder" role="button">Opret medarbejder</a><br><br>
-        <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/medarbejdere_til_redigering" role="button">Rediger
-            medarbejder</a><br><br>
-        <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/afsluttede_sager" role="button">Afsluttede
-            sager</a><br><br>
-        <a class="btn defaultBtn blackColour aHover btn-lg center-block" href="/kalender" role="button">Kalender</a>
-    </div>
 </div>
+<div th:if="${session.Stilling != 'Leder' && session.Stilling != 'Konduktør'}" th:insert="fragments/ingen_adgang :: noAccess"></div>
 </body>
 
 </html>

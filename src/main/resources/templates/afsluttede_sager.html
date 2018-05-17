@@ -8,60 +8,58 @@
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="container-fluid">
-
-    <div class="container logo">
-        <div class="row noBorder">
-            <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
-            <div class="col-sm-1"></div>
-            <div class="col-sm-4 top-45"><h2>Afsluttede sager</h2></div>
+<div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør'}">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container-fluid">
+        <div class="container logo">
+            <div class="row noBorder">
+                <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4 top-45"><h2 class="marginBottom50">Afsluttede sager</h2></div>
+            </div>
         </div>
-    </div>
-
-    <div class="container">
-        <div class="row noPadding">
-            <div class="col">
-                <table class="table table-bordered noMargin">
-                    <thead class="logoColour">
-                    <tr>
-                        <th class="text-center" id="th-id">Sag nr</th>
-                        <th class="text-center">Arbejdssted</th>
-                        <th class="text-center">Beskrivelse</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tr th:each="Sag: ${sagerListe}">
-
-                        <td class="td-center" th:text="${Sag.getSags_id()}"></td>
-                        <td class="td-center" th:text="${Sag.getArbejdssted()}"></td>
-                        <td class="td-center" th:text="${Sag.getArbejdsbeskrivelse()}"></td>
-                        <td class="width-250">
-
-
-                            <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
-                            <a th:href="@{'/aktuel_sag/'+ ${Sag.getSags_id()}}">
-                                <button type="button" name="vis_sagBtn" class="btn defaultBtn blackColour">
-                                    Vis sag
-                                </button>
-                            </a>
-
-
-                            <!--<form method="post" th:action="@{/afsluttede_sager}">-->
-                            <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
-
-                            <!--</form>-->
-                        </td>
-
-                    </tr>
-
-
-                </table>
+        <div class="container bg-white">
+            <div class="row noPadding">
+                <div class="col">
+                    <table class="table table-bordered noMargin">
+                        <thead class="logoColour">
+                        <tr>
+                            <th class="text-center" id="th-id">Sag nr</th>
+                            <th class="text-center">Arbejdssted</th>
+                            <th class="text-center">Beskrivelse</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tr th:each="Sag: ${sagerListe}">
+                            <td class="td-center" th:text="${Sag.getSags_id()}"></td>
+                            <td class="td-center" th:text="${Sag.getArbejdssted()}"></td>
+                            <td class="td-center" th:text="${Sag.getArbejdsbeskrivelse()}"></td>
+                            <td class="width-250">
+                                <input type="hidden" th:value="${Sag.getSags_id()}" th:name="id">
+                                <a th:href="@{'/aktuel_sag/'+ ${Sag.getSags_id()}}">
+                                    <button type="button" name="vis_sagBtn" class="btn defaultBtn blackColour">
+                                        Vis sag
+                                    </button>
+                                </a>
+                                <input type="hidden" th:value="${Sag.getSags_id()}" name="sags_id">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container noBorder">
+            <div class="row">
+                <a th:href="@{'/menu'}">
+                    <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+                        Tilbage
+                    </button>
+                </a>
             </div>
         </div>
     </div>
-
-
 </div>
+<div th:if="${session.Stilling != 'Leder' && session.Stilling != 'Konduktør'}" th:insert="fragments/ingen_adgang :: noAccess"></div>
+
 </body>
 </html>

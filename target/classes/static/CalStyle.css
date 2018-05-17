@@ -11,6 +11,19 @@ div {
     display: none;
 }
 
+.fontSize15 {
+    font-size: 15pt;
+}
+
+.fontSize13 {
+    font-size: 13pt;
+    font-weight: bold;
+}
+
+.row {
+    padding: 0;
+}
+
 .noMargin {
     margin: 0;
 }
@@ -40,3 +53,67 @@ div {
 button {
     bottom: 9px;
 }
+
+.onGoing {
+    background-color: #ff00004d;
+
+}
+
+.ended {
+    background-color: #0080006b;
+
+}
+
+#calendarList td {
+    padding: 0;
+}
+
+#calendarList td p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+a:active {
+    text-decoration: none;
+    color: black;
+}
+
+#outerContainer div table {
+    border-color: black;
+}
+
+#headerContainer table {
+    border-bottom: none;
+}
+
+#outerContainer div table td {
+    border-color: black;
+}
+
+.navbar-expand-lg .navbar-nav>li>a {
+    color: #777;
+}
+
+.navbar-expand-lg >a {
+    color: #777;
+}
+
+.dropdown-toggle::after {
+    vertical-align: 5%;
+}
+

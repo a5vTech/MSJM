@@ -6,13 +6,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import dk.eviggladegulve.sagsstyring.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import sun.util.resources.LocaleData;
+
+import java.time.LocalDate;
 
 @Controller
-@SessionAttributes({"BrugerID","Stilling"})
+@SessionAttributes({"BrugerID","Stilling", "Date"})
 public class MenuController {
 
+    /**
+     * This method takes the current time and adds it to an attribute for the menu html
+     * @param model Model
+     * @return menu
+     */
     @GetMapping("/menu")
-    public String menu() {
+    public String menu(Model model) {
+        model.addAttribute("Date",LocalDate.now());
         return "menu";
     }
 
@@ -52,9 +61,16 @@ public class MenuController {
 
         return "redirect:/rediger_medarbejdere";
     }
-    @PostMapping(value = "/menu", params = "kalender")
-    public String menuKalenderPost() {
 
+
+    /**
+     * This method creates a Date attribute for the current time and sends it to the calendar html.
+     * @param model
+     * @return /kalender
+     */
+    @PostMapping(value = "/menu", params = "kalender")
+    public String menuKalenderPost(Model model) {
+        model.addAttribute("Date",LocalDate.now());
         return "redirect:/kalender";
     }
 

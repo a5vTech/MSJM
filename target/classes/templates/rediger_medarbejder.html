@@ -8,96 +8,96 @@
     <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
 </head>
 <body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="container-fluid">
-    <form method="post" th:action="@{/rediger_medarbejder}">
-        <div class="container logo">
-            <div class="row noBorder">
-                <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4 top-45"><h1>Rediger medarbejder</h1></div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-1">
-                    <label>ID:</label>
-                </div>
-                <div class="col-sm-3">
-                    <label th:text="${Medarbejder.medarbejder_id}"/>
-                    <input type="hidden" th:value="${Medarbejder.getMedarbejder_id()}" name="medarbejder_id"/>
+<div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør'}">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div class="container-fluid">
+        <form method="post" th:action="@{/rediger_medarbejder}">
+            <div class="container logo">
+                <div class="row noBorder">
+                    <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4 top-45"><h1 class="marginBottom50">Rediger medarbejder</h1></div>
                 </div>
             </div>
-            <div class="row ">
-                <div class="col-sm-1">
-                    <label>Fornavn:</label>
+            <div class="container bg-white" id="opretMedarbejder">
+                <div class="row logoColour">
+                    <div class="col-sm-2">
+                        <label>ID:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <label th:text="${Medarbejder.medarbejder_id}"/>
+                        <input type="hidden" th:value="${Medarbejder.getMedarbejder_id()}" name="medarbejder_id"/>
+                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <input type="text" th:field="${Medarbejder.fornavn}" placeholder="Fornavn"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1">
-                    <label>Efternavn:</label>
-                </div>
-                <div class="col-sm-3">
-                    <input type="text" th:field="${Medarbejder.efternavn}" placeholder="Efternavn"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1">
-                    <label>Stilling:</label>
+                <div class="row ">
+                    <div class="col-sm-2">
+                        <label>Fornavn:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="${Medarbejder.fornavn}" placeholder="Fornavn"/>
+                    </div>
                 </div>
 
-                <div class="col-sm-3">
-                    <select th:field="${Medarbejder.stilling}" class="marginRight165">
-                        <option value="Leder">Leder</option>
-                        <option value="Konduktør">Konduktør</option>
-                        <option value="Svend">Svend</option>
-                    </select>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Efternavn:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="${Medarbejder.efternavn}" placeholder="Efternavn"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>Stilling:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <select th:field="${Medarbejder.stilling}" class="width-385 verticalalign-25">
+                            <option value="Leder">Leder</option>
+                            <option value="Konduktør">Konduktør</option>
+                            <option value="Svend">Svend</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>E-mail:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="${Medarbejder.email}" placeholder="E-mail"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Telefon:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="${Medarbejder.telefonnummer}" placeholder="Telefon"/>
+                    </div>
+                </div>
+                <div class="row logoColour">
+                    <div class="col-md-2">
+                        <label>Kodeord:</label>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" required th:field="${Medarbejder.kodeord}" placeholder="Kodeord"/>
+                    </div>
                 </div>
             </div>
-
-
-            <div class="row">
-                <div class="col-md-1">
-                    <label>E-mail:</label>
-                </div>
-                <div class="col-sm-3">
-                    <input type="text" th:field="${Medarbejder.email}" placeholder="E-mail"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-1">
-                    <label>Telefon:</label>
-                </div>
-                <div class="col-sm-3">
-                    <input type="text" th:field="${Medarbejder.telefonnummer}" placeholder="Telefon"/>
+            <div class="container noBorder">
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn defaultBtn blackColour marginRight-10" name="save">Rediger</button>
+                        <a th:href="@{'/medarbejdere_til_redigering'}">
+                            <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+                                Tilbage
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
-
-            <div class="row logoColour">
-                <div class="col-md-1">
-                    <label>Kodeord:</label>
-                </div>
-                <div class="col-sm-3">
-                    <input type="text" th:field="${Medarbejder.kodeord}" placeholder="Kodeord"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="container noBorder">
-            <div class="row">
-                <div class="col">
-                    <button type="submit" class="btn defaultBtn" name="save">Rediger</button>
-                </div>
-            </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
-
+<div th:if="${session.Stilling != 'Leder' && session.Stilling != 'Konduktør'}" th:insert="fragments/ingen_adgang :: noAccess"></div>
 </body>
 </html>

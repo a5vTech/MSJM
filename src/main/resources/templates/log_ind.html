@@ -9,7 +9,6 @@
 </head>
 <body>
 <div class="container-fluid">
-
     <div class="container logo">
         <div class="row noBorder">
             <div class="col-sm-4"></div>
@@ -17,38 +16,28 @@
             <div class="col-sm-4"></div>
         </div>
     </div>
-
     <form method="post" th:action="@{/log_ind}">
         <div class="container noBorder logoColour" id="loginTitle">
-            <div class="row noPadding">
-                <div class="col">
-                    <h2>Login</h2>
-                </div>
-            </div>
-
             <div class="row marginTop20 noPadding">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
                     <label class="fontSize18 floatNone">Brugernavn:</label>
-                    <input type="number" class="fontSize18 border-bottom-color" th:name="username">
+                    <input type="number" required class="fontSize18 border-bottom-color" th:name="username">
                 </div>
             </div>
             <div class="col-sm-4"></div>
-
             <div class="row">
                 <div class="row marginTop20">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
                         <label class="fontSize18 floatNone">Kodeord:</label>
-                        <input type="password" class="fontSize18 border-bottom-color" th:name="password">
+                        <input type="password" required class="fontSize18 border-bottom-color" th:name="password">
                     </div>
                     <div class="col-sm-4"></div>
                 </div>
             </div>
         </div>
-
         <button type="submit" class="btn defaultBtn blackColour fontSize18">Log ind</button>
-
     </form>
 </div>
 </body>

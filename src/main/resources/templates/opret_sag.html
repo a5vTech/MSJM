@@ -7,215 +7,229 @@
     <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
     <link rel="stylesheet" type="text/css" th:href="@{style.css}">
 </head>
-<body>
-<nav th:replace="fragments/navbar :: navbar"></nav>
-<div class="container-fluid">
+<body >
 
-    <form method="post" th:action="@{/opret_sag}">
-
-
-        <div class="container logo">
-            <div class="row noBorder">
-                <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${sags_id}"></h3></div>
-            </div>
-        </div>
-
-        <div class="container">
-
-            <div class="row logoColour">
-                <div class="col-sm-1 width-9">
-                    <label >Arbejdssted:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <input type="text" th:field="${Sag.arbejdssted}" placeholder="Arbejdssted"/>
+<div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør'}">
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    <div  class="container-fluid">
+        <form method="post" th:action="@{/opret_sag}">
+            <div class="container logo">
+                <div class="row noBorder">
+                    <div class="col-sm-6"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${sags_id}"></h3></div>
                 </div>
             </div>
-
-
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Adresse:</label>
+            <div class="container bg-white">
+                <div class="row logoColour">
+                    <div class="col-sm-1 width-9">
+                        <label>Arbejdssted:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" required th:field="${Sag.arbejdssted}" placeholder="Arbejdssted"/>
+                    </div>
                 </div>
-                <div class="col-sm-11 width-90">
-                    <input type="text" th:field="${Sag.vejnavn}" placeholder="Vejnavn"/>
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Adresse:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" required th:field="${Sag.vejnavn}" placeholder="Vejnavn"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Vejnummer:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" class="paragraph" required th:field="${Sag.vejnummer}"
+                               placeholder="Vejnummer"/>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-1 width-9">
+                        <label>By:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" required th:field="${Sag.by}" placeholder="By"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Postnr:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" class="paragraph" required th:field="${Sag.postnummer}"
+                               placeholder="Postnummer"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Kunde:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" required th:field="${Sag.kontaktperson_navn}" placeholder="Kunde"/>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-sm-1 width-9">
+                        <label>Email:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" th:field="${Sag.email}" placeholder="E-mail"/>
+                    </div>
+                </div>
+                <div class="row logoColour">
+                    <div class="col-sm-1 width-9">
+                        <label>Telefon:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" required th:field="${Sag.telefonnummer}" placeholder="Telefon"/>
+                    </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="row logoColour">
+                    <div class="col-sm-1 width-9">
+                        <label>Opstartsdato:</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="date" required th:field="${Sag.start_dato}" placeholder="yyyy-mm-dd"/>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
 
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Vejnummer:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <input class="paragraph" th:field="${Sag.vejnummer}" placeholder="Vejnummer"/>
+                    <div class="col-sm-1 width-6">
+                        <label>Slutdato:</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="date" required th:field="${Sag.slut_dato}" placeholder="yyyy-mm-dd"/>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>
                 </div>
             </div>
-
-
-            <div class="row ">
-                <div class="col-sm-1 width-9">
-                    <label>By:</label>
+            <div class="container bg-white">
+                <div class="row logoColour">
+                    <div class="col-sm-3 width-251">
+                        <label>Ekstraarbejde er udført. Aftalt med</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" th:field="${Sag.aftalt_med}"/>
+                    </div>
                 </div>
-                <div class="col-sm-11 width-90">
-                    <input type="text" th:field="${Sag.by}" placeholder="By"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Postnr:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <input class="paragraph" th:field="${Sag.postnummer}" placeholder="Postnummer"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Kunde:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <input type="text" th:field="${Sag.kontaktperson_navn}" placeholder="Kunde"/>
-                </div>
-            </div>
-
-            <div class="row ">
-                <div class="col-sm-1 width-9">
-                    <label>Email:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <input type="text" th:field="${Sag.email}" placeholder="E-mail"/>
-                </div>
-            </div>
-
-            <div class="row logoColour">
-                <div class="col-sm-1 width-9">
-                    <label>Telefon:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <input type="text" th:field="${Sag.telefonnummer}" placeholder="Telefon"/>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-1 width-9">
-                    <label>Opstartsdato:</label>
-                </div>
-                <div class="col-sm-2">
-                    <input type="date" required th:field="${Sag.start_dato}" placeholder="yyyy-mm-dd"/>
-                </div>
-                <div class="col-sm-2">
-                </div>
-
-                <div class="col-sm-1 width-6">
-                    <label>Slutdato:</label>
-                </div>
-                <div class="col-sm-2">
-                    <input type="date"  required th:field="${Sag.slut_dato}" placeholder="yyyy-mm-dd"/>
-                </div>
-                <div class="col-sm-2">
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-3 width-251">
-                    <label>Ekstraarbejde er udført. Aftalt med</label>
-                </div>
-                <div class="col-sm-4">
-                    <input type="text" th:field="${Sag.aftalt_med}"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="1"
                               placeholder="Ekstraarbejde"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="container">
+                <div class="row logoColour">
+                    <div class="col-sm-4 width-17">
+                        <label>Der er aftalt fast mødetid kl.</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" placeholder="00.00" th:field="${Sag.fast_moedetid}"/>
+                    </div>
 
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-4 width-17">
-                    <label>Der er aftalt fast mødetid kl.</label>
-                </div>
-                <div class="col-sm-1">
-                    <input type="text" placeholder="8.00" th:field="${Sag.fast_moedetid}"/>
-                </div>
+                    <div class="col-sm-2">
+                    </div>
 
-                <div class="col-sm-2">
-                </div>
-
-                <div class="col-sm-4 width-23">
-                    <label>Arbejdet skal udføres på overtid fra kl.</label>
-                </div>
-                <div class="col-sm-1">
-                    <input type="text" placeholder="03.00" th:field="${Sag.udfoeres_overtid}"/>
+                    <div class="col-sm-4 width-23">
+                        <label>Arbejdet skal udføres på overtid fra kl.</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="text" placeholder="00.00" th:field="${Sag.udfoeres_overtid}"/>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-2">
-                    <label>Arbejdsbeskrivelse:</label>
+            <div class="container bg-white">
+                <div class="row logoColour">
+                    <div class="col-sm-2">
+                        <label>Arbejdsbeskrivelse:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" rows="7" placeholder="Arbejdsbeskrivelse"
                               th:field="${Sag.arbejdsbeskrivelse}"></textarea>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="row logoColour">
-                <div class="col-sm-2">
-                    <label>Særlige aftaler:</label>
+            <div class="container bg-white">
+                <div class="row logoColour">
+                    <div class="col-sm-2">
+                        <label>Særlige aftaler:</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
                     <textarea wrap="hard" class="form-control textarea" rows="2" placeholder="Særlige aftaler"
                               th:field="${Sag.saerlige_aftaler}"></textarea>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <!-- MATERIALE LISTE -->
+            <div class="container noPadding bg-white" th:include="fragments/materialeliste :: materialeliste"/>
+            <button type="submit" class="btn defaultBtn hideFromPrint marginRight-10" name="save"
+                    value="savebtn">Opret
+            </button>
+            <a th:href="@{'/menu'}">
+                <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+                    Tilbage
+                </button>
+            </a>
+            <div class="container noBorder">
+                <div class="row noBorder">
+                    <div class="col-sm-12">
+                        <strong>Det er håndværk - det ligger fast!</strong>
+                    </div>
+                </div>
+                <div class="row noBorder">
+                    <div class="col-sm-12">
+                        <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br/>
+        <div id="opretModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content modal-sm modal-centered">
+                    <div class="modal-header logoColour">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title logoColour">Modal Header</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <form method="post" th:action="@{/sager_til_redigering}">
+                            <input type="hidden" name="sags_id"/>
+                            <button type="button" class="btn defaultBtn blackColour" data-dismiss="modal">Ok</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-<br/>
-<br/>
-<br/>
-        <!-- MATERIALE LISTE -->
-        <div class="container noPadding" th:include="fragments/materialeliste :: materialeliste"/>
-
-        <button type="submit" class="btn defaultBtn hideFromPrint" name="save"
-                value="savebtn">Opret
-        </button>
-
-        <div class="container noBorder">
-            <div class="row noBorder">
-                <div class="col-sm-12">
-                    <strong>Det er håndværk - det ligger fast!</strong>
-
-                </div>
-            </div>
-            <div class="row noBorder">
-                <div class="col-sm-12">
-                    <p>Vær smilende og omhyggelig. Forkæl kunden - læg nogle Evigglade bolcher :-)</p>
-                </div>
-            </div>
-        </div>
-
-    </form>
-    <br/>
-
-
+    </div>
 </div>
-</body>
+<div th:if="${session.Stilling != 'Leder' && session.Stilling != 'Konduktør'}" th:insert="fragments/ingen_adgang :: noAccess"></div>
 
+</body>
+<script>
+    $('#opretModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var sagID = button.data('sagid') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Du har nu oprettet en sag for: ' + sagID)
+        modal.find('.modal-footer input').val(sagID)
+    })
+</script>
 </html>

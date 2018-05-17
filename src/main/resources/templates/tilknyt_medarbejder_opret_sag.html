@@ -11,7 +11,7 @@
 <div th:if="${session.Stilling == 'Leder' || session.Stilling == 'Konduktør'}">
     <nav th:replace="fragments/navbar :: navbar"></nav>
     <div class="container-fluid">
-        <form method="post" th:action="@{/tilknyt_medarbejder_rediger_sag}">
+        <form method="post" th:action="@{/tilknyt_medarbejder_opret_sag}">
             <div class="container logo">
                 <div class="row noBorder">
                     <div class="col-sm-3"><img class="pull-left" th:src="@{/billeder/Logo PNG.png}"/></div>
@@ -47,7 +47,7 @@
                         </table>
                     </div>
                     <div class="col-lg-6 center-block">
-                        <label class="marginLeft200">Tilknyttede medarbejdere</label>
+                        <label class="marginLeft200">Tilknyttede medarbejder</label>
                         <table>
                             <tr>
                                 <div class="form-group marginbottom-1">
@@ -65,7 +65,7 @@
             </div>
             <div class="container noBorder">
                 <div class="row">
-                    <button class="btn defaultBtn marginRight-10" type="submit" name="edit">Rediger</button>
+                    <button class="btn defaultBtn marginRight-10" type="submit" name="opret">Opret</button>
                     <button onclick="history.go(-1);" type="button" name="tilbage" class="btn defaultBtn blackColour">
                         Tilbage
                     </button>

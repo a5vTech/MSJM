@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Ingen adgang</title>
+    <th:block th:include="fragments/head :: headInclude"/>
+    <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
+    <link rel="stylesheet" type="text/css" th:href="@{style.css}">
+</head>
+<body>
+<div th:fragment="noAccess">
+    <h1>Ingen adgang</h1>
+    <h3>Du har ikke adgang til denne side, hvis du mener dette er en fejl,</h3>
+    <h3>så kontakt venligst systemadministratoren eller prøv at logge ind igen</h3>
+    <a href="/log_ind" class="btn defaultBtn blackColour">Log ind</a>
+</div>
+</body>
+</html>

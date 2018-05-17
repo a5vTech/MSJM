@@ -1,31 +1,22 @@
-@font-face {
-    font-family: "Myriad Pro Light";
-    font-weight: normal;
-    font-style: normal;
-    src: local("Myriad Pro Light"), url(../static/fonts/MyriadPro-Light.eot) format("eot");
-}
-
-@font-face {
-    font-family: "Myriad Pro Light";
-    font-weight: normal;
-    font-style: normal;
-    src: local("MyriadPro-Light"), url(../static/fonts/MyriadPro-Light.eot) format("eot");
-}
-
 #loginTitle {
     width: 510px;
     border-bottom-width: 51px;
     border-radius: 3%;
 }
 
+#opretMedarbejder {
+    width: 510px;
+}
+
 div {
-    /*border-style: solid;*/
     border-width: 0.02px;
     text-align: center;
     vertical-align: middle;
 }
 
-/*ABOVE IS FOR TESTING PURPOSES*/
+body {
+    background-color: whitesmoke;
+}
 
 .fontSize18 {
     font-size: 18px;
@@ -57,7 +48,7 @@ div {
 }
 
 .modal-header {
-    border-radius: 14px;
+    border-radius: 14px 14px 2px 2px;
 }
 
 .modal-footer {
@@ -97,6 +88,16 @@ div {
     background-color: #DDEBF6;
 }
 
+.blankBtn {
+    bottom: 0;
+    border-radius: 0;
+
+}
+
+.blankBtn:hover{
+    background-color: transparent;
+}
+
 button:hover {
     background-color: #CAD8E3;
 }
@@ -109,10 +110,12 @@ a.aHover:hover {
     background-color: #CAD8E3;
 }
 
-h1, h2, h3, h4, h5, h6, select, tr, th, td, button {
-    font-family: "MyriadPro-Light";
-    font-family: "Myriad Pro Light";
+.width-260 {
+    width: 260px;
+}
 
+.width-385 {
+    width: 385px;
 }
 
 label {
@@ -122,24 +125,32 @@ label {
     font-weight: 700;
     float: left;
 
-    font-family: "MyriadPro-Light";
-    font-family: "Myriad Pro Light";
+//
 }
 
 input {
     width: 100%;
-    font-family: "MyriadPro-Light";
-    font-family: "Myriad Pro Light";
+//
     border-left: 0;
     border-right: 0;
     border-top: 0;
     outline: none;
     background: transparent;
-    border-bottom-color: #b1b1b1;
+    border-bottom-color: #000000;
+    border-width: 0.8px;
+    border-left: none;
 }
 
 a:link {
     text-decoration: none;
+}
+
+.verticalalign-25 {
+    vertical-align: -25%;
+}
+
+.marginBottom50 {
+    margin-bottom: 50px;
 }
 
 .noBorder {
@@ -213,6 +224,10 @@ a:link {
     padding: 0 !important;
 }
 
+.paddingBottom10 {
+    padding-bottom: 10px;
+}
+
 .float-left {
     float: left;
 }
@@ -239,6 +254,14 @@ textarea {
     border: 1px solid rgba(0, 0, 0, 0.98);
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.noBorderRight {
+    border-right: 0; !important;
+}
+
+.noBorderLeft {
+    border-left: 0;
 }
 
 .logo {
@@ -271,6 +294,10 @@ textarea {
 }
 
 .marginTop20 {
+    margin-top: 20px;
+}
+
+.marginTop10 {
     margin-top: 20px;
 }
 
@@ -612,8 +639,16 @@ textarea {
         border: 1px solid black;
     }
 
+    .border-none {
+        border: none;
+    }
+
     .marginBottom0 {
         margin-bottom: 0;
+    }
+
+    .marginBottom15 {
+        margin-bottom: 15px !important;
     }
 
     .onlyBorderBottom {
@@ -622,4 +657,19 @@ textarea {
         border-top: 0;
         outline: none;
     }
+}
+
+#ugedage td{
+    border-bottom: 0;
+}
+
+/* Hide arrows on number type */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bg-white {
+    background: white;
 }
