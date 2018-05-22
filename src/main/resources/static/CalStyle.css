@@ -117,3 +117,27 @@ a:active {
     vertical-align: 5%;
 }
 
+.color-box-red {
+    width: 25px;
+    height: 22px;
+    display: inline-block;
+    background-color: #ff00004d;
+    vertical-align: -4px;
+}
+
+.color-box-green {
+    width: 25px;
+    height: 22px;
+    display: inline-block;
+    background-color: #0080006b;
+    vertical-align: -4px;
+}
+
+#colorExplain p {
+    padding-left: 35px;
+}
+
+#calNavbar {
+    border-width: 1px;
+    border-color: black
+}

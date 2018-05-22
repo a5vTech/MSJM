@@ -42,10 +42,20 @@
                         <label>Vejnummer:</label>
                     </div>
                     <div class="col-sm-11 width-90">
-                        <input type="text" class="paragraph" required th:field="${Sag.vejnummer}"
+                        <input type="text" required th:field="${Sag.vejnummer}"
                                placeholder="Vejnummer"/>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-1 width-9">
+                        <label>Postnr:</label>
+                    </div>
+                    <div class="col-sm-11 width-90">
+                        <input type="text" pattern="\d*" maxlength="10" required th:field="${Sag.postnummer}"
+                               placeholder="Postnummer"/>
+                    </div>
+                </div>
+
                 <div class="row ">
                     <div class="col-sm-1 width-9">
                         <label>By:</label>
@@ -54,15 +64,7 @@
                         <input type="text" required th:field="${Sag.by}" placeholder="By"/>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-1 width-9">
-                        <label>Postnr:</label>
-                    </div>
-                    <div class="col-sm-11 width-90">
-                        <input type="text" class="paragraph" required th:field="${Sag.postnummer}"
-                               placeholder="Postnummer"/>
-                    </div>
-                </div>
+
 
                 <div class="row">
                     <div class="col-sm-1 width-9">
@@ -85,7 +87,7 @@
                         <label>Telefon:</label>
                     </div>
                     <div class="col-sm-11 width-90">
-                        <input type="text" required th:field="${Sag.telefonnummer}" placeholder="Telefon"/>
+                        <input type="text" pattern="\d*" maxlength="20" th:field="${Sag.telefonnummer}" placeholder="Telefon"/>
                     </div>
                 </div>
             </div>
@@ -154,7 +156,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="7" placeholder="Arbejdsbeskrivelse"
+                    <textarea id="arbBeskrivelse" wrap="hard" class="form-control textarea" rows="8" placeholder="Arbejdsbeskrivelse" required
                               th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                     </div>
                 </div>

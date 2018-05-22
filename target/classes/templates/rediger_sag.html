@@ -48,20 +48,21 @@
             </div>
             <div class="row">
                 <div class="col-sm-1 width-9">
+                    <label>Postnr:</label>
+                </div>
+                <div class="col-sm-11 width-90">
+                    <input type="text" pattern="\d*" maxlength="10" class="border-bottom-color" th:field="${Sag.postnummer}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1 width-9">
                     <label>By:</label>
                 </div>
                 <div class="col-sm-11 width-90">
                     <input class="border-bottom-color" th:field="${Sag.by}"/>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-1 width-9">
-                    <label>Postnr:</label>
-                </div>
-                <div class="col-sm-11 width-90">
-                    <input class="border-bottom-color" th:field="${Sag.postnummer}"/>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-sm-1 width-9">
                     <label>Kunde:</label>
@@ -83,7 +84,7 @@
                     <label>Telefon:</label>
                 </div>
                 <div class="col-sm-11 width-90">
-                    <input class="border-bottom-color" th:field="${Sag.telefonnummer}"/>
+                    <input type="text" pattern="\d*" maxlength="20" class="border-bottom-color" th:field="${Sag.telefonnummer}"/>
                 </div>
             </div>
         </div>
@@ -151,7 +152,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                      <textarea wrap="hard" class="form-control textarea" rows="7"
+                      <textarea id="arbBeskrivelse" wrap="hard" class="form-control textarea" rows="8"
                                 th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                 </div>
             </div>
@@ -179,11 +180,9 @@
                 Tilknyt eller fjern medarbejder
             </button>
         </a>
-        <a th:href="@{'/sager_til_redigering'}">
-            <button type="button" name="tilbage" class="btn defaultBtn blackColour">
+            <button onclick="history.go(-1);" type="button" name="tilbage" class="btn defaultBtn blackColour">
                 Tilbage
             </button>
-        </a>
         <div class="container noBorder">
             <div class="row noBorder">
                 <div class="col-sm-12">

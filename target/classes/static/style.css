@@ -8,6 +8,9 @@
     width: 510px;
 }
 
+#arbBeskrivelse{
+    font-size: 9pt;
+}
 div {
     border-width: 0.02px;
     text-align: center;
@@ -329,6 +332,10 @@ textarea {
     /*max-height: 70px;*/
     border-radius: 0%;
 
+}
+
+.textarea_readonlyColor {
+    background-color: #f9f9f9 !important;
 }
 
 .modal-centered {

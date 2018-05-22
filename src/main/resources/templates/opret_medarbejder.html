@@ -70,7 +70,7 @@
                         <label>Telefon:</label>
                     </div>
                     <div class="col-sm-10">
-                        <input type="text" required th:field="${medarbejder.telefonnummer}" placeholder="Telefon"/>
+                        <input type="text" pattern="\d*" maxlength="20" required th:field="${medarbejder.telefonnummer}" placeholder="Telefon"/>
                     </div>
                 </div>
                 <div class="row logoColour">

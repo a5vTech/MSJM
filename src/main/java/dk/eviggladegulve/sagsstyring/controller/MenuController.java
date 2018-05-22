@@ -3,10 +3,10 @@ package dk.eviggladegulve.sagsstyring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import dk.eviggladegulve.sagsstyring.*;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import sun.util.resources.LocaleData;
 
 import java.time.LocalDate;
 
@@ -20,8 +20,11 @@ public class MenuController {
      * @return menu
      */
     @GetMapping("/menu")
-    public String menu(Model model) {
-        model.addAttribute("Date",LocalDate.now());
+    public String menu(Model model, @ModelAttribute("Stilling") String stilling) {
+
+        if(stilling.equals("Leder") || stilling.equals("Konduktør") ){
+            model.addAttribute("Date",LocalDate.now());
+        }
         return "menu";
     }
 
@@ -31,7 +34,6 @@ public class MenuController {
     }
 
 
-    //Opretsag
     @PostMapping(value = "/menu", params = "opret_sag")
     public String menuOpretSagPost() {
 

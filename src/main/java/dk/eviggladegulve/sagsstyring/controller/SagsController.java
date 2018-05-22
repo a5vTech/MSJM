@@ -16,7 +16,6 @@ public class SagsController {
 
     //OPRET_SAG
 
-
     /**
      * This method loads the create case view and takes model as a parameter
      * The method sends an empty case object to the view as well as the generated
@@ -31,7 +30,6 @@ public class SagsController {
         model.addAttribute("sags_id", sagCRUD.getLastCaseId() + 1);
         return "opret_sag";
     }
-
 
     /**
      * This method takes the current case as a parameter of the case that has been written and saves the address
@@ -48,9 +46,7 @@ public class SagsController {
         return "redirect:/tilknyt_medarbejder_opret_sag/" + sagCRUD.getLastCaseId();
     }
 
-
-//TILKNYT_MEDARBEJDER
-
+    //TILKNYT_MEDARBEJDER
 
     /**
      * This method takes the id and model as a parameter and loads all the employees into the view and removes the
@@ -116,15 +112,12 @@ public class SagsController {
     @PostMapping(value = "/tilknyt_medarbejder_opret_sag", params = "remove")
     public String removeEmployeesCreatePost(@ModelAttribute Sag nuvaerendeSag, @RequestParam("fjern_Medarbejder_id") String medarbejder_id, @RequestParam("sag_id") int sag_id) {
         nuvaerendeSag.setSags_id(sag_id);
-        System.out.println("POSTMAPPING - TILKNYT SLET");
         String[] idListe = medarbejder_id.split(",");
         for (int i = 0; i < idListe.length; i++) {
             sagCRUD.removeFromCase(sag_id, idListe[i]);
-            System.out.println(idListe[i]);
         }
         return "redirect:/tilknyt_medarbejder_opret_sag/" + nuvaerendeSag.getSags_id();
     }
-
 
     //SAGER_TIL_REDIGERING
 
@@ -138,12 +131,13 @@ public class SagsController {
     public String sager_til_redigering(Model model) {
         ArrayList<Sag> sager = sagCRUD.getAllActiveCases();
         model.addAttribute("caseList", sager);
+        model.addAttribute("header", "Rediger sag");
         return "sager_til_redigering";
     }
 
     /**
      * This method takes the case id chosen from the view as a parameter and deletes the appropriate case
-     * from the list and sets it ass inactive in the database.
+     * from the list and sets it as inactive in the database.
      *
      * @param sags_id
      * @retur sager_til_redigering
@@ -153,7 +147,6 @@ public class SagsController {
         sagCRUD.deleteCase(sags_id);
         return "redirect:/sager_til_redigering";
     }
-
 
     //REDIGER_SAG
 
@@ -195,8 +188,7 @@ public class SagsController {
         return "redirect:/menu";
     }
 
-
-//TILKNYT_MEDARBEJDER_REDIGER_SAG
+    //TILKNYT_MEDARBEJDER_REDIGER_SAG
 
     /**
      * This method takes the id and model as a parameter and loads all the employees into the view whether
@@ -262,17 +254,14 @@ public class SagsController {
     @PostMapping(value = "/tilknyt_medarbejder_rediger_sag", params = "remove")
     public String removeEmployeesPost(@ModelAttribute Sag nuvaerendeSag, @RequestParam("fjern_Medarbejder_id") String medarbejder_id, @RequestParam("sag_id") int sag_id) {
         nuvaerendeSag.setSags_id(sag_id);
-        System.out.println("POSTMAPPING - TILKNYT SLET");
         String[] idListe = medarbejder_id.split(",");
         for (int i = 0; i < idListe.length; i++) {
             sagCRUD.removeFromCase(sag_id, idListe[i]);
-            System.out.println(idListe[i]);
         }
         return "redirect:/tilknyt_medarbejder_rediger_sag/" + nuvaerendeSag.getSags_id();
     }
 
     //SAGER_TIL_AFSLUTNING
-
 
     /**
      * This method takes model as an parameter and adds all the active cases as an attribute and loads
@@ -295,9 +284,7 @@ public class SagsController {
         return "redirect:/afslut_sag/";
     }
 
-
     //AFSLUT_SAG
-
 
     /**
      * This method takes id, model, and the user ID as a parameter and gets the chosen case from the active case list.
@@ -329,7 +316,6 @@ public class SagsController {
      */
     @PostMapping(value = "/afslut_sag", params = "afslut_Sag_Leder")
     public String afslut_sagLederPost(Sag nuvaerendeSag, @RequestParam("aftalt_med") String aftalt_med, @RequestParam int sags_id, @RequestParam("ekstra_arbejde") String ekstra_arbejde) {
-        System.out.println(sags_id);
         sagCRUD.end_case(sags_id);
         sagCRUD.add_extra_work(ekstra_arbejde, aftalt_med, sags_id);
         return "redirect:/menu";
@@ -371,7 +357,6 @@ public class SagsController {
         return "redirect:/afslut_sag/" + sags_id;
     }
 
-
     //IGANGVAERENDE_SAGER
 
     /**
@@ -393,7 +378,6 @@ public class SagsController {
     public String igangvaerendeSagerPost() {
         return "igangvaerende_sager";
     }
-
 
     //VIS_AKTUEL_SAG
 
@@ -442,12 +426,10 @@ public class SagsController {
         return "ikke_afsluttede_sager";
     }
 
-
     @PostMapping("/ikke_afsluttede_sager")
     public String sagerPost(@RequestParam int id) {
         return "vis_aktuel_sag/" + id;
     }
-
 
     //VIS AKTIVE SAGER
 
@@ -461,6 +443,7 @@ public class SagsController {
     public String aktiveSager(Model model) {
         ArrayList<Sag> sager = sagCRUD.getAllActiveCases();
         model.addAttribute("caseList", sager);
+        model.addAttribute("header", "Aktive sager");
         return "sager_til_redigering";
     }
 }

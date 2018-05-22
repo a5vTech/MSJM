@@ -15,7 +15,7 @@ public class AccessDB {
 
     /**
      * we want to use JDBC protocol, mysql DBMS , the google cloud platform with
-     * the database eggEksamen
+     * the database eggNormaliseret
      *
      * This method connects to the database with the provided username and password
      *

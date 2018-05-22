@@ -30,14 +30,15 @@ public class KalenderController {
      * @param date LocalDate
      * @return kalender
      */
+
     @GetMapping("/kalender")
-    public String calendar(Model model, @ModelAttribute("Date") LocalDate date) {
+    public String calendar(Model model, @ModelAttribute("Date") LocalDate date) throws NullPointerException {
         KalenderService calendarService = new KalenderService(date);
         ArrayList<Medarbejder> empList = calendarService.getMedarbejderListe();
 
 
         sagCRUD.executeStamementCases(calendarService.firstDay(), empList);
-        Collections.sort(empList,Collections.reverseOrder());
+        Collections.sort(empList, Collections.reverseOrder());
         //WeekFields is a java class that can find the current week of a localdate
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         model.addAttribute("week1", date.get(weekFields.weekOfWeekBasedYear()));
@@ -53,13 +54,9 @@ public class KalenderController {
         model.addAttribute("endDateMonth", calendarService.getMonth(date.plusDays(13).getMonthValue()));
         model.addAttribute("endDateDay", date.plusDays(13).toString().substring(8, 10));
         model.addAttribute("endDateYear", date.plusDays(13).toString().substring(0, 4));
-        for(int i = 0; i < 14; i++){
-            model.addAttribute("day"+(i+1), date.plusDays(i).toString().substring(8, 10) + date.plusDays(i).toString().substring(4, 7));
-    }
-
-
-
-
+        for (int i = 0; i < 14; i++) {
+            model.addAttribute("day" + (i + 1), date.plusDays(i).toString().substring(8, 10) + date.plusDays(i).toString().substring(4, 7));
+        }
 
 
         return "kalender";
@@ -68,8 +65,9 @@ public class KalenderController {
     /**
      * This method makes the calendar go to the next week
      * And sends the new date to the Calendars getmapping
- @param model Model
-     * @param date LocalDate
+     *
+     * @param model Model
+     * @param date  LocalDate
      * @return redirect:/kalender
      */
     @PostMapping(value = "/kalender", params = "nextWeekBtn")
@@ -77,11 +75,13 @@ public class KalenderController {
         model.addAttribute("Date", date.plusDays(7));
         return "redirect:/kalender";
     }
+
     /**
      * This method makes the calendar go to the previous week
      * And sends the new date to the Calendars getmapping
+     *
      * @param model Model
-     * @param date LocalDate
+     * @param date  LocalDate
      * @return redirect:/kalender
      */
     @PostMapping(value = "/kalender", params = "previousWeekBtn")
@@ -93,14 +93,14 @@ public class KalenderController {
     /**
      * This method makes the calendar go to a specific date
      * And sends the new date to the session attribute "Date"
+     *
      * @param model Model
-     * @param date LocalDate
+     * @param date  LocalDate
      * @return redirect:/kalender
      */
 
     @PostMapping(value = "/kalender", params = "goToDate")
     public String calendarGoToDate(Model model, @ModelAttribute("Date") LocalDate date, @RequestParam("dateFromGoTo") String dateFromGoTo) {
-        System.out.println(dateFromGoTo);
         if (dateFromGoTo.equals("")) {
             return "redirect:/kalender";
         }

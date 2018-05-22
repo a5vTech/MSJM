@@ -5,7 +5,7 @@
 
     <groupId>dk.eviggladegulve</groupId>
     <artifactId>sagsstyring</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1</version>
     <packaging>jar</packaging>
 
     <name>Sagsstyring</name>
@@ -25,6 +25,29 @@
     </properties>
 
     <dependencies>
+<!--START OF GRABBED POM CONFIG http://www.springboottutorial.com/spring-boot-with-embedded-servers-tomcat-jetty-->
+        <!--This allowed us to create an excecuteable jar file with the tomcat server embedded-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>8.5.23</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-el</artifactId>
+            <version>8.5.23</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-websocket</artifactId>
+            <version>8.5.23</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--END OF GRABBED POM CONFIG-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-@SessionAttributes({"BrugerID", "Stilling"})
+@SessionAttributes({"BrugerID", "Stilling","Date"})
 
 public class LoginController {
     final MedarbejderCRUD medarbejderCRUD = MedarbejderCRUD.getInstance();
@@ -21,16 +21,17 @@ public class LoginController {
      * @return log_ind
      */
 
-    @GetMapping("/log_ind")
+    @GetMapping(value = {"/log_ind","/"})
     public String login(Model model) {
         model.addAttribute("BrugerID","");
         model.addAttribute("Stilling","");
+        model.addAttribute("Date","");
         return "log_ind";
     }
 
     /**
      * This method takes the username and password entered by the user
-     * and checks it against the stored data  in the database.
+     * and checks it against the stored data in the database.
      * It also sets the Session attributes "BrugerID" and "Stilling"
      * @param model Model to add the slessionAttributes
      * @param username

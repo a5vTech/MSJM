@@ -10,33 +10,12 @@ public class MedarbejderCRUD {
     static MedarbejderCRUD instance = new MedarbejderCRUD();
 
     /**
-     * This method inserts a new employee into the database and takes an employee as parameter
-     * @param currentEmployee Medarbejder
-     * @throws NullPointerException If the employee object is empty or not received
+     *  This method gets an instance of the MedarbejderCRUD class.
+     * @return instance
      */
-    //Denne metode tager imod den nuværende medarbejder og indsætter oplysningerne for medarbejderen ind i databasen
-    public void insertEmployee(Medarbejder currentEmployee) throws NullPointerException {
-        Connection con = AccessDB.getConnection();
-        String selectSQL = "INSERT INTO medarbejder(fornavn, efternavn, email, telefonnummer, kodeord, stilling) VALUES(?,?,?,?,AES_ENCRYPT(?,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe'),?);";
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
-            preparedStatement.setString(1, currentEmployee.getFornavn());
-            preparedStatement.setString(2, currentEmployee.getEfternavn());
-            preparedStatement.setString(3, currentEmployee.getEmail());
-            preparedStatement.setString(4, currentEmployee.getTelefonnummer());
-            preparedStatement.setString(5, currentEmployee.getKodeord());
-            preparedStatement.setString(6, currentEmployee.getStilling());
-
-            preparedStatement.executeUpdate();
-
-            preparedStatement.close();
-            con.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static MedarbejderCRUD getInstance() {
+        return instance;
     }
-
 
     /**
      * This method finds the last generated employee id
@@ -70,63 +49,31 @@ public class MedarbejderCRUD {
     }
 
     /**
-     * This method finds all employees
-     * @return ArrayList<Medarbejder>
+     * This method inserts a new employee into the database and takes an employee as parameter
+     * @param currentEmployee Medarbejder
+     * @throws NullPointerException If the employee object is empty or not received
      */
-    public ArrayList<Medarbejder> executeStamementEmployeeList() {
-       Connection con = AccessDB.getConnection();
-        String selectSQL = "SELECT medarbejder_id, fornavn, efternavn, email, telefonnummer,CAST(AES_DECRYPT(kodeord,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') AS CHAR) AS kodeord, stilling FROM medarbejder";
-        ArrayList<Medarbejder> empList = new ArrayList<>();
+    public void insertEmployee(Medarbejder currentEmployee) throws NullPointerException {
+        Connection con = AccessDB.getConnection();
+        String selectSQL = "INSERT INTO medarbejder(fornavn, efternavn, email, telefonnummer, kodeord, stilling) VALUES(?,?,?,?,AES_ENCRYPT(?,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe'),?);";
         try {
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+            preparedStatement.setString(1, currentEmployee.getFornavn());
+            preparedStatement.setString(2, currentEmployee.getEfternavn());
+            preparedStatement.setString(3, currentEmployee.getEmail());
+            preparedStatement.setString(4, currentEmployee.getTelefonnummer());
+            preparedStatement.setString(5, currentEmployee.getKodeord());
+            preparedStatement.setString(6, currentEmployee.getStilling());
 
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    try {
-                        empList.add(new Medarbejder(rs.getInt("medarbejder_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getString("telefonnummer"), rs.getString("kodeord"), rs.getString("stilling")));
-                        //sager.add(new Sag(rs.getInt("sags_nr"), rs.getDate("start_dato"), rs.getDate("slut_dato"), rs.getString("titel")));
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            preparedStatement.executeUpdate();
 
             preparedStatement.close();
             con.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return empList;
     }
-
-    /**
-     * This method finds all attached employees to a given case. The method
-     * takes one parameter sags_id
-     * @param sags_id INT
-     * @return ArrayList<Medarbejder>
-     */
-    public ArrayList<Medarbejder> showActiveEmployee(int sags_id) {
-        Connection con = AccessDB.getConnection();
-        String SQL = "SELECT medarbejder.medarbejder_id, medarbejder.fornavn, medarbejder.efternavn, medarbejder.stilling FROM svend_sager JOIN medarbejder ON (medarbejder.medarbejder_id = svend_sager.medarbejder_id) WHERE sags_id=?;";
-        ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
-        try {
-            PreparedStatement preparedStatement = con.prepareStatement(SQL);
-            preparedStatement.setInt(1, sags_id);
-            ResultSet rs = preparedStatement.executeQuery();
-            if (rs != null) {
-                while (rs.next()) {
-                    medarbejdere.add(new Medarbejder(rs.getInt("medarbejder_id"),rs.getString("fornavn"),rs.getString("efternavn"),rs.getString("stilling")));
-                }
-            }
-            preparedStatement.close();
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return medarbejdere;
-    }
-
 
     /**
      * This method updates an employee in the database. It takes a medarbejder as parameters
@@ -172,6 +119,62 @@ public class MedarbejderCRUD {
 
     }
 
+    /**
+     * This method finds all employees
+     * @return ArrayList<Medarbejder>
+     */
+    public ArrayList<Medarbejder> executeStamementEmployeeList() {
+        Connection con = AccessDB.getConnection();
+        String selectSQL = "SELECT medarbejder_id, fornavn, efternavn, email, telefonnummer,CAST(AES_DECRYPT(kodeord,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') AS CHAR) AS kodeord, stilling FROM medarbejder";
+        ArrayList<Medarbejder> empList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    try {
+                        empList.add(new Medarbejder(rs.getInt("medarbejder_id"), rs.getString("fornavn"), rs.getString("efternavn"), rs.getString("email"), rs.getString("telefonnummer"), rs.getString("kodeord"), rs.getString("stilling")));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return empList;
+    }
+
+    /**
+     * This method finds all attached employees to a given case. The method
+     * takes one parameter sags_id
+     * @param sags_id INT
+     * @return ArrayList<Medarbejder>
+     */
+    public ArrayList<Medarbejder> showActiveEmployee(int sags_id) {
+        Connection con = AccessDB.getConnection();
+        String SQL = "SELECT medarbejder.medarbejder_id, medarbejder.fornavn, medarbejder.efternavn, medarbejder.stilling FROM svend_sager JOIN medarbejder ON (medarbejder.medarbejder_id = svend_sager.medarbejder_id) WHERE sags_id=?;";
+        ArrayList<Medarbejder> medarbejdere = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(SQL);
+            preparedStatement.setInt(1, sags_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    medarbejdere.add(new Medarbejder(rs.getInt("medarbejder_id"),rs.getString("fornavn"),rs.getString("efternavn"),rs.getString("stilling")));
+                }
+            }
+            preparedStatement.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medarbejdere;
+    }
 
     /**
      * This method verifies the users credentials. It requires the username and password as parameters
@@ -181,12 +184,13 @@ public class MedarbejderCRUD {
      */
     public String checkLogin(String username, String password) {
        Connection con = AccessDB.getConnection();
-        String selectSQL = "SELECT CAST(AES_DECRYPT(kodeord,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') AS CHAR) AS kodeord, stilling FROM medarbejder WHERE medarbejder_id = ?";
+       // crypto from https://passwordsgenerator.net/
+        String selectSQL = "SELECT CAST(AES_DECRYPT(kodeord,'y93ZhTvmASwz3CfEQt4aLf8HrUuHpqvFCtVjzLuFPycvmbcAHqzyhAPujveajAfVW59UcTmpzQz2YsKHsHe') " +
+                "AS CHAR) AS kodeord, stilling FROM medarbejder WHERE medarbejder_id = ?";
         try {
             PreparedStatement preparedStatement = con.prepareStatement(selectSQL);
             preparedStatement.setString(1, username);
 
-            // crypto from https://passwordsgenerator.net/
             ResultSet rs = preparedStatement.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
@@ -209,16 +213,5 @@ public class MedarbejderCRUD {
         }
 
         return "redirect:/log_ind";
-    }
-
-
-
-
-    /**
-     *  This method gets an instance of the MedarbejderCRUD class.
-     * @return instance
-     */
-    public static MedarbejderCRUD getInstance() {
-        return instance;
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8"/>
-    <title>Afslut sag</title>
+    <title>Aktuel sag</title>
     <th:block th:include="fragments/head :: headInclude"/>
     <th:block th:include="fragments/til_toppen_knap :: til_toppen_knap"/>
     <link rel="stylesheet" type="text/css" th:href="@{../style.css}">
@@ -19,7 +19,7 @@
                     <div class="col-sm-4"><h3 class="pull-right" th:text="'Arbejdsseddel: '+${sags_id}"></h3></div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container bg-white">
                 <div class="row logoColour">
                     <div class="col-sm-1 width-9">
                         <label>Arbejdssted:</label>
@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container bg-white">
                 <div class="row logoColour">
                     <div class="col-sm-3 width-251">
                         <label>Ekstraarbejde er udført. Aftalt med</label>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" th:field="${Sag.ekstra_arbejde}" rows="1"
+                    <textarea wrap="hard" class="form-control textarea textarea_readonlyColor" th:field="${Sag.ekstra_arbejde}" rows="1"
                               placeholder="Ekstraarbejde" readonly></textarea>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container bg-white">
                 <div class="row logoColour">
                     <div class="col-sm-2">
                         <label>Arbejdsbeskrivelse:</label>
@@ -148,12 +148,12 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="7" placeholder="Arbejdsbeskrivelse" readonly
+                    <textarea wrap="hard" class="form-control textarea textarea_readonlyColor" rows="7" placeholder="Arbejdsbeskrivelse" readonly
                               th:field="${Sag.arbejdsbeskrivelse}"></textarea>
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container bg-white">
                 <div class="row logoColour">
                     <div class="col-sm-2">
                         <label>Særlige aftaler:</label>
@@ -161,13 +161,13 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                    <textarea wrap="hard" class="form-control textarea" rows="2" placeholder="Særlige aftaler" readonly
+                    <textarea wrap="hard" class="form-control textarea textarea_readonlyColor" rows="2" placeholder="Særlige aftaler" readonly
                               th:field="${Sag.saerlige_aftaler}"></textarea>
                     </div>
                 </div>
             </div>
             <!-- MATERIALE LISTE -->
-            <div class="container noPadding" th:include="fragments/materialeliste :: materialeliste"/>
+            <div class="container noPadding bg-white" th:include="fragments/materialeliste :: materialeliste"/>
             <button type="button" class="btn defaultBtn marginRight-10" data-toggle="modal" data-target="#registreredeTimer" th:data-samlettimer="${timer}">Se
                 registrerede timer
             </button>
@@ -200,7 +200,7 @@
                         <div class="modal-body">
                             <label>Samlede arbejdstimer for sagen:</label>
                             <div>
-                                <input readonly class="TIMER" style="border-left:0;border-right:0;border-top:0;outline:none;"/>
+                                <input readonly class="TIMER"/>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -220,7 +220,7 @@
         var button = $(event.relatedTarget)
         var samlet = button.data('samlettimer')
         var modal = $(this)
-        modal.find('.modal-body .TIMER').val(samlet + ' Timer')
+        modal.find('.modal-body .TIMER').val(samlet + ' timer')
     })
 </script>
 </html>

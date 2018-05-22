@@ -36,7 +36,8 @@
                                     <option th:if="${Medarbejder.getStilling() == 'Svend'}"
                                             th:each="Medarbejder : ${medarbejderListe}"
                                             th:value="${Medarbejder.getMedarbejder_id()}"
-                                            th:text="${Medarbejder.getFornavn()}+' '+${Medarbejder.getEfternavn()}+' (id: '+${Medarbejder.getMedarbejder_id()}+')'"></option>
+                                            th:text="${Medarbejder.getFornavn()}+' '+${Medarbejder.getEfternavn()}+' (id: '+${Medarbejder.getMedarbejder_id()}+')'">
+                                    </option>
                                 </select>
                         </div>
                     </tr>
